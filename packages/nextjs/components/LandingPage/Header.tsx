@@ -7,9 +7,9 @@ export default function Header() {
         <Link href="/" className="text-2xl font-bold text-blue-600">DefiVerse</Link>
         <nav>
           <ul className="flex space-x-4">
-            <li><a href="#features" className="text-gray-600 hover:text-blue-600">Features</a></li>
-            <li><a href="#how-it-works" className="text-gray-600 hover:text-blue-600">How It Works</a></li>
-            <li><a href="#testimonials" className="text-gray-600 hover:text-blue-600">Testimonials</a></li>
+            <li><a href="#features" className="text-gray-600 hover:text-blue-600">Keywords</a></li>
+            <li><a href="#how-it-works" className="text-gray-600 hover:text-blue-600">News</a></li>
+            <li><a href="#testimonials" className="text-gray-600 hover:text-blue-600">DEXs</a></li>
             <li><Link href="/dashboard" className="text-gray-600 hover:text-blue-600">Dashboard</Link></li>
           </ul>
         </nav>
