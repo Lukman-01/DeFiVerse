@@ -73,7 +73,7 @@ const sections = [
   }
 ];
 
-export default function DeFiDocumentation() {
+export default function DeFiFundamentals() {
   const [selectedSection, setSelectedSection] = useState(0);
   const [isSidebarOpen, setSidebarOpen] = useState(true);
 

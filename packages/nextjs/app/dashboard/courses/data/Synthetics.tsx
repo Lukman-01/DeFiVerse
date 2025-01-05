@@ -1,12 +1,13 @@
 "use client";
 import React, { useState } from 'react';
-import { ChevronRight, Book, AlertTriangle, Shield } from 'lucide-react';
-import IntroductionToOracles from '~~/components/Oracles/IntroductionToOracles';
-import BasicOracleDesignPart1 from '~~/components/Oracles/BasicOracleDesignPart1';
-import BasicOracleDesignPart2 from '~~/components/Oracles/BasicOracleDesignPart2';
-import AdvancedOracleUseCases from '~~/components/Oracles/AdvancedOracleUseCases';
-import OraclePrivacy from '~~/components/Oracles/OraclePrivacy';
-import PrivacyPreservingOracles from '~~/components/Oracles/PrivacyPreservingOracles';
+import { ChevronRight, Book, AlertTriangle } from 'lucide-react';
+import IntroductionToDerivatives from '~~/components/Synthetics/IntroductionToDerivatives';
+import FuturesVsForwards from '~~/components/Synthetics/FuturesVsForwards';
+import MarginAndMarkingToMarket from '~~/components/Synthetics/MarginAndMarkingToMarket';
+import Swaps from '~~/components/Synthetics/Swaps';
+import SyntheticAssetsAndSynthetix from '~~/components/Synthetics/SyntheticAssetsAndSynthetix';
+import LeveragedDerivatives from '~~/components/Synthetics/LeveragedDerivatives';
+import RiskManagementInDerivatives from '~~/components/Synthetics/RiskManagementInDerivatives';
 
 const ContentWrapper: React.FC<{ children: React.ReactNode; title: string }> = ({ children, title }) => (
   <div className="space-y-4">
@@ -17,62 +18,71 @@ const ContentWrapper: React.FC<{ children: React.ReactNode; title: string }> = (
 
 const sections = [
   {
-    title: "Introduction to Oracles",
+    title: "Introduction to Derivatives",
     icon: <Book className="w-5 h-5" />,
     component: (
-      <ContentWrapper title="Introduction to Oracles">
-        <IntroductionToOracles />
+      <ContentWrapper title="Introduction to Derivatives">
+        <IntroductionToDerivatives />
       </ContentWrapper>
     ),
   },
   {
-    title: "Basic Oracle Design (Part I)",
+    title: "Futures vs. Forwards",
     icon: <Book className="w-5 h-5" />,
     component: (
-      <ContentWrapper title="Basic Oracle Design (Part I)">
-        <BasicOracleDesignPart1 />
+      <ContentWrapper title="Futures vs. Forwards">
+        <FuturesVsForwards />
       </ContentWrapper>
     ),
   },
   {
-    title: "Basic Oracle Design (Part II)",
+    title: "Margin and Marking to Market",
     icon: <Book className="w-5 h-5" />,
     component: (
-      <ContentWrapper title="Basic Oracle Design (Part II)">
-        <BasicOracleDesignPart2 />
+      <ContentWrapper title="Margin and Marking to Market">
+        <MarginAndMarkingToMarket />
       </ContentWrapper>
     ),
   },
   {
-    title: "Advanced Oracle Use Cases",
+    title: "Swaps",
+    icon: <Book className="w-5 h-5" />,
+    component: (
+      <ContentWrapper title="Swaps">
+        <Swaps />
+      </ContentWrapper>
+    ),
+  },
+  {
+    title: "Synthetic Assets and Synthetix",
+    icon: <Book className="w-5 h-5" />,
+    component: (
+      <ContentWrapper title="Synthetic Assets and Synthetix">
+        <SyntheticAssetsAndSynthetix />
+      </ContentWrapper>
+    ),
+  },
+  {
+    title: "Leveraged Derivatives",
+    icon: <Book className="w-5 h-5" />,
+    component: (
+      <ContentWrapper title="Leveraged Derivatives">
+        <LeveragedDerivatives />
+      </ContentWrapper>
+    ),
+  },
+  {
+    title: "Risk Management in Derivatives",
     icon: <AlertTriangle className="w-5 h-5" />,
     component: (
-      <ContentWrapper title="Advanced Oracle Use Cases">
-        <AdvancedOracleUseCases />
-      </ContentWrapper>
-    ),
-  },
-  {
-    title: "Oracle Privacy",
-    icon: <Shield className="w-5 h-5" />,
-    component: (
-      <ContentWrapper title="Oracle Privacy">
-        <OraclePrivacy />
-      </ContentWrapper>
-    ),
-  },
-  {
-    title: "DeFi Applications Using Privacy-Preserving Oracles",
-    icon: <Shield className="w-5 h-5" />,
-    component: (
-      <ContentWrapper title="DeFi Applications Using Privacy-Preserving Oracles">
-        <PrivacyPreservingOracles />
+      <ContentWrapper title="Risk Management in Derivatives">
+        <RiskManagementInDerivatives />
       </ContentWrapper>
     ),
   },
 ];
 
-export default function OraclesPage() {
+export default function Synthetics() {
   const [selectedSection, setSelectedSection] = useState(0);
   const [isSidebarOpen, setSidebarOpen] = useState(true);
 
@@ -81,7 +91,7 @@ export default function OraclesPage() {
       {/* Sidebar */}
       <div className={`${isSidebarOpen ? "w-64" : "w-0"} transition-all duration-300 bg-white border-r`}>
         <div className="p-4 border-b">
-          <h1 className="text-xl font-bold">Oracles Documentation</h1>
+          <h1 className="text-xl font-bold">Derivatives Documentation</h1>
         </div>
         <nav className="p-4">
           <ul className="space-y-2">
@@ -103,15 +113,6 @@ export default function OraclesPage() {
             ))}
           </ul>
         </nav>
-      </div>
-
-      {/* Main Content */}
-      <div className="flex-1 flex flex-col overflow-hidden">
-        <main className="flex-1 overflow-auto p-4">
-          <div className="max-w-4xl mx-auto">
-            <div className="bg-white shadow-sm rounded-lg p-6">{sections[selectedSection].component}</div>
-          </div>
-        </main>
       </div>
     </div>
   );

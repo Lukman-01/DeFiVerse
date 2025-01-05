@@ -52,7 +52,7 @@ const sections = [
   },
 ];
 
-export default function StablecoinsPage() {
+export default function Stablecoins() {
   const [selectedSection, setSelectedSection] = useState(0);
   const [isSidebarOpen, setSidebarOpen] = useState(true);
 

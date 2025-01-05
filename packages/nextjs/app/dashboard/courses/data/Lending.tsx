@@ -73,7 +73,7 @@ const sections = [
   },
 ];
 
-export default function LendingPage() {
+export default function Lending() {
   const [selectedSection, setSelectedSection] = useState(0);
   const [isSidebarOpen, setSidebarOpen] = useState(true);
 
