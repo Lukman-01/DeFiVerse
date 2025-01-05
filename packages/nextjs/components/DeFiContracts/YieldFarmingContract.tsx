@@ -1,146 +1,212 @@
 import React from 'react';
+import { Coins, Code, LightbulbIcon, TrendingUp } from 'lucide-react';
 
-interface CodeExample {
-  title: string;
-  code: string;
-  explanation: string;
-}
+// Custom Card Components
+const Card = ({ children, className = '' }:any) => (
+  <div className={`bg-white rounded-lg shadow-md border ${className}`}>
+    {children}
+  </div>
+);
 
-const YieldFarmingContract = () => {
-  const codeExamples: CodeExample[] = [
-    {
-      title: "Core Yield Farming Contract",
-      code: `contract YieldFarming {
-    struct Pool {
-        address stakingToken;
-        address rewardToken;
-        uint256 rewardRate; // Rewards per block
-        uint256 lastUpdateBlock;
-        uint256 rewardPerTokenStored;
-        uint256 totalStaked;
-    }
+const CardHeader = ({ children, className = '' }:any) => (
+  <div className={`px-6 py-4 ${className}`}>
+    {children}
+  </div>
+);
 
-    mapping(address => Pool) public pools;
-    mapping(address => mapping(address => uint256)) public userStakes; // user => pool => amount staked
-    mapping(address => mapping(address => uint256)) public userRewards; // user => pool => reward
-    mapping(address => mapping(address => uint256)) public userRewardPerTokenPaid; // user => pool => reward per token
+const CardTitle = ({ children, className = '' }:any) => (
+  <h2 className={`text-xl font-semibold ${className}`}>
+    {children}
+  </h2>
+);
 
-    event Staked(address indexed user, address indexed pool, uint256 amount);
-    event Withdrawn(address indexed user, address indexed pool, uint256 amount);
-    event RewardClaimed(address indexed user, address indexed pool, uint256 reward);
-}`,
-      explanation: "Defines the core structures for yield farming pools, including staking and reward mechanisms."
-    },
-    {
-      title: "Stake Tokens",
-      code: `function stake(address pool, uint256 amount) external {
-    Pool storage poolData = pools[pool];
-    require(amount > 0, "Cannot stake zero");
+const CardContent = ({ children, className = '' }:any) => (
+  <div className={`px-6 pb-6 ${className}`}>
+    {children}
+  </div>
+);
 
-    updateReward(msg.sender, pool);
-
-    // Transfer staking tokens
-    IERC20(poolData.stakingToken).transferFrom(msg.sender, address(this), amount);
-
-    // Update user stake
-    userStakes[msg.sender][pool] += amount;
-    poolData.totalStaked += amount;
-
-    emit Staked(msg.sender, pool, amount);
-}
-
-function updateReward(address user, address pool) internal {
-    Pool storage poolData = pools[pool];
-    poolData.rewardPerTokenStored = rewardPerToken(pool);
-    poolData.lastUpdateBlock = block.number;
-
-    if (user != address(0)) {
-        userRewards[user][pool] = earned(user, pool);
-        userRewardPerTokenPaid[user][pool] = poolData.rewardPerTokenStored;
-    }
-}
-
-function rewardPerToken(address pool) public view returns (uint256) {
-    Pool storage poolData = pools[pool];
-    if (poolData.totalStaked == 0) return poolData.rewardPerTokenStored;
-
-    return poolData.rewardPerTokenStored +
-        ((block.number - poolData.lastUpdateBlock) * poolData.rewardRate * 1e18 / poolData.totalStaked);
-}`,
-      explanation: "Allows users to stake tokens in a yield farming pool and calculates rewards based on staked amounts and time."
-    },
-    {
-      title: "Withdraw Staked Tokens",
-      code: `function withdraw(address pool, uint256 amount) external {
-    Pool storage poolData = pools[pool];
-    require(userStakes[msg.sender][pool] >= amount, "Insufficient stake");
-
-    updateReward(msg.sender, pool);
-
-    // Update user stake
-    userStakes[msg.sender][pool] -= amount;
-    poolData.totalStaked -= amount;
-
-    // Transfer staking tokens back
-    IERC20(poolData.stakingToken).transfer(msg.sender, amount);
-
-    emit Withdrawn(msg.sender, pool, amount);
-}`,
-      explanation: "Enables users to withdraw their staked tokens from a yield farming pool while maintaining reward calculations."
-    },
-    {
-      title: "Claim Rewards",
-      code: `function claimReward(address pool) external {
-    updateReward(msg.sender, pool);
-
-    uint256 reward = userRewards[msg.sender][pool];
-    require(reward > 0, "No rewards available");
-
-    userRewards[msg.sender][pool] = 0;
-
-    Pool storage poolData = pools[pool];
-    IERC20(poolData.rewardToken).transfer(msg.sender, reward);
-
-    emit RewardClaimed(msg.sender, pool, reward);
-}`,
-      explanation: "Allows users to claim accumulated rewards from a yield farming pool."
-    },
-    {
-      title: "Add New Pool",
-      code: `function addPool(
-    address stakingToken,
-    address rewardToken,
-    uint256 rewardRate
-) external onlyOwner {
-    require(pools[stakingToken].stakingToken == address(0), "Pool already exists");
-
-    pools[stakingToken] = Pool({
-        stakingToken: stakingToken,
-        rewardToken: rewardToken,
-        rewardRate: rewardRate,
-        lastUpdateBlock: block.number,
-        rewardPerTokenStored: 0,
-        totalStaked: 0
-    });
-}`,
-      explanation: "Allows the owner to add a new yield farming pool by specifying staking and reward tokens and the reward rate."
-    }
-  ];
-
+const YieldFarmingPlatform = () => {
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Yield Farming Contract Code Examples</h1>
-      {codeExamples.map((example, index) => (
-        <div key={index} className="mb-6 border-b pb-4">
-          <h2 className="text-xl font-semibold">{example.title}</h2>
-          <pre className="bg-gray-200 p-4 rounded text-sm overflow-x-auto my-2">
-            <code>{example.code}</code>
+    <div className="max-w-5xl mx-auto p-6 space-y-8">
+      {/* Header */}
+      <div className="text-center space-y-2">
+        <h1 className="text-3xl font-bold">Understanding Yield Farming</h1>
+        <p className="text-gray-600">Your Guide to Earning Rewards in DeFi</p>
+      </div>
+
+      {/* Concept Section */}
+      <Card>
+        <CardHeader className="border-b">
+          <div className="flex items-center space-x-2">
+            <Coins className="w-6 h-6 text-blue-500" />
+            <CardTitle>What is Yield Farming?</CardTitle>
+          </div>
+        </CardHeader>
+        <CardContent className="space-y-4 pt-4">
+          <div className="bg-blue-50 p-4 rounded-lg">
+            <p className="text-blue-800">
+              Yield farming is like a high-tech savings account for cryptocurrency! 
+              Instead of just holding your tokens, you can "stake" them in special pools 
+              to earn additional rewards. Think of it as putting your money to work - 
+              you deposit tokens, and in return, you earn more tokens as rewards over time.
+            </p>
+          </div>
+          
+          <h3 className="font-semibold text-lg mt-4">How Does It Work?</h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+            <div className="bg-gray-50 p-4 rounded-lg">
+              <h4 className="font-semibold mb-2">Stake Tokens</h4>
+              <p className="text-gray-600">Deposit your tokens into farming pools</p>
+            </div>
+            <div className="bg-gray-50 p-4 rounded-lg">
+              <h4 className="font-semibold mb-2">Earn Rewards</h4>
+              <p className="text-gray-600">Accumulate rewards based on your stake</p>
+            </div>
+            <div className="bg-gray-50 p-4 rounded-lg">
+              <h4 className="font-semibold mb-2">Claim & Withdraw</h4>
+              <p className="text-gray-600">Collect rewards and withdraw anytime</p>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Code Section */}
+      <Card>
+        <CardHeader className="border-b">
+          <div className="flex items-center space-x-2">
+            <Code className="w-6 h-6 text-green-500" />
+            <CardTitle>The Code: Yield Farming Contract</CardTitle>
+          </div>
+        </CardHeader>
+        <CardContent className="pt-4">
+          <pre className="bg-gray-50 p-4 rounded-lg overflow-x-auto">
+            <code className="text-sm">
+{`// SPDX-License-Identifier: MIT
+contract YieldFarming {
+    struct Pool {
+        address stakingToken;      // Token you deposit
+        address rewardToken;       // Token you earn
+        uint256 rewardRate;        // Rewards per block
+        uint256 lastUpdateBlock;   // Last reward update
+        uint256 rewardPerTokenStored;
+        uint256 totalStaked;       // Total tokens in pool
+    }
+    
+    mapping(address => Pool) public pools;
+    mapping(address => mapping(address => uint256)) public userStakes;
+    mapping(address => mapping(address => uint256)) public userRewards;
+    
+    function stake(address pool, uint256 amount) external {
+        Pool storage poolData = pools[pool];
+        require(amount > 0, "Cannot stake zero");
+        
+        updateReward(msg.sender, pool);
+        IERC20(poolData.stakingToken).transferFrom(msg.sender, address(this), amount);
+        
+        userStakes[msg.sender][pool] += amount;
+        poolData.totalStaked += amount;
+    }
+    
+    function withdraw(address pool, uint256 amount) external {
+        require(userStakes[msg.sender][pool] >= amount, "Insufficient stake");
+        
+        updateReward(msg.sender, pool);
+        userStakes[msg.sender][pool] -= amount;
+        poolData.totalStaked -= amount;
+        
+        IERC20(poolData.stakingToken).transfer(msg.sender, amount);
+    }
+    
+    function claimReward(address pool) external {
+        updateReward(msg.sender, pool);
+        uint256 reward = userRewards[msg.sender][pool];
+        userRewards[msg.sender][pool] = 0;
+        IERC20(poolData.rewardToken).transfer(msg.sender, reward);
+    }
+}`}
+            </code>
           </pre>
-          <p className="text-gray-700">{example.explanation}</p>
-        </div>
-      ))}
+        </CardContent>
+      </Card>
+
+      {/* Explanation Section */}
+      <Card>
+        <CardHeader className="border-b">
+          <div className="flex items-center space-x-2">
+            <LightbulbIcon className="w-6 h-6 text-yellow-500" />
+            <CardTitle>Understanding the Code</CardTitle>
+          </div>
+        </CardHeader>
+        <CardContent className="space-y-6 pt-4">
+          <div className="grid gap-6">
+            {/* Pool Structure */}
+            <div className="bg-gray-50 p-4 rounded-lg">
+              <h3 className="font-semibold text-lg mb-2">Pool Structure</h3>
+              <p className="text-gray-600">
+                Each yield farming pool tracks:
+              </p>
+              <ul className="list-disc pl-6 mt-2 space-y-1 text-gray-600">
+                <li>Which token you can stake (stakingToken)</li>
+                <li>Which token you earn as rewards (rewardToken)</li>
+                <li>How many rewards are given per block (rewardRate)</li>
+                <li>Total amount of tokens staked by all users</li>
+              </ul>
+            </div>
+
+            {/* Staking Process */}
+            <div className="bg-gray-50 p-4 rounded-lg">
+              <h3 className="font-semibold text-lg mb-2">Staking Process</h3>
+              <p className="text-gray-600">
+                When you stake tokens:
+              </p>
+              <ul className="list-disc pl-6 mt-2 space-y-1 text-gray-600">
+                <li>Your rewards are calculated and updated</li>
+                <li>Tokens are transferred to the contract</li>
+                <li>Your stake is recorded in the pool</li>
+                <li>Total staked amount is increased</li>
+              </ul>
+            </div>
+
+            {/* Rewards System */}
+            <div className="bg-gray-50 p-4 rounded-lg">
+              <h3 className="font-semibold text-lg mb-2">Rewards System</h3>
+              <p className="text-gray-600">
+                The rewards system:
+              </p>
+              <ul className="list-disc pl-6 mt-2 space-y-1 text-gray-600">
+                <li>Calculates rewards based on blocks passed</li>
+                <li>Tracks individual user rewards</li>
+                <li>Allows claiming of earned rewards</li>
+                <li>Updates rewards automatically on stake/withdraw</li>
+              </ul>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Earnings Calculator */}
+      <Card>
+        <CardHeader className="border-b">
+          <div className="flex items-center space-x-2">
+            <TrendingUp className="w-6 h-6 text-purple-500" />
+            <CardTitle>How Rewards Are Calculated</CardTitle>
+          </div>
+        </CardHeader>
+        <CardContent className="space-y-4 pt-4">
+          <div className="bg-purple-50 p-4 rounded-lg">
+            <h3 className="font-semibold text-lg mb-2">Reward Formula</h3>
+            <ul className="list-disc pl-6 space-y-2 text-purple-800">
+              <li>Rewards per token = (blocks passed × reward rate) ÷ total staked</li>
+              <li>Your rewards = your stake × (current rewards per token - last rewards per token)</li>
+              <li>Rewards update every block while you're staked</li>
+              <li>Claim rewards anytime without affecting your stake</li>
+            </ul>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 };
 
-export default YieldFarmingContract;
+export default YieldFarmingPlatform;

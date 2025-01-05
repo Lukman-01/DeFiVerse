@@ -1,219 +1,226 @@
 import React from 'react';
+import { Coins, Code, LightbulbIcon, ShieldAlert } from 'lucide-react';
 
-interface CodeExample {
-  title: string;
-  code: string;
-  explanation: string;
-}
+// Custom Card Components
+const Card = ({ children, className = '' }:any) => (
+  <div className={`bg-white rounded-lg shadow-md border ${className}`}>
+    {children}
+  </div>
+);
 
-const LendingPoolContract = () => {
-  const codeExamples: CodeExample[] = [
-    {
-      title: "Lending Pool Core Structure",
-      code: `contract LendingPool {
-    struct Market {
-        uint256 totalDeposits;
-        uint256 totalBorrows;
-        uint256 utilizationRate;
-        uint256 borrowAPY;
-        uint256 supplyAPY;
-        uint256 collateralFactor;  // % of deposit that can be borrowed (scaled by 1e18)
-    }
-    
-    struct UserAccount {
-        uint256 deposited;
-        uint256 borrowed;
-        uint256 lastUpdateTime;
-        bool isCollateral;
-    }
-    
-    mapping(address => mapping(address => UserAccount)) public userAccounts;  // user => token => account
-    mapping(address => Market) public markets;  // token => market
-    mapping(address => bool) public supportedTokens;
-    
-    uint256 public constant UTILIZATION_OPTIMAL = 80 * 1e18 / 100;  // 80%
-    uint256 public constant BASE_RATE = 2 * 1e18 / 100;            // 2%
-    uint256 public constant SLOPE1 = 10 * 1e18 / 100;             // 10%
-    uint256 public constant SLOPE2 = 100 * 1e18 / 100;            // 100%
-}`,
-      explanation: "The core structure defines markets for different assets, tracks user positions, and sets interest rate parameters based on utilization."
-    },
-    {
-      title: "Interest Rate Model",
-      code: `function calculateInterestRates(
-    address token
-) public view returns (uint256 borrowRate, uint256 supplyRate) {
-    Market storage market = markets[token];
-    
-    // Calculate utilization rate
-    if (market.totalDeposits == 0) return (0, 0);
-    uint256 utilization = (market.totalBorrows * 1e18) / market.totalDeposits;
-    
-    // Two-slope interest rate model
-    if (utilization <= UTILIZATION_OPTIMAL) {
-        // First slope: gradual increase
-        borrowRate = BASE_RATE + 
-            (utilization * SLOPE1) / 1e18;
-    } else {
-        // Second slope: sharp increase
-        uint256 extraUtil = utilization - UTILIZATION_OPTIMAL;
-        borrowRate = BASE_RATE + 
-            (UTILIZATION_OPTIMAL * SLOPE1) / 1e18 +
-            (extraUtil * SLOPE2) / 1e18;
-    }
-    
-    // Supply rate = borrow rate * utilization * (1 - reserve factor)
-    supplyRate = (borrowRate * utilization * 9) / (10 * 1e18);
-    
-    return (borrowRate, supplyRate);
-}`,
-      explanation: "Implements a two-slope interest rate model where rates increase sharply after optimal utilization to maintain liquidity."
-    },
-    {
-      title: "Deposit and Collateral Management",
-      code: `function deposit(
-    address token,
-    uint256 amount
-) external {
-    require(supportedTokens[token], "Token not supported");
-    require(amount > 0, "Amount must be positive");
-    
-    Market storage market = markets[token];
-    UserAccount storage account = userAccounts[msg.sender][token];
-    
-    // Update market state
-    updateInterest(token);
-    
-    // Transfer tokens
-    IERC20(token).transferFrom(msg.sender, address(this), amount);
-    
-    // Update user account
-    account.deposited += amount;
-    market.totalDeposits += amount;
-    
-    emit Deposit(msg.sender, token, amount);
-}
+const CardHeader = ({ children, className = '' }:any) => (
+  <div className={`px-6 py-4 ${className}`}>
+    {children}
+  </div>
+);
 
-function setAsCollateral(address token, bool useAsCollateral) external {
-    UserAccount storage account = userAccounts[msg.sender][token];
-    require(account.deposited > 0, "No deposits");
-    
-    account.isCollateral = useAsCollateral;
-    emit CollateralSet(msg.sender, token, useAsCollateral);
-}`,
-      explanation: "Handles deposits and collateral designation with proper market updates and safety checks."
-    },
-    {
-      title: "Borrowing with Health Factor",
-      code: `function borrow(
-    address token,
-    uint256 amount
-) external {
-    require(supportedTokens[token], "Token not supported");
-    Market storage market = markets[token];
-    UserAccount storage borrower = userAccounts[msg.sender][token];
-    
-    // Update market state
-    updateInterest(token);
-    
-    // Check borrowing capacity
-    require(getHealthFactor(msg.sender) >= 1e18, "Insufficient collateral");
-    
-    // Update state
-    borrower.borrowed += amount;
-    market.totalBorrows += amount;
-    
-    // Transfer tokens
-    IERC20(token).transfer(msg.sender, amount);
-    
-    emit Borrow(msg.sender, token, amount);
-}
+const CardTitle = ({ children, className = '' }:any) => (
+  <h2 className={`text-xl font-semibold ${className}`}>
+    {children}
+  </h2>
+);
 
-function getHealthFactor(address user) public view returns (uint256) {
-    uint256 totalCollateralUSD = 0;
-    uint256 totalBorrowsUSD = 0;
-    
-    for (uint i = 0; i < supportedTokens.length; i++) {
-        address token = supportedTokens[i];
-        UserAccount storage account = userAccounts[user][token];
-        Market storage market = markets[token];
-        
-        if (account.isCollateral) {
-            uint256 tokenPrice = getPrice(token);  // from oracle
-            totalCollateralUSD += 
-                (account.deposited * tokenPrice * market.collateralFactor) / 1e36;
-        }
-        
-        if (account.borrowed > 0) {
-            uint256 tokenPrice = getPrice(token);
-            totalBorrowsUSD += (account.borrowed * tokenPrice) / 1e18;
-        }
-    }
-    
-    if (totalBorrowsUSD == 0) return type(uint256).max;
-    return (totalCollateralUSD * 1e18) / totalBorrowsUSD;
-}`,
-      explanation: "Implements borrowing logic with health factor calculations to ensure loans remain safely collateralized."
-    }
-  ];
+const CardContent = ({ children, className = '' }:any) => (
+  <div className={`px-6 pb-6 ${className}`}>
+    {children}
+  </div>
+);
 
+const LendingPoolPlatform = () => {
   return (
-    <div className="space-y-8">
-      <div className="border-b pb-4">
-        <h2 className="text-2xl font-bold">Lending Pool Smart Contract</h2>
-        <p className="mt-2 text-gray-600">
-          A lending pool enables users to deposit assets for earning interest and
-          borrow assets against collateral. It uses dynamic interest rates based
-          on pool utilization and maintains borrower solvency through collateral requirements.
-        </p>
+    <div className="max-w-5xl mx-auto p-6 space-y-8">
+      {/* Header */}
+      <div className="text-center space-y-2">
+        <h1 className="text-3xl font-bold">Understanding DeFi Lending Pools</h1>
+        <p className="text-gray-600">Your Guide to Digital Banking Without Banks</p>
       </div>
 
-      <div className="space-y-4">
-        <h3 className="text-xl font-semibold">Key Features</h3>
-        <ul className="list-disc pl-5 space-y-2">
-          <li>Multi-asset lending and borrowing</li>
-          <li>Dynamic interest rate model</li>
-          <li>Collateral management system</li>
-          <li>Health factor monitoring</li>
-          <li>Risk parameters per asset</li>
-        </ul>
-      </div>
-
-      <div className="space-y-6">
-        <h3 className="text-xl font-semibold">Implementation Details</h3>
-        {codeExamples.map((example, index) => (
-          <div key={index} className="border rounded-lg p-4 space-y-3">
-            <h4 className="font-semibold">{example.title}</h4>
-            <pre className="bg-gray-50 p-3 rounded overflow-x-auto">
-              <code>{example.code}</code>
-            </pre>
-            <p className="text-gray-600">{example.explanation}</p>
+      {/* Concept Section */}
+      <Card>
+        <CardHeader className="border-b">
+          <div className="flex items-center space-x-2">
+            <Coins className="w-6 h-6 text-blue-500" />
+            <CardTitle>What is a Lending Pool?</CardTitle>
           </div>
-        ))}
-      </div>
+        </CardHeader>
+        <CardContent className="space-y-4 pt-4">
+          <div className="bg-blue-50 p-4 rounded-lg">
+            <p className="text-blue-800">
+              Think of a lending pool like a community piggy bank where everyone can participate! 
+              Some people put money in to earn interest (like a savings account), while others can 
+              borrow from it by putting up collateral (like getting a loan from a bank, but using 
+              other crypto as security). The more people borrow, the more interest lenders earn!
+            </p>
+          </div>
+          
+          <h3 className="font-semibold text-lg mt-4">How Does It Work?</h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+            <div className="bg-gray-50 p-4 rounded-lg">
+              <h4 className="font-semibold mb-2">For Lenders</h4>
+              <p className="text-gray-600">Deposit crypto and earn interest based on how much others borrow</p>
+            </div>
+            <div className="bg-gray-50 p-4 rounded-lg">
+              <h4 className="font-semibold mb-2">For Borrowers</h4>
+              <p className="text-gray-600">Lock some crypto as collateral and borrow other types of crypto</p>
+            </div>
+            <div className="bg-gray-50 p-4 rounded-lg">
+              <h4 className="font-semibold mb-2">Interest Rates</h4>
+              <p className="text-gray-600">Change automatically based on how much of the pool is being used</p>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
 
-      <div className="space-y-4">
-        <h3 className="text-xl font-semibold">Security Considerations</h3>
-        <ul className="list-disc pl-5 space-y-2">
-          <li>Oracle manipulation protection</li>
-          <li>Interest rate calculation precision</li>
-          <li>Collateral liquidation mechanisms</li>
-          <li>Emergency pause functionality</li>
-          <li>Proper decimal handling for different tokens</li>
-        </ul>
-      </div>
+      {/* Code Section */}
+      <Card>
+        <CardHeader className="border-b">
+          <div className="flex items-center space-x-2">
+            <Code className="w-6 h-6 text-green-500" />
+            <CardTitle>The Code: Lending Pool Contract</CardTitle>
+          </div>
+        </CardHeader>
+        <CardContent className="pt-4">
+          <pre className="bg-gray-50 p-4 rounded-lg overflow-x-auto">
+            <code className="text-sm">
+{`// SPDX-License-Identifier: MIT
+contract LendingPool {
+    // Think of Market like a piggy bank's status report
+    struct Market {
+        uint256 totalDeposits;     // How much money is in the piggy bank
+        uint256 totalBorrows;      // How much has been borrowed
+        uint256 utilizationRate;   // How much of the money is being used
+        uint256 borrowAPY;         // Yearly interest rate for borrowers
+        uint256 supplyAPY;         // Yearly interest rate for lenders
+        uint256 collateralFactor;  // How much you can borrow against your deposit
+    }
+    
+    // Think of UserAccount like your personal bank statement
+    struct UserAccount {
+        uint256 deposited;        // How much you've put in
+        uint256 borrowed;         // How much you've borrowed
+        uint256 lastUpdateTime;   // When was your last transaction
+        bool isCollateral;        // Are you using this as collateral?
+    }
+    
+    // Keep track of everyone's accounts and all markets
+    mapping(address => mapping(address => UserAccount)) public userAccounts;
+    mapping(address => Market) public markets;
+    
+    // Basic functions
+    function deposit(address token, uint256 amount) external {
+        // Check if the deposit is valid
+        require(amount > 0, "Please deposit something!");
+        
+        // Update their account
+        UserAccount storage account = userAccounts[msg.sender][token];
+        account.deposited += amount;
+        
+        // Update the market totals
+        Market storage market = markets[token];
+        market.totalDeposits += amount;
+        
+        // Take their tokens and put them in the pool
+        IERC20(token).transferFrom(msg.sender, address(this), amount);
+    }
+    
+    function borrow(address token, uint256 amount) external {
+        // Make sure they have enough collateral
+        require(getHealthFactor(msg.sender) >= 1e18, "Need more collateral!");
+        
+        // Update their loan amount
+        UserAccount storage account = userAccounts[msg.sender][token];
+        account.borrowed += amount;
+        
+        // Update the market totals
+        Market storage market = markets[token];
+        market.totalBorrows += amount;
+        
+        // Send them the borrowed tokens
+        IERC20(token).transfer(msg.sender, amount);
+    }
+}`}
+            </code>
+          </pre>
+        </CardContent>
+      </Card>
 
-      <div className="space-y-4">
-        <h3 className="text-xl font-semibold">Integration Requirements</h3>
-        <ul className="list-disc pl-5 space-y-2">
-          <li>Price oracle implementation</li>
-          <li>Interest rate model configuration</li>
-          <li>Risk parameter calibration</li>
-          <li>Liquidation bot infrastructure</li>
-        </ul>
-      </div>
+      {/* Explanation Section */}
+      <Card>
+        <CardHeader className="border-b">
+          <div className="flex items-center space-x-2">
+            <LightbulbIcon className="w-6 h-6 text-yellow-500" />
+            <CardTitle>Understanding the Code</CardTitle>
+          </div>
+        </CardHeader>
+        <CardContent className="space-y-6 pt-4">
+          <div className="grid gap-6">
+            {/* Market Structure */}
+            <div className="bg-gray-50 p-4 rounded-lg">
+              <h3 className="font-semibold text-lg mb-2">The Market Structure</h3>
+              <p className="text-gray-600">
+                Think of each Market like a dashboard for a specific cryptocurrency pool:
+              </p>
+              <ul className="list-disc pl-6 mt-2 space-y-1 text-gray-600">
+                <li>It tracks how much money is in the pool (totalDeposits)</li>
+                <li>It knows how much has been borrowed (totalBorrows)</li>
+                <li>It calculates interest rates based on usage</li>
+                <li>It sets rules for how much you can borrow</li>
+              </ul>
+            </div>
+
+            {/* User Account */}
+            <div className="bg-gray-50 p-4 rounded-lg">
+              <h3 className="font-semibold text-lg mb-2">Your Personal Account</h3>
+              <p className="text-gray-600">
+                Each user has their own account that tracks:
+              </p>
+              <ul className="list-disc pl-6 mt-2 space-y-1 text-gray-600">
+                <li>How much you've deposited (like savings)</li>
+                <li>How much you've borrowed (like loans)</li>
+                <li>Whether you're using your deposits as collateral</li>
+                <li>When you last made any changes</li>
+              </ul>
+            </div>
+
+            {/* Interest Rates */}
+            <div className="bg-gray-50 p-4 rounded-lg">
+              <h3 className="font-semibold text-lg mb-2">Smart Interest Rates</h3>
+              <p className="text-gray-600">
+                The pool automatically adjusts interest rates:
+              </p>
+              <ul className="list-disc pl-6 mt-2 space-y-1 text-gray-600">
+                <li>When more people borrow, rates go up</li>
+                <li>When fewer people borrow, rates go down</li>
+                <li>Lenders earn more when demand is high</li>
+                <li>Borrowers pay more when supply is low</li>
+              </ul>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Safety Features */}
+      <Card>
+        <CardHeader className="border-b">
+          <div className="flex items-center space-x-2">
+            <ShieldAlert className="w-6 h-6 text-red-500" />
+            <CardTitle>Safety Features</CardTitle>
+          </div>
+        </CardHeader>
+        <CardContent className="space-y-4 pt-4">
+          <div className="bg-red-50 p-4 rounded-lg">
+            <h3 className="font-semibold text-lg mb-2">Built-in Protections</h3>
+            <ul className="list-disc pl-6 space-y-2 text-red-800">
+              <li>You must have more collateral than loans (like a safety deposit)</li>
+              <li>Interest rates adjust to prevent the pool from running dry</li>
+              <li>Each token type has its own risk settings</li>
+              <li>All transactions are recorded on the blockchain</li>
+            </ul>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 };
 
-export default LendingPoolContract;
+export default LendingPoolPlatform;
