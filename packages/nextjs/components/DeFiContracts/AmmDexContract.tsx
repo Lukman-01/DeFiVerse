@@ -1,3 +1,4 @@
+"use client";
 import React from 'react';
 import { BarChart2, Code, LightbulbIcon, ArrowLeftRight, Droplet } from 'lucide-react';
 

@@ -1,3 +1,4 @@
+"use client";
 import React from 'react';
 import { Shield, Code, LightbulbIcon, Lock } from 'lucide-react';
 

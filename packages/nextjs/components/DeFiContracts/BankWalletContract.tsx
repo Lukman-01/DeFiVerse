@@ -1,3 +1,4 @@
+"use client";
 import React from 'react';
 import { Wallet, Code, LightbulbIcon, ShieldCheck } from 'lucide-react';
 

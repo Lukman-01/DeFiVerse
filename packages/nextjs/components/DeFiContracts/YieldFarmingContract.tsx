@@ -1,3 +1,4 @@
+"use client";
 import React from 'react';
 import { Coins, Code, LightbulbIcon, TrendingUp } from 'lucide-react';
 
