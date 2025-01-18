@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import Footer from "~~/components/LandingPage/Footer";
+import Navbar from "~~/components/Navbar";
 import { RainbowKitCustomConnectButton } from "~~/components/scaffold-eth/RainbowKitCustomConnectButton";
 
 const FeatureCard = ({ icon, title, description }: any) => {
@@ -49,26 +50,6 @@ const StepCard = ({ number, title, description }: any) => (
 export default function LandingPage() {
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-blue-50 to-gray-100">
-      <header className="py-6 bg-white sticky top-0 shadow-md z-20">
-        <div className="container mx-auto px-4 flex justify-between items-center">
-          <Link href="/" className="text-3xl font-extrabold text-blue-600">
-            DefiVerse
-          </Link>
-          <nav className="space-x-6 font-medium">
-            <Link href="#features" className="text-gray-600 hover:text-blue-600 transition-colors">
-              Keywords
-            </Link>
-            <Link href="#how-it-works" className="text-gray-600 hover:text-blue-600 transition-colors">
-              News
-            </Link>
-            <Link href="#testimonials" className="text-gray-600 hover:text-blue-600 transition-colors">
-              DEXs
-            </Link>
-          </nav>
-          <RainbowKitCustomConnectButton />
-        </div>
-      </header>
-
       <main className="flex-grow">
         {/* Hero Section */}
         <section className="container mx-auto px-4 py-20 text-center">
@@ -78,7 +59,7 @@ export default function LandingPage() {
               DefiVerse: Your interactive on-chain learning platform for mastering decentralized finance.
             </p>
             <Link
-              href="/dashboard/courses"
+              href="/courses"
               className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-medium px-8 py-4 rounded-full transition"
             >
               Start Learning
@@ -96,10 +77,9 @@ export default function LandingPage() {
               <div className="bg-white rounded-lg shadow-md p-6">
                 <h3 className="text-2xl font-bold mb-4 text-gray-900">What is DeFi?</h3>
                 <p className="text-lg text-gray-700 leading-relaxed">
-                  Decentralized Finance (DeFi) is a revolutionary concept in blockchain 
-                  that removes intermediaries in financial transactions, providing open access 
-                  to financial services. It empowers individuals to gain control over their assets, 
-                  reduces costs, and fosters financial inclusion globally.
+                  Decentralized Finance (DeFi) is a revolutionary concept in blockchain that removes intermediaries in
+                  financial transactions, providing open access to financial services. It empowers individuals to gain
+                  control over their assets, reduces costs, and fosters financial inclusion globally.
                 </p>
               </div>
 
@@ -123,12 +103,7 @@ export default function LandingPage() {
                             viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg"
                           >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M5 13l4 4L19 7"
-                            />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                           </svg>
                         </div>
                       </div>
@@ -165,16 +140,13 @@ export default function LandingPage() {
         </section>
 
         {/* How It Works Section */}
-        <section id="how-it-works" className="container mx-auto px-4 py-16 bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl shadow-lg">
-          <h2 className="text-4xl font-bold mb-12 text-center text-gray-900">
-            How It Works
-          </h2>
+        <section
+          id="how-it-works"
+          className="container mx-auto px-4 py-16 bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl shadow-lg"
+        >
+          <h2 className="text-4xl font-bold mb-12 text-center text-gray-900">How It Works</h2>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <StepCard
-              number={1}
-              title="Connect Wallet"
-              description="Link your wallet to get started with DefiVerse."
-            />
+            <StepCard number={1} title="Connect Wallet" description="Link your wallet to get started with DefiVerse." />
             <StepCard
               number={2}
               title="Start Learning"
@@ -195,9 +167,7 @@ export default function LandingPage() {
 
         {/* Call-to-Action Section */}
         <section className="container mx-auto px-4 py-20 text-center">
-          <h2 className="text-4xl font-bold mb-8 text-gray-900 tracking-tight">
-            Ready to Start Your DeFi Journey?
-          </h2>
+          <h2 className="text-4xl font-bold mb-8 text-gray-900 tracking-tight">Ready to Start Your DeFi Journey?</h2>
           <p className="text-xl mb-10 text-gray-700 max-w-3xl mx-auto">
             Join DefiVerse today and unlock the potential of decentralized finance.
           </p>

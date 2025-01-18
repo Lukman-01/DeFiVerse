@@ -12,7 +12,7 @@ import YieldFarmingContract from '~~/components/DeFiContracts/YieldFarmingContra
 
 const ContentWrapper: React.FC<{ children: React.ReactNode; title: string }> = ({ children, title }) => (
   <div className="space-y-4">
-    <div className="text-sm text-gray-500">Debug: Rendering {title}</div>
+    <div className="text-sm text-black/60">Debug: Rendering {title}</div>
     {children}
   </div>
 );
@@ -83,7 +83,7 @@ const sections = [
   },
 ];
 
-export default function DerivativesPage() {
+export default function DeFiContracts() {
   const [selectedSection, setSelectedSection] = useState(0);
   const [isSidebarOpen, setSidebarOpen] = useState(true);
 
