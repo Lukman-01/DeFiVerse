@@ -1,3 +1,5 @@
+import DexPage from "~~/components/Navigations/Dexs";
+
 export default function DexsPage() {
-  return <div>Dex Page</div>;
+  return <DexPage />;
 }
