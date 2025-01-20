@@ -36,7 +36,7 @@ const sections = [
     ),
   },
   {
-    title: "Over-Collateralized Borrowing",
+    title: "Over-Collateralized",
     icon: <Book className="w-5 h-5" />,
     component: (
       <ContentWrapper title="Over-Collateralized Borrowing">
@@ -45,7 +45,7 @@ const sections = [
     ),
   },
   {
-    title: "Under-Collateralized Borrowing",
+    title: "Under-Collateralized",
     icon: <Book className="w-5 h-5" />,
     component: (
       <ContentWrapper title="Under-Collateralized Borrowing">

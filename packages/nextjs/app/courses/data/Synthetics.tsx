@@ -114,6 +114,11 @@ export default function Synthetics() {
           </ul>
         </nav>
       </div>
+
+      {/* Main Content */}
+      <div className="flex-1 p-6 overflow-y-auto">
+        {sections[selectedSection]?.component}
+      </div>
     </div>
   );
 }

@@ -1,6 +1,5 @@
-"use client";
 import React, { useState } from 'react';
-import { ChevronRight, Book, AlertTriangle } from 'lucide-react';
+import { ChevronRight, Book } from 'lucide-react';
 import VaultContract from '~~/components/DeFiContracts/VaultContract';
 import LendingPoolContract from '~~/components/DeFiContracts/LendingPoolContract';
 import StakingContract from '~~/components/DeFiContracts/StakingContract';
@@ -8,7 +7,6 @@ import EscrowContract from '~~/components/DeFiContracts/EscrowContract';
 import BankWalletContract from '~~/components/DeFiContracts/BankWalletContract';
 import AmmDexContract from '~~/components/DeFiContracts/AmmDexContract';
 import YieldFarmingContract from '~~/components/DeFiContracts/YieldFarmingContract';
-//import { title } from 'process';
 
 const ContentWrapper: React.FC<{ children: React.ReactNode; title: string }> = ({ children, title }) => (
   <div className="space-y-4">
@@ -88,7 +86,7 @@ export default function DeFiContracts() {
   const [isSidebarOpen, setSidebarOpen] = useState(true);
 
   return (
-    <div className="flex h-screen bg-gray-100">
+    <div className="flex h-screen bg-black-500">
       {/* Sidebar */}
       <div className={`${isSidebarOpen ? "w-64" : "w-0"} transition-all duration-300 bg-white border-r`}>
         <div className="p-4 border-b">
@@ -114,6 +112,28 @@ export default function DeFiContracts() {
             ))}
           </ul>
         </nav>
+      </div>
+
+      {/* Main Content */}
+      <div className="flex-1 flex flex-col overflow-hidden">
+        <header className="bg-white border-b p-4 shadow-sm">
+          <div className="max-w-4xl mx-auto flex items-center">
+            <button onClick={() => setSidebarOpen(!isSidebarOpen)} className="p-2 rounded-lg hover:bg-gray-100 mr-4">
+              <ChevronRight
+                className={`w-5 h-5 transition-transform duration-200 ${isSidebarOpen ? "rotate-180" : ""}`}
+              />
+            </button>
+            <h2 className="text-xl font-semibold">{sections[selectedSection].title}</h2>
+          </div>
+        </header>
+
+        <main className="flex-1 overflow-auto p-4">
+          <div className="max-w-4xl mx-auto">
+            <div className="bg-white shadow-sm rounded-lg p-6">
+              <div className="min-h-[200px]">{sections[selectedSection].component}</div>
+            </div>
+          </div>
+        </main>
       </div>
     </div>
   );
