@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Shield, TrendingUp, TrendingDown, Activity, AlertTriangle, Info } from 'lucide-react';
+import { Shield, TrendingUp, TrendingDown, AlertTriangle, Info } from 'lucide-react';
 
 interface Term {
   id: string;

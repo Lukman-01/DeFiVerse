@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Coins, ArrowRight, PiggyBank, Globe, Lock, LucideIcon } from 'lucide-react';
+import { Coins, ArrowRight, PiggyBank, Globe, Lock} from 'lucide-react';
 
 interface Benefit {
   id: string;

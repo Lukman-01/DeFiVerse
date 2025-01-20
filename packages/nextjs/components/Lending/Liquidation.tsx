@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { AlertTriangle, TrendingDown, Gavel, Clock, BarChart3, DollarSign, Info, ArrowRight } from 'lucide-react';
+import { AlertTriangle, Gavel, DollarSign, Info, ArrowRight } from 'lucide-react';
 
 interface LiquidationMethod {
   id: string;
