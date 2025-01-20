@@ -1,4 +1,5 @@
 "use client";
+
 import React from 'react';
 import { BookOpen, Code, LightbulbIcon } from 'lucide-react';
 
@@ -26,14 +27,14 @@ const CardContent = ({ children, className = '' }:any) => (
   </div>
 );
 
-const DeFiLearningPlatform = () => {
+const VaultContract = () => {
   return (
     <div className="max-w-5xl mx-auto p-6 space-y-8">
       {/* Rest of the component remains exactly the same... */}
       {/* Header */}
       <div className="text-center space-y-2">
         <h1 className="text-3xl font-bold">Understanding DeFi Vaults</h1>
-        <p className="text-gray-600">A Complete Guide from Concept to Code</p>
+        <p className="text-black-600">A Complete Guide from Concept to Code</p>
       </div>
 
       {/* Concept Section */}
@@ -185,4 +186,4 @@ contract SimpleVault {
   );
 };
 
-export default DeFiLearningPlatform;
+export default VaultContract;

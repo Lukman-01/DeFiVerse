@@ -1,14 +1,5 @@
 import React, { useState } from 'react';
-import { 
-  Coins, 
-  Users, 
-  Zap, 
-  Globe, 
-  Lock, 
-  TrendingUp,
-  ChevronRight,
-  BookOpen
-} from 'lucide-react';
+import { Coins, Users, Zap, Globe, Lock, TrendingUp, ChevronRight, BookOpen} from 'lucide-react';
 
 const BenefitCard = ({ icon, title, description, stats }:any) => (
   <div className="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow">

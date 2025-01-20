@@ -27,7 +27,7 @@ const CardContent = ({ children, className = '' }:any) => (
   </div>
 );
 
-const StakingLearningPlatform = () => {
+const StakingContract = () => {
   return (
     <div className="max-w-5xl mx-auto p-6 space-y-8">
       {/* Header */}
@@ -230,4 +230,4 @@ contract Staking {
   );
 };
 
-export default StakingLearningPlatform;
+export default StakingContract;

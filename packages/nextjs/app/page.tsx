@@ -5,8 +5,6 @@ import Link from "next/link";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import Footer from "~~/components/LandingPage/Footer";
-import Navbar from "~~/components/Navbar";
-import { RainbowKitCustomConnectButton } from "~~/components/scaffold-eth/RainbowKitCustomConnectButton";
 
 const FeatureCard = ({ icon, title, description }: any) => {
   const controls = useAnimation();

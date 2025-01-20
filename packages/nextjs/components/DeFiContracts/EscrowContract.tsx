@@ -27,7 +27,7 @@ const CardContent = ({ children, className = '' }:any) => (
   </div>
 );
 
-const EscrowLearningPlatform = () => {
+const EscrowContract = () => {
   return (
     <div className="max-w-5xl mx-auto p-6 space-y-8">
       {/* Header */}
@@ -216,4 +216,4 @@ contract SimpleEscrow {
   );
 };
 
-export default EscrowLearningPlatform;
+export default EscrowContract;

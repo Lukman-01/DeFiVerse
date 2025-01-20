@@ -1,15 +1,5 @@
 import React, { useState } from 'react';
-import { 
-  Building2, 
-  ShieldCheck, 
-  Clock, 
-  Users, 
-  Eye, 
-  ChevronRight, 
-  AlertCircle,
-  DollarSign,
-  Scale
-} from 'lucide-react';
+import { Building2, ShieldCheck, Clock, Eye, ChevronRight, AlertCircle,Scale} from 'lucide-react';
 
 const FeatureCard = ({ icon, title, description, details, isActive, onClick }:any) => (
   <div 

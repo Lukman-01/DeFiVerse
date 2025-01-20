@@ -27,7 +27,7 @@ const CardContent = ({ children, className = '' }:any) => (
   </div>
 );
 
-const BankWalletPlatform = () => {
+const BankWalletContract = () => {
   return (
     <div className="max-w-5xl mx-auto p-6 space-y-8">
       {/* Header */}
@@ -216,4 +216,4 @@ contract SmartWallet {
   );
 };
 
-export default BankWalletPlatform;
+export default BankWalletContract;

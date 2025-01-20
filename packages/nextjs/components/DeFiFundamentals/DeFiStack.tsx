@@ -1,13 +1,5 @@
 import React, { useState } from 'react';
-import { 
-  Layers, 
-  Database, 
-  Code, 
-  Layout, 
-  ChevronRight,
-  ArrowRight,
-  Info
-} from 'lucide-react';
+import { Layers, Database, Code, Layout, ChevronRight, ArrowRight, Info} from 'lucide-react';
 
 const LayerCard = ({ layer, isActive, onClick }:any) => (
   <div 

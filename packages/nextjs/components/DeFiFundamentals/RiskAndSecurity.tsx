@@ -1,15 +1,5 @@
 import React, { useState } from 'react';
-import { 
-  Shield, 
-  AlertTriangle, 
-  Bug, 
-  Database, 
-  TrendingDown, 
-  Network, 
-  FastForward,
-  Check,
-  Info
-} from 'lucide-react';
+import { Shield, AlertTriangle, Bug, Database, TrendingDown, Network, FastForward, Check, Info} from 'lucide-react';
 
 const RiskCard = ({ icon, title, description, example, isActive, onClick }:any) => (
   <div 

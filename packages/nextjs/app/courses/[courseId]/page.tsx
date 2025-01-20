@@ -2,8 +2,6 @@
 
 import React, { ReactNode } from "react";
 import { useParams } from "next/navigation";
-import Footer from "../../../components/LandingPage/Footer";
-import Header from "../../../components/LandingPage/Header";
 import DeFiContracts from "../data/DeFiContracts";
 import DeFiFundamentals from "../data/DeFiFundamentals";
 import Lending from "../data/Lending";
@@ -34,7 +32,6 @@ const CoursePage = () => {
     const loadCourseData = async () => {
       console.log("Params ", params);
       try {
-        // Dynamic import of course data based on courseId
         const module = await import(`../data/${courseId}.tsx`);
         setCourseData(module.default);
         console.log("Data ", module.export);

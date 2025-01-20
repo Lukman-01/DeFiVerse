@@ -27,7 +27,7 @@ const CardContent = ({ children, className = '' }:any) => (
   </div>
 );
 
-const AmmDexPlatform = () => {
+const AmmDexContract = () => {
   return (
     <div className="max-w-5xl mx-auto p-6 space-y-8">
       {/* Header */}
@@ -214,4 +214,4 @@ contract ConstantProductAMM {
   );
 };
 
-export default AmmDexPlatform;
+export default AmmDexContract;
