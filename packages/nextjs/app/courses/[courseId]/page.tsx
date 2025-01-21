@@ -4,10 +4,12 @@ import React, { ReactNode } from "react";
 import { useParams } from "next/navigation";
 import DeFiContracts from "../data/DeFiContracts";
 import DeFiFundamentals from "../data/DeFiFundamentals";
+import Dexes from "../data/Dexes";
 import Lending from "../data/Lending";
 import Oracles from "../data/Oracles";
 import Stablecoins from "../data/Stablecoins";
 import Synthetics from "../data/Synthetics";
+import DeFiSecurity from "../data/DeFiSecurity";
 
 interface CourseContent {
   title: string;
@@ -22,30 +24,9 @@ interface CourseData {
 
 const CoursePage = () => {
   const params = useParams();
-  const courseId = params.courseId as string;
   const urlToTitle = decodeURIComponent(params.courseId as string);
 
-  const [courseData, setCourseData] = React.useState<ReactNode>(null);
-  const [loading, setLoading] = React.useState(true);
-
-  React.useEffect(() => {
-    const loadCourseData = async () => {
-      console.log("Params ", params);
-      try {
-        const module = await import(`../data/${courseId}.tsx`);
-        setCourseData(module.default);
-        console.log("Data ", module.export);
-      } catch (error) {
-        console.error("Failed to load course data:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    if (courseId) {
-      loadCourseData();
-    }
-  }, [courseId]);
+  const [loading, setLoading] = React.useState(false);
 
   function getCourse(title: string) {
     switch (title) {
@@ -61,6 +42,10 @@ const CoursePage = () => {
         return <Stablecoins />;
       case "Synthetics and Derivatives":
         return <Synthetics />;
+      case "DEXs":
+        return <Dexes />;
+      case "DeFi Security":
+        return <DeFiSecurity />;
     }
   }
 

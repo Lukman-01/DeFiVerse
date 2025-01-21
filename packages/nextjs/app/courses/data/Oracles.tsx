@@ -1,12 +1,13 @@
 "use client";
-import React, { useState } from 'react';
-import { ChevronRight, Book, AlertTriangle, Shield } from 'lucide-react';
-import IntroductionToOracles from '~~/components/Oracles/IntroductionToOracles';
-import BasicOracleDesignPart1 from '~~/components/Oracles/BasicOracleDesignPart1';
-import BasicOracleDesignPart2 from '~~/components/Oracles/BasicOracleDesignPart2';
-import AdvancedOracleUseCases from '~~/components/Oracles/AdvancedOracleUseCases';
-import OraclePrivacy from '~~/components/Oracles/OraclePrivacy';
-import PrivacyPreservingOracles from '~~/components/Oracles/PrivacyPreservingOracles';
+
+import React, { useState } from "react";
+import { AlertTriangle, Book, ChevronRight, Shield } from "lucide-react";
+import AdvancedOracleUseCases from "~~/components/Oracles/AdvancedOracleUseCases";
+import BasicOracleDesignPart1 from "~~/components/Oracles/BasicOracleDesignPart1";
+import BasicOracleDesignPart2 from "~~/components/Oracles/BasicOracleDesignPart2";
+import IntroductionToOracles from "~~/components/Oracles/IntroductionToOracles";
+import OraclePrivacy from "~~/components/Oracles/OraclePrivacy";
+import PrivacyPreservingOracles from "~~/components/Oracles/PrivacyPreservingOracles";
 
 const ContentWrapper: React.FC<{ children: React.ReactNode; title: string }> = ({ children, title }) => (
   <div className="space-y-4">
@@ -72,14 +73,14 @@ const sections = [
   },
 ];
 
-export default function Oracles() {
-  const [selectedSection, setSelectedSection] = useState(0);
-  const [isSidebarOpen, setSidebarOpen] = useState(true);
+function Oracles() {
+  const [selectedSection, setSelectedSection] = useState<number>(0);
+  const [isSidebarOpen, setSidebarOpen] = useState<boolean>(true);
 
   return (
     <div className="flex h-screen bg-gray-100">
       {/* Sidebar */}
-      <div className={`${isSidebarOpen ? "w-64" : "w-0"} transition-all duration-300 bg-white border-r`}>
+      <div className={`transition-all duration-300 bg-white border-r ${isSidebarOpen ? "w-64" : "w-0"}`}>
         <div className="p-4 border-b">
           <h1 className="text-xl font-bold">Oracles Documentation</h1>
         </div>
@@ -89,9 +90,7 @@ export default function Oracles() {
               <li key={index}>
                 <button
                   className={`flex items-center w-full p-3 rounded-lg transition-colors duration-200 ${
-                    selectedSection === index
-                      ? "bg-blue-50 text-blue-600"
-                      : "text-gray-600 hover:bg-gray-50"
+                    selectedSection === index ? "bg-blue-50 text-blue-600" : "text-gray-600 hover:bg-gray-50"
                   }`}
                   onClick={() => setSelectedSection(index)}
                 >
@@ -116,3 +115,5 @@ export default function Oracles() {
     </div>
   );
 }
+
+export default Oracles;

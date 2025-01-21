@@ -1,10 +1,11 @@
 "use client";
-import React, { useState } from 'react';
-import { ChevronRight, Book, AlertTriangle } from 'lucide-react';
-import WhyStablecoins from '~~/components/StableCoins/WhyStablecoins';
-import WhatIsStable from '~~/components/StableCoins/WhatIsStable';
-import StablecoinTypes from '~~/components/StableCoins/StablecoinTypes';
-import DeFiBankRun from '~~/components/StableCoins/DeFiBankRun';
+
+import React, { useState } from "react";
+import { AlertTriangle, Book, ChevronRight } from "lucide-react";
+import DeFiBankRun from "~~/components/StableCoins/DeFiBankRun";
+import StablecoinTypes from "~~/components/StableCoins/StablecoinTypes";
+import WhatIsStable from "~~/components/StableCoins/WhatIsStable";
+import WhyStablecoins from "~~/components/StableCoins/WhyStablecoins";
 
 const ContentWrapper: React.FC<{ children: React.ReactNode; title: string }> = ({ children, title }) => (
   <div className="space-y-4">
@@ -15,20 +16,20 @@ const ContentWrapper: React.FC<{ children: React.ReactNode; title: string }> = (
 
 const sections = [
   {
+    title: "What is Stable?",
+    icon: <Book className="w-5 h-5" />,
+    component: (
+      <ContentWrapper title="What is 'Stable'?">
+        <WhatIsStable />
+      </ContentWrapper>
+    ),
+  },
+  {
     title: "Why Stablecoins?",
     icon: <Book className="w-5 h-5" />,
     component: (
       <ContentWrapper title="Why Stablecoins">
         <WhyStablecoins />
-      </ContentWrapper>
-    ),
-  },
-  {
-    title: "What is 'Stable'?",
-    icon: <Book className="w-5 h-5" />,
-    component: (
-      <ContentWrapper title="What is 'Stable'?">
-        <WhatIsStable />
       </ContentWrapper>
     ),
   },
@@ -69,9 +70,7 @@ export default function Stablecoins() {
               <li key={index}>
                 <button
                   className={`flex items-center w-full p-3 rounded-lg transition-colors duration-200 ${
-                    selectedSection === index
-                      ? "bg-blue-50 text-blue-600"
-                      : "text-gray-600 hover:bg-gray-50"
+                    selectedSection === index ? "bg-blue-50 text-blue-600" : "text-gray-600 hover:bg-gray-50"
                   }`}
                   onClick={() => setSelectedSection(index)}
                 >
@@ -87,9 +86,22 @@ export default function Stablecoins() {
 
       {/* Main Content */}
       <div className="flex-1 flex flex-col overflow-hidden">
+        <header className="bg-white border-b p-4 shadow-sm">
+          <div className="max-w-4xl mx-auto flex items-center">
+            <button onClick={() => setSidebarOpen(!isSidebarOpen)} className="p-2 rounded-lg hover:bg-gray-100 mr-4">
+              <ChevronRight
+                className={`w-5 h-5 transition-transform duration-200 ${isSidebarOpen ? "rotate-180" : ""}`}
+              />
+            </button>
+            <h2 className="text-xl font-semibold">{sections[selectedSection].title}</h2>
+          </div>
+        </header>
+
         <main className="flex-1 overflow-auto p-4">
           <div className="max-w-4xl mx-auto">
-            <div className="bg-white shadow-sm rounded-lg p-6">{sections[selectedSection].component}</div>
+            <div className="bg-white shadow-sm rounded-lg p-6">
+              <div className="min-h-[200px]">{sections[selectedSection].component}</div>
+            </div>
           </div>
         </main>
       </div>
