@@ -4,7 +4,7 @@ import { ChevronRight, Book, AlertTriangle } from "lucide-react";
 import Arbitrage from "~~/components/Dexes/Arbitrage";
 import AutomatedMarketMaker from "~~/components/Dexes/AutomatedMakertMaker";
 import DEXAggregator from "~~/components/Dexes/DEXAggregator";
-import DecentralizedExchange from "~~/components/Dexes/DecentralizeExchange";
+import OrderBookModels from "~~/components/Dexes/DecentralizeExchange";
 import ExchangeTransactionPropagation from "~~/components/Dexes/ExchangeTransactionPropagation";
 import ImpermanentLoss from "~~/components/Dexes/ImpermanentLoss";
 import LiquidityMining from "~~/components/Dexes/LiquidityMining";
@@ -52,7 +52,7 @@ const sections = [
     icon: <Book className="w-5 h-5" />,
     component: (
       <ContentWrapper title="Decentralized Exchange">
-        <DecentralizedExchange />
+        <OrderBookModels />
       </ContentWrapper>
     ),
   },
