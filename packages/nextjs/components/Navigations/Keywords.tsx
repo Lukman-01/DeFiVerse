@@ -454,13 +454,15 @@ const keywords = [
     term: "Token Vesting",
     description:
       "A schedule that releases tokens gradually over a specified period, ensuring long-term alignment between a project and its stakeholders.",
-    example: "A DeFi project may use a token vesting schedule to distribute team tokens over three years to prevent sudden dumps.",
+    example:
+      "A DeFi project may use a token vesting schedule to distribute team tokens over three years to prevent sudden dumps.",
   },
   {
     term: "Gnosis Safe",
     description:
       "A multi-signature wallet platform used in DeFi for managing assets and executing transactions securely. It requires multiple approvals for transactions.",
-    example: "A DAO using Gnosis Safe to manage its treasury and require three out of five signatures for fund transfers.",
+    example:
+      "A DAO using Gnosis Safe to manage its treasury and require three out of five signatures for fund transfers.",
   },
   {
     term: "Bribe Market",
@@ -502,7 +504,8 @@ const keywords = [
     term: "Real-World Assets (RWA)",
     description:
       "The tokenization of physical assets such as real estate, bonds, or commodities for use in DeFi protocols.",
-    example: "Tokenizing a real estate property and allowing users to trade or invest in fractional shares through a DeFi platform.",
+    example:
+      "Tokenizing a real estate property and allowing users to trade or invest in fractional shares through a DeFi platform.",
   },
   {
     term: "Delta Neutral Strategy",
@@ -559,7 +562,7 @@ const FeaturesDefiKeywordsPage = () => {
           <input
             type="text"
             placeholder="Search DeFi terms..."
-            className="w-full pl-10 pr-4 py-4 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 text-lg"
+            className="w-full pl-10 pr-4 py-4 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 text-lg bg-white"
             value={searchTerm}
             onChange={e => setSearchTerm(e.target.value)}
           />
