@@ -23,6 +23,9 @@ export default function Navbar() {
           <Link href="/dexs" className="text-gray-600 hover:text-blue-600 transition-colors">
             DEXs
           </Link>
+          <Link href="/quiz" className="text-gray-600 hover:text-blue-600 transition-colors">
+            Quiz
+          </Link>
         </nav>
         <RainbowKitCustomConnectButton />
       </div>
