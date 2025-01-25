@@ -1,35 +1,24 @@
 "use client";
-import React from 'react';
-import { Coins, Code, LightbulbIcon, TrendingUp } from 'lucide-react';
+
+import React from "react";
+import { Code, Coins, LightbulbIcon, TrendingUp } from "lucide-react";
 
 // Custom Card Components
-const Card = ({ children, className = '' }:any) => (
-  <div className={`bg-white rounded-lg shadow-md border ${className}`}>
-    {children}
-  </div>
+const Card = ({ children, className = "" }: any) => (
+  <div className={`bg-white rounded-lg shadow-md border ${className}`}>{children}</div>
 );
 
-const CardHeader = ({ children, className = '' }:any) => (
-  <div className={`px-6 py-4 ${className}`}>
-    {children}
-  </div>
+const CardHeader = ({ children, className = "" }: any) => <div className={`px-6 py-4 ${className}`}>{children}</div>;
+
+const CardTitle = ({ children, className = "" }: any) => (
+  <h2 className={`text-xl font-semibold ${className}`}>{children}</h2>
 );
 
-const CardTitle = ({ children, className = '' }:any) => (
-  <h2 className={`text-xl font-semibold ${className}`}>
-    {children}
-  </h2>
-);
-
-const CardContent = ({ children, className = '' }:any) => (
-  <div className={`px-6 pb-6 ${className}`}>
-    {children}
-  </div>
-);
+const CardContent = ({ children, className = "" }: any) => <div className={`px-6 pb-6 ${className}`}>{children}</div>;
 
 const YieldFarmingContract = () => {
   return (
-    <div className="max-w-5xl mx-auto p-6 space-y-8">
+    <div className="p-6 space-y-8">
       {/* Header */}
       <div className="text-center space-y-2">
         <h1 className="text-3xl font-bold">Understanding Yield Farming</h1>
@@ -47,13 +36,12 @@ const YieldFarmingContract = () => {
         <CardContent className="space-y-4 pt-4">
           <div className="bg-blue-50 p-4 rounded-lg">
             <p className="text-blue-800">
-              Yield farming is like a high-tech savings account for cryptocurrency! 
-              Instead of just holding your tokens, you can "stake" them in special pools 
-              to earn additional rewards. Think of it as putting your money to work - 
-              you deposit tokens, and in return, you earn more tokens as rewards over time.
+              Yield farming is like a high-tech savings account for cryptocurrency! Instead of just holding your tokens,
+              you can "stake" them in special pools to earn additional rewards. Think of it as putting your money to
+              work - you deposit tokens, and in return, you earn more tokens as rewards over time.
             </p>
           </div>
-          
+
           <h3 className="font-semibold text-lg mt-4">How Does It Work?</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
             <div className="bg-gray-50 p-4 rounded-lg">
@@ -82,8 +70,8 @@ const YieldFarmingContract = () => {
         </CardHeader>
         <CardContent className="pt-4">
           <pre className="bg-gray-50 p-4 rounded-lg overflow-x-auto">
-            <code className="text-sm">
-{`// SPDX-License-Identifier: MIT
+            <code className="text-[15px] font-medium text-blue-900">
+              {`// SPDX-License-Identifier: MIT
 contract YieldFarming {
     struct Pool {
         address stakingToken;      // Token you deposit
@@ -144,9 +132,7 @@ contract YieldFarming {
             {/* Pool Structure */}
             <div className="bg-gray-50 p-4 rounded-lg">
               <h3 className="font-semibold text-lg mb-2">Pool Structure</h3>
-              <p className="text-gray-600">
-                Each yield farming pool tracks:
-              </p>
+              <p className="text-gray-600">Each yield farming pool tracks:</p>
               <ul className="list-disc pl-6 mt-2 space-y-1 text-gray-600">
                 <li>Which token you can stake (stakingToken)</li>
                 <li>Which token you earn as rewards (rewardToken)</li>
@@ -158,9 +144,7 @@ contract YieldFarming {
             {/* Staking Process */}
             <div className="bg-gray-50 p-4 rounded-lg">
               <h3 className="font-semibold text-lg mb-2">Staking Process</h3>
-              <p className="text-gray-600">
-                When you stake tokens:
-              </p>
+              <p className="text-gray-600">When you stake tokens:</p>
               <ul className="list-disc pl-6 mt-2 space-y-1 text-gray-600">
                 <li>Your rewards are calculated and updated</li>
                 <li>Tokens are transferred to the contract</li>
@@ -172,9 +156,7 @@ contract YieldFarming {
             {/* Rewards System */}
             <div className="bg-gray-50 p-4 rounded-lg">
               <h3 className="font-semibold text-lg mb-2">Rewards System</h3>
-              <p className="text-gray-600">
-                The rewards system:
-              </p>
+              <p className="text-gray-600">The rewards system:</p>
               <ul className="list-disc pl-6 mt-2 space-y-1 text-gray-600">
                 <li>Calculates rewards based on blocks passed</li>
                 <li>Tracks individual user rewards</li>

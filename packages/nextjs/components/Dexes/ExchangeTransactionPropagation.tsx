@@ -1,6 +1,8 @@
+"use client";
+
 // ExchangeTransactionPropagation.tsx
-import React, { useState, useEffect } from 'react';
-import { ArrowRight, Database, AlertTriangle, Activity } from 'lucide-react';
+import React, { useEffect, useState } from "react";
+import { Activity, AlertTriangle, ArrowRight, Database } from "lucide-react";
 
 interface Node {
   id: number;
@@ -20,41 +22,41 @@ export const ExchangeTransactionPropagation: React.FC = (): JSX.Element => {
   useEffect(() => {
     if (isAnimating) {
       const interval = setInterval(() => {
-        setActiveNode((prev) => (prev + 1) % 5);
+        setActiveNode(prev => (prev + 1) % 5);
       }, 2000);
       return () => clearInterval(interval);
     }
   }, [isAnimating]);
 
   const nodes: Node[] = [
-    { id: 0, label: 'Transaction Initiated' },
-    { id: 1, label: 'P2P Propagation' },
-    { id: 2, label: 'Fee Auction' },
-    { id: 3, label: 'Block Inclusion' },
-    { id: 4, label: 'Transaction Confirmed' }
+    { id: 0, label: "Transaction Initiated" },
+    { id: 1, label: "P2P Propagation" },
+    { id: 2, label: "Fee Auction" },
+    { id: 3, label: "Block Inclusion" },
+    { id: 4, label: "Transaction Confirmed" },
   ];
 
   const challenges: Challenge[] = [
     {
       icon: <Activity className="w-5 h-5" />,
-      title: 'High-Frequency Impact',
-      description: 'Trading volume can affect network transparency'
+      title: "High-Frequency Impact",
+      description: "Trading volume can affect network transparency",
     },
     {
       icon: <AlertTriangle className="w-5 h-5" />,
-      title: 'Front-Running Risks',
-      description: 'Fee auction vulnerability on public networks'
-    }
+      title: "Front-Running Risks",
+      description: "Fee auction vulnerability on public networks",
+    },
   ];
 
   return (
-    <div className="p-6 bg-white rounded-lg shadow-lg max-w-4xl mx-auto">
+    <div className="p-6 bg-white rounded-lg shadow-lg">
       <h1 className="text-2xl font-bold mb-6">Exchange Transaction Propagation</h1>
-      
+
       {/* Main description */}
       <p className="text-gray-600 mb-8">
-        A decentralized system for distributing and executing blockchain transactions,
-        ensuring trades are visible, verified, and executed without central coordination.
+        A decentralized system for distributing and executing blockchain transactions, ensuring trades are visible,
+        verified, and executed without central coordination.
       </p>
 
       {/* Propagation visualization */}
@@ -64,19 +66,13 @@ export const ExchangeTransactionPropagation: React.FC = (): JSX.Element => {
             <div key={node.id} className="flex flex-col items-center">
               <div
                 className={`w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 ${
-                  index === activeNode
-                    ? 'bg-blue-500 text-white'
-                    : 'bg-gray-100 text-gray-500'
+                  index === activeNode ? "bg-blue-500 text-white" : "bg-gray-100 text-gray-500"
                 }`}
               >
                 <Database className="w-6 h-6" />
               </div>
-              <div className="mt-2 text-sm text-center max-w-[120px]">
-                {node.label}
-              </div>
-              {index < nodes.length - 1 && (
-                <ArrowRight className="absolute ml-14 text-gray-400" />
-              )}
+              <div className="mt-2 text-sm text-center max-w-[120px]">{node.label}</div>
+              {index < nodes.length - 1 && <ArrowRight className="absolute ml-14 text-gray-400" />}
             </div>
           ))}
         </div>
@@ -94,9 +90,7 @@ export const ExchangeTransactionPropagation: React.FC = (): JSX.Element => {
           </div>
           <div className="p-4 bg-green-50 rounded-lg">
             <h3 className="font-semibold mb-2">Fee Auction Mechanisms</h3>
-            <p className="text-sm text-gray-600">
-              PGA and SGA systems determine transaction inclusion based on fees
-            </p>
+            <p className="text-sm text-gray-600">PGA and SGA systems determine transaction inclusion based on fees</p>
           </div>
         </div>
       </div>

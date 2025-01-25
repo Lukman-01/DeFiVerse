@@ -1,35 +1,24 @@
 "use client";
-import React from 'react';
-import { BarChart2, Code, LightbulbIcon, ArrowLeftRight, Droplet } from 'lucide-react';
+
+import React from "react";
+import { ArrowLeftRight, BarChart2, Code, Droplet, LightbulbIcon } from "lucide-react";
 
 // Custom Card Components
-const Card = ({ children, className = '' }:any) => (
-  <div className={`bg-white rounded-lg shadow-md border ${className}`}>
-    {children}
-  </div>
+const Card = ({ children, className = "" }: any) => (
+  <div className={`bg-white rounded-lg shadow-md border ${className}`}>{children}</div>
 );
 
-const CardHeader = ({ children, className = '' }:any) => (
-  <div className={`px-6 py-4 ${className}`}>
-    {children}
-  </div>
+const CardHeader = ({ children, className = "" }: any) => <div className={`px-6 py-4 ${className}`}>{children}</div>;
+
+const CardTitle = ({ children, className = "" }: any) => (
+  <h2 className={`text-xl font-semibold ${className}`}>{children}</h2>
 );
 
-const CardTitle = ({ children, className = '' }:any) => (
-  <h2 className={`text-xl font-semibold ${className}`}>
-    {children}
-  </h2>
-);
-
-const CardContent = ({ children, className = '' }:any) => (
-  <div className={`px-6 pb-6 ${className}`}>
-    {children}
-  </div>
-);
+const CardContent = ({ children, className = "" }: any) => <div className={`px-6 pb-6 ${className}`}>{children}</div>;
 
 const AmmDexContract = () => {
   return (
-    <div className="max-w-5xl mx-auto p-6 space-y-8">
+    <div className="p-6 space-y-8">
       {/* Header */}
       <div className="text-center space-y-2">
         <h1 className="text-3xl font-bold">Understanding AMM DEX</h1>
@@ -47,14 +36,13 @@ const AmmDexContract = () => {
         <CardContent className="space-y-4 pt-4">
           <div className="bg-blue-50 p-4 rounded-lg">
             <p className="text-blue-800">
-              An AMM (Automated Market Maker) DEX is like a robot-powered trading post! 
-              Instead of traditional order books with buyers and sellers, it uses a mathematical 
-              formula (x * y = k) to automatically determine prices. Users can trade tokens 
-              directly with a liquidity pool, and other users can earn fees by providing 
+              An AMM (Automated Market Maker) DEX is like a robot-powered trading post! Instead of traditional order
+              books with buyers and sellers, it uses a mathematical formula (x * y = k) to automatically determine
+              prices. Users can trade tokens directly with a liquidity pool, and other users can earn fees by providing
               liquidity to these pools.
             </p>
           </div>
-          
+
           <h3 className="font-semibold text-lg mt-4">Key Components</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
             <div className="bg-gray-50 p-4 rounded-lg">
@@ -83,8 +71,8 @@ const AmmDexContract = () => {
         </CardHeader>
         <CardContent className="pt-4">
           <pre className="bg-gray-50 p-4 rounded-lg overflow-x-auto">
-            <code className="text-sm">
-{`// SPDX-License-Identifier: MIT
+            <code className="text-[15px] font-medium text-blue-900">
+              {`// SPDX-License-Identifier: MIT
 contract ConstantProductAMM {
     struct Pool {
         uint256 reserve0;      // First token reserve
@@ -181,10 +169,7 @@ contract ConstantProductAMM {
           <div className="mt-4">
             <h3 className="font-semibold text-lg mb-2">Price Impact Formula</h3>
             <pre className="bg-gray-50 p-4 rounded-lg overflow-x-auto">
-              <code>
-                Δy = (y * Δx) / (x + Δx)
-                Price Impact = (original K - new K) / original K
-              </code>
+              <code>Δy = (y * Δx) / (x + Δx) Price Impact = (original K - new K) / original K</code>
             </pre>
           </div>
         </CardContent>

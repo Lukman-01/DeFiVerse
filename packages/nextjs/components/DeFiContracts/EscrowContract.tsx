@@ -1,35 +1,24 @@
 "use client";
-import React from 'react';
-import { Shield, Code, LightbulbIcon, Lock } from 'lucide-react';
+
+import React from "react";
+import { Code, LightbulbIcon, Lock, Shield } from "lucide-react";
 
 // Custom Card Components
-const Card = ({ children, className = '' }:any) => (
-  <div className={`bg-white rounded-lg shadow-md border ${className}`}>
-    {children}
-  </div>
+const Card = ({ children, className = "" }: any) => (
+  <div className={`bg-white rounded-lg shadow-md border ${className}`}>{children}</div>
 );
 
-const CardHeader = ({ children, className = '' }:any) => (
-  <div className={`px-6 py-4 ${className}`}>
-    {children}
-  </div>
+const CardHeader = ({ children, className = "" }: any) => <div className={`px-6 py-4 ${className}`}>{children}</div>;
+
+const CardTitle = ({ children, className = "" }: any) => (
+  <h2 className={`text-xl font-semibold ${className}`}>{children}</h2>
 );
 
-const CardTitle = ({ children, className = '' }:any) => (
-  <h2 className={`text-xl font-semibold ${className}`}>
-    {children}
-  </h2>
-);
-
-const CardContent = ({ children, className = '' }:any) => (
-  <div className={`px-6 pb-6 ${className}`}>
-    {children}
-  </div>
-);
+const CardContent = ({ children, className = "" }: any) => <div className={`px-6 pb-6 ${className}`}>{children}</div>;
 
 const EscrowContract = () => {
   return (
-    <div className="max-w-5xl mx-auto p-6 space-y-8">
+    <div className="p-6 space-y-8">
       {/* Header */}
       <div className="text-center space-y-2">
         <h1 className="text-3xl font-bold">Understanding Digital Escrow</h1>
@@ -47,13 +36,13 @@ const EscrowContract = () => {
         <CardContent className="space-y-4 pt-4">
           <div className="bg-blue-50 p-4 rounded-lg">
             <p className="text-blue-800">
-              Think of a digital escrow like a trusted middleman for online transactions. Just like when 
-              buying a house, where a third party holds the money until all paperwork is complete, a digital 
-              escrow holds cryptocurrency or digital assets until both parties fulfill their agreements. It's 
-              like a digital safety deposit box with smart rules!
+              Think of a digital escrow like a trusted middleman for online transactions. Just like when buying a house,
+              where a third party holds the money until all paperwork is complete, a digital escrow holds cryptocurrency
+              or digital assets until both parties fulfill their agreements. It's like a digital safety deposit box with
+              smart rules!
             </p>
           </div>
-          
+
           <h3 className="font-semibold text-lg mt-4">How Does It Work?</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
             <div className="bg-gray-50 p-4 rounded-lg">
@@ -82,8 +71,8 @@ const EscrowContract = () => {
         </CardHeader>
         <CardContent className="pt-4">
           <pre className="bg-gray-50 p-4 rounded-lg overflow-x-auto">
-            <code className="text-sm">
-{`// SPDX-License-Identifier: MIT
+            <code className="text-[15px] font-medium text-blue-900">
+              {`// SPDX-License-Identifier: MIT
 contract SimpleEscrow {
     // Structure to track each deal
     struct Deal {
@@ -149,9 +138,7 @@ contract SimpleEscrow {
             {/* Deal Structure */}
             <div className="bg-gray-50 p-4 rounded-lg">
               <h3 className="font-semibold text-lg mb-2">The Deal Structure</h3>
-              <p className="text-gray-600">
-                Think of each Deal like a digital receipt that contains:
-              </p>
+              <p className="text-gray-600">Think of each Deal like a digital receipt that contains:</p>
               <ul className="list-disc pl-6 mt-2 space-y-1 text-gray-600">
                 <li>Who's paying (the buyer)</li>
                 <li>Who's getting paid (the seller)</li>
@@ -164,9 +151,7 @@ contract SimpleEscrow {
             {/* Creating a Deal */}
             <div className="bg-gray-50 p-4 rounded-lg">
               <h3 className="font-semibold text-lg mb-2">Creating a New Deal</h3>
-              <p className="text-gray-600">
-                When someone creates a deal:
-              </p>
+              <p className="text-gray-600">When someone creates a deal:</p>
               <ul className="list-disc pl-6 mt-2 space-y-1 text-gray-600">
                 <li>They must send some money (no empty deals allowed!)</li>
                 <li>They set a future deadline (can't expire immediately)</li>
@@ -178,9 +163,7 @@ contract SimpleEscrow {
             {/* Completing a Deal */}
             <div className="bg-gray-50 p-4 rounded-lg">
               <h3 className="font-semibold text-lg mb-2">Completing the Deal</h3>
-              <p className="text-gray-600">
-                When it's time to complete the deal:
-              </p>
+              <p className="text-gray-600">When it's time to complete the deal:</p>
               <ul className="list-disc pl-6 mt-2 space-y-1 text-gray-600">
                 <li>Only the buyer can complete the deal (safety first!)</li>
                 <li>The deal must not be already completed</li>

@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
-import { Shield, AlertTriangle, Bug, Database, TrendingDown, Network, FastForward, Check, Info} from 'lucide-react';
+"use client";
 
-const RiskCard = ({ icon, title, description, example, isActive, onClick }:any) => (
-  <div 
+import React, { useState } from "react";
+import { AlertTriangle, Bug, Check, Database, FastForward, Info, Network, Shield, TrendingDown } from "lucide-react";
+
+const RiskCard = ({ icon, title, description, example, isActive, onClick }: any) => (
+  <div
     onClick={onClick}
     className={`bg-white rounded-lg shadow p-6 cursor-pointer transition-all
-      ${isActive ? 'ring-2 ring-red-500 shadow-xl' : 'hover:shadow-lg'}`}
+      ${isActive ? "ring-2 ring-red-500 shadow-xl" : "hover:shadow-lg"}`}
   >
     <div className="flex items-center mb-4">
       {icon}
@@ -23,7 +25,7 @@ const RiskCard = ({ icon, title, description, example, isActive, onClick }:any) 
   </div>
 );
 
-const SecurityPractice = ({ title, description }:any) => (
+const SecurityPractice = ({ title, description }: any) => (
   <div className="bg-green-50 rounded-lg p-4 flex items-start">
     <Check className="h-5 w-5 mr-3 text-green-500 flex-shrink-0 mt-1" />
     <div>
@@ -34,73 +36,73 @@ const SecurityPractice = ({ title, description }:any) => (
 );
 
 const RiskAndSecurity = () => {
-  const [activeRisk, setActiveRisk] = useState('smart_contract');
+  const [activeRisk, setActiveRisk] = useState("smart_contract");
 
   const risks = {
     smart_contract: {
       icon: <Bug className="h-6 w-6 text-red-500" />,
       title: "Smart Contract Vulnerabilities",
       description: "Smart contracts are prone to bugs and exploits if not properly audited.",
-      example: "The 2020 DAO exploit resulted in $60M loss due to a reentrancy vulnerability."
+      example: "The 2020 DAO exploit resulted in $60M loss due to a reentrancy vulnerability.",
     },
     oracle: {
       icon: <Database className="h-6 w-6 text-orange-500" />,
       title: "Oracle Manipulation",
       description: "Price oracles can be manipulated to exploit DeFi protocols.",
-      example: "Attackers can fake price spikes to trigger unfair liquidations."
+      example: "Attackers can fake price spikes to trigger unfair liquidations.",
     },
     economic: {
       icon: <TrendingDown className="h-6 w-6 text-yellow-500" />,
       title: "Economic Risks",
       description: "Financial risks including impermanent loss and insufficient collateral.",
-      example: "Liquidity providers in AMMs often face impermanent loss during market volatility."
+      example: "Liquidity providers in AMMs often face impermanent loss during market volatility.",
     },
     systemic: {
       icon: <Network className="h-6 w-6 text-purple-500" />,
       title: "Systemic Risks",
       description: "Interconnected protocols can create cascade effects across the ecosystem.",
-      example: "The 2022 Luna-Terra crash affected multiple DeFi platforms across the ecosystem."
+      example: "The 2022 Luna-Terra crash affected multiple DeFi platforms across the ecosystem.",
     },
     frontrunning: {
       icon: <FastForward className="h-6 w-6 text-blue-500" />,
       title: "Front-Running and MEV",
       description: "Transaction reordering can be exploited for profit at users' expense.",
-      example: "Sandwich attacks in DEX trades lead to higher costs for regular users."
-    }
+      example: "Sandwich attacks in DEX trades lead to higher costs for regular users.",
+    },
   };
 
   const securityPractices = [
     {
       title: "Regular Smart Contract Audits",
-      description: "Multiple independent audits from reputable firms before deployment."
+      description: "Multiple independent audits from reputable firms before deployment.",
     },
     {
       title: "Use of Trusted Protocols",
-      description: "Stick to well-established platforms with proven track records."
+      description: "Stick to well-established platforms with proven track records.",
     },
     {
       title: "Risk Assessment",
-      description: "Thorough research and understanding of protocol-specific risks."
+      description: "Thorough research and understanding of protocol-specific risks.",
     },
     {
       title: "DeFi Insurance Coverage",
-      description: "Protection against smart contract failures through insurance protocols."
+      description: "Protection against smart contract failures through insurance protocols.",
     },
     {
       title: "Portfolio Management",
-      description: "Diversification across multiple protocols to minimize risk exposure."
-    }
+      description: "Diversification across multiple protocols to minimize risk exposure.",
+    },
   ];
 
   const metrics = [
     { value: "$2.5B+", label: "Lost to DeFi Hacks (2022)" },
     { value: "200+", label: "Major Security Audits" },
     { value: "$500M+", label: "DeFi Insurance Coverage" },
-    { value: "1000+", label: "Known Vulnerabilities" }
+    { value: "1000+", label: "Known Vulnerabilities" },
   ];
 
   return (
-    <div className="max-w-4xl mx-auto space-y-8 p-4">
+    <div className="space-y-8 p-4">
       <div className="bg-white rounded-lg shadow-lg overflow-hidden">
         <div className="p-6 bg-gradient-to-r from-red-800 to-red-600 text-white">
           <div className="flex items-center mb-4">
@@ -108,8 +110,8 @@ const RiskAndSecurity = () => {
             <h1 className="text-2xl font-bold">Risks and Security in DeFi</h1>
           </div>
           <p className="text-lg">
-            Understanding and managing risks is crucial for safely participating in the 
-            DeFi ecosystem. Learn about key vulnerabilities and protection strategies.
+            Understanding and managing risks is crucial for safely participating in the DeFi ecosystem. Learn about key
+            vulnerabilities and protection strategies.
           </p>
         </div>
 
@@ -125,12 +127,7 @@ const RiskAndSecurity = () => {
 
           <div className="grid md:grid-cols-2 gap-6 mb-8">
             {Object.entries(risks).map(([key, risk]) => (
-              <RiskCard
-                key={key}
-                {...risk}
-                isActive={activeRisk === key}
-                onClick={() => setActiveRisk(key)}
-              />
+              <RiskCard key={key} {...risk} isActive={activeRisk === key} onClick={() => setActiveRisk(key)} />
             ))}
           </div>
 

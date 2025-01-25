@@ -1,17 +1,35 @@
-import React, { useState } from 'react';
-import { ArrowRight, CheckSquare, AlertTriangle, Repeat, Building2, BarChart3 } from 'lucide-react';
+"use client";
+
+import React, { useState } from "react";
+import { AlertTriangle, ArrowRight, BarChart3, Building2, CheckSquare, Repeat } from "lucide-react";
 
 const FuturesVsForwards: React.FC = () => {
-  const [selectedTab, setSelectedTab] = useState<'features' | 'example'>('features');
+  const [selectedTab, setSelectedTab] = useState<"features" | "example">("features");
 
-  const ComparisonCard = ({ title, children, className }: { title: string; children: React.ReactNode; className?: string }) => (
+  const ComparisonCard = ({
+    title,
+    children,
+    className,
+  }: {
+    title: string;
+    children: React.ReactNode;
+    className?: string;
+  }) => (
     <div className={`p-6 rounded-lg shadow-lg ${className}`}>
       <h4 className="text-lg font-bold mb-4">{title}</h4>
       {children}
     </div>
   );
 
-  const Feature = ({ icon: Icon, title, description }: { icon: React.ElementType; title: string; description: string }) => (
+  const Feature = ({
+    icon: Icon,
+    title,
+    description,
+  }: {
+    icon: React.ElementType;
+    title: string;
+    description: string;
+  }) => (
     <div className="flex items-start space-x-3 mb-4">
       <Icon className="w-5 h-5 mt-1 flex-shrink-0" />
       <div>
@@ -22,34 +40,35 @@ const FuturesVsForwards: React.FC = () => {
   );
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white rounded-xl shadow-sm">
+    <div className="p-6 bg-white rounded-xl shadow-sm">
       <div className="mb-8">
         <h2 className="text-3xl font-bold mb-4">Futures vs. Forwards</h2>
         <p className="text-gray-600 text-lg">
-          Understanding the key differences between standardized futures and customizable forward contracts in derivative trading
+          Understanding the key differences between standardized futures and customizable forward contracts in
+          derivative trading
         </p>
       </div>
 
       <div className="flex mb-6 border-b">
         <button
           className={`px-6 py-3 font-medium ${
-            selectedTab === 'features' ? 'border-b-2 border-blue-500 text-blue-600' : 'text-gray-500'
+            selectedTab === "features" ? "border-b-2 border-blue-500 text-blue-600" : "text-gray-500"
           }`}
-          onClick={() => setSelectedTab('features')}
+          onClick={() => setSelectedTab("features")}
         >
           Key Features
         </button>
         <button
           className={`px-6 py-3 font-medium ${
-            selectedTab === 'example' ? 'border-b-2 border-blue-500 text-blue-600' : 'text-gray-500'
+            selectedTab === "example" ? "border-b-2 border-blue-500 text-blue-600" : "text-gray-500"
           }`}
-          onClick={() => setSelectedTab('example')}
+          onClick={() => setSelectedTab("example")}
         >
           Example Trade
         </button>
       </div>
 
-      {selectedTab === 'features' && (
+      {selectedTab === "features" && (
         <div className="grid md:grid-cols-2 gap-6">
           <ComparisonCard title="Futures Contracts" className="bg-blue-50">
             <Feature
@@ -85,11 +104,7 @@ const FuturesVsForwards: React.FC = () => {
               title="Settlement at Maturity"
               description="No money changes hands until contract maturity"
             />
-            <Feature
-              icon={Building2}
-              title="OTC Trading"
-              description="Traded over-the-counter between parties"
-            />
+            <Feature icon={Building2} title="OTC Trading" description="Traded over-the-counter between parties" />
             <Feature
               icon={AlertTriangle}
               title="Counterparty Risk"
@@ -99,7 +114,7 @@ const FuturesVsForwards: React.FC = () => {
         </div>
       )}
 
-      {selectedTab === 'example' && (
+      {selectedTab === "example" && (
         <div className="bg-gray-50 p-6 rounded-lg">
           <h3 className="text-xl font-bold mb-4">Example Trade Flow</h3>
           <div className="space-y-6">
@@ -114,7 +129,7 @@ const FuturesVsForwards: React.FC = () => {
                 <p>Trade executed at agreed $20 regardless of current price</p>
               </div>
             </div>
-            
+
             <div className="bg-white p-4 rounded shadow">
               <h4 className="font-semibold mb-2">Profit/Loss Calculation</h4>
               <p>Buy Forward: Spot Price - $20</p>

@@ -1,27 +1,29 @@
-import React, { useState } from 'react';
-import { ArrowDownUp, Percent, DollarSign, Shield, Repeat, AlertCircle } from 'lucide-react';
+"use client";
+
+import React, { useState } from "react";
+import { AlertCircle, ArrowDownUp, DollarSign, Percent, Repeat, Shield } from "lucide-react";
 
 const Swaps: React.FC = () => {
-  const [selectedSwap, setSelectedSwap] = useState<'fixed' | 'credit'>('fixed');
+  const [selectedSwap, setSelectedSwap] = useState<"fixed" | "credit">("fixed");
   const [showRateDetails, setShowRateDetails] = useState(false);
 
-  const SwapCard = ({ 
-    title, 
-    description, 
-    isActive, 
-    onClick 
-  }: { 
-    title: string; 
-    description: string; 
-    isActive: boolean; 
-    onClick: () => void 
+  const SwapCard = ({
+    title,
+    description,
+    isActive,
+    onClick,
+  }: {
+    title: string;
+    description: string;
+    isActive: boolean;
+    onClick: () => void;
   }) => (
     <button
       onClick={onClick}
       className={`w-full p-6 rounded-lg text-left transition-all ${
-        isActive 
-          ? 'bg-blue-50 border-2 border-blue-500 shadow-lg' 
-          : 'bg-gray-50 border-2 border-transparent hover:bg-gray-100'
+        isActive
+          ? "bg-blue-50 border-2 border-blue-500 shadow-lg"
+          : "bg-gray-50 border-2 border-transparent hover:bg-gray-100"
       }`}
     >
       <h4 className="text-lg font-bold mb-2">{title}</h4>
@@ -29,8 +31,8 @@ const Swaps: React.FC = () => {
     </button>
   );
 
-  const SwapFlow = ({ type }: { type: 'fixed' | 'credit' }) => {
-    if (type === 'fixed') {
+  const SwapFlow = ({ type }: { type: "fixed" | "credit" }) => {
+    if (type === "fixed") {
       return (
         <div className="bg-white p-6 rounded-lg shadow-lg">
           <h4 className="text-lg font-bold mb-4">Fixed-for-Floating Swap Flow</h4>
@@ -39,13 +41,13 @@ const Swaps: React.FC = () => {
               <div className="text-center">
                 <div className="bg-blue-100 p-4 rounded-lg mb-4">
                   <h5 className="font-semibold">Fixed Rate Payer</h5>
-                  <p className="text-sm text-gray-600">Pays: {showRateDetails ? '5.7% × $1,000,000' : '5.7% Fixed'}</p>
+                  <p className="text-sm text-gray-600">Pays: {showRateDetails ? "5.7% × $1,000,000" : "5.7% Fixed"}</p>
                 </div>
               </div>
               <div className="text-center">
                 <div className="bg-green-100 p-4 rounded-lg mb-4">
                   <h5 className="font-semibold">Floating Rate Payer</h5>
-                  <p className="text-sm text-gray-600">Pays: {showRateDetails ? 'LIBOR × $1,000,000' : 'LIBOR Rate'}</p>
+                  <p className="text-sm text-gray-600">Pays: {showRateDetails ? "LIBOR × $1,000,000" : "LIBOR Rate"}</p>
                 </div>
               </div>
             </div>
@@ -53,11 +55,11 @@ const Swaps: React.FC = () => {
               <ArrowDownUp className="w-8 h-8 text-gray-400" />
             </div>
           </div>
-          <button 
+          <button
             onClick={() => setShowRateDetails(!showRateDetails)}
             className="mt-4 text-blue-500 text-sm hover:underline"
           >
-            {showRateDetails ? 'Hide Details' : 'Show Example Calculation'}
+            {showRateDetails ? "Hide Details" : "Show Example Calculation"}
           </button>
         </div>
       );
@@ -89,7 +91,15 @@ const Swaps: React.FC = () => {
     );
   };
 
-  const Feature = ({ icon: Icon, title, description }: { icon: React.ElementType; title: string; description: string }) => (
+  const Feature = ({
+    icon: Icon,
+    title,
+    description,
+  }: {
+    icon: React.ElementType;
+    title: string;
+    description: string;
+  }) => (
     <div className="flex items-start space-x-3 mb-4">
       <Icon className="w-5 h-5 mt-1 flex-shrink-0" />
       <div>
@@ -100,7 +110,7 @@ const Swaps: React.FC = () => {
   );
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white rounded-xl shadow-sm">
+    <div className="p-6 bg-white rounded-xl shadow-sm">
       <div className="mb-8">
         <h2 className="text-3xl font-bold mb-4">Swaps</h2>
         <p className="text-gray-600 text-lg">
@@ -112,14 +122,14 @@ const Swaps: React.FC = () => {
         <SwapCard
           title="Fixed-for-Floating Swap"
           description="Exchange fixed interest rate payments for floating rate payments"
-          isActive={selectedSwap === 'fixed'}
-          onClick={() => setSelectedSwap('fixed')}
+          isActive={selectedSwap === "fixed"}
+          onClick={() => setSelectedSwap("fixed")}
         />
         <SwapCard
           title="Credit Default Swap"
           description="Protection against credit events in exchange for regular premium payments"
-          isActive={selectedSwap === 'credit'}
-          onClick={() => setSelectedSwap('credit')}
+          isActive={selectedSwap === "credit"}
+          onClick={() => setSelectedSwap("credit")}
         />
       </div>
 
@@ -138,13 +148,9 @@ const Swaps: React.FC = () => {
             title="Cost Efficiency"
             description="Lower transaction costs compared to cash market alternatives"
           />
-          <Feature
-            icon={Repeat}
-            title="Flexibility"
-            description="Customizable terms to match specific needs"
-          />
+          <Feature icon={Repeat} title="Flexibility" description="Customizable terms to match specific needs" />
         </div>
-        
+
         <div className="bg-gray-50 p-6 rounded-lg">
           <h4 className="text-lg font-bold mb-4">Important Considerations</h4>
           <Feature

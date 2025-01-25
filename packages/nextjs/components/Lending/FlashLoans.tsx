@@ -1,12 +1,23 @@
-import React, { useState, useEffect } from 'react';
-import { RefreshCcw, Coins, ArrowRight, AlertTriangle, TrendingUp, ArrowRightLeft, Zap, PlayCircle } from 'lucide-react';
+"use client";
+
+import React, { useEffect, useState } from "react";
+import {
+  AlertTriangle,
+  ArrowRight,
+  ArrowRightLeft,
+  Coins,
+  PlayCircle,
+  RefreshCcw,
+  TrendingUp,
+  Zap,
+} from "lucide-react";
 
 interface FlashLoanCase {
   id: string;
   icon: React.ReactNode;
   title: string;
   description: string;
-  riskLevel: 'low' | 'medium' | 'high';
+  riskLevel: "low" | "medium" | "high";
   steps: Array<{
     description: string;
     action: string;
@@ -32,7 +43,7 @@ const AnimatedTransaction: React.FC<AnimatedTransactionProps> = ({ steps, isPlay
   useEffect(() => {
     if (isPlaying) {
       const timer = setInterval(() => {
-        setCurrentStep((prev) => (prev + 1) % steps.length);
+        setCurrentStep(prev => (prev + 1) % steps.length);
       }, 2000);
       return () => clearInterval(timer);
     }
@@ -45,13 +56,13 @@ const AnimatedTransaction: React.FC<AnimatedTransactionProps> = ({ steps, isPlay
           <div key={index} className="flex items-center">
             <div
               className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                index <= currentStep ? 'bg-blue-500 text-white' : 'bg-gray-200'
+                index <= currentStep ? "bg-blue-500 text-white" : "bg-gray-200"
               }`}
             >
               {index + 1}
             </div>
             {index < steps.length - 1 && (
-              <ArrowRight className={`mx-2 ${index < currentStep ? 'text-blue-500' : 'text-gray-300'}`} />
+              <ArrowRight className={`mx-2 ${index < currentStep ? "text-blue-500" : "text-gray-300"}`} />
             )}
           </div>
         ))}
@@ -72,113 +83,114 @@ const FlashLoans: React.FC = () => {
 
   const cases: FlashLoanCase[] = [
     {
-      id: 'arbitrage',
+      id: "arbitrage",
       icon: <TrendingUp className="w-6 h-6 text-green-500" />,
-      title: 'Arbitrage Trading',
-      description: 'Profit from price differences across exchanges',
-      riskLevel: 'low',
+      title: "Arbitrage Trading",
+      description: "Profit from price differences across exchanges",
+      riskLevel: "low",
       steps: [
-        { 
-          description: 'Borrow 1000 ETH from Aave',
-          action: 'Flash Loan Initiated'
+        {
+          description: "Borrow 1000 ETH from Aave",
+          action: "Flash Loan Initiated",
         },
         {
-          description: 'Sell ETH on Exchange A at $2000',
-          action: 'Execute Trade 1'
+          description: "Sell ETH on Exchange A at $2000",
+          action: "Execute Trade 1",
         },
         {
-          description: 'Buy ETH on Exchange B at $1950',
-          action: 'Execute Trade 2'
+          description: "Buy ETH on Exchange B at $1950",
+          action: "Execute Trade 2",
         },
         {
-          description: 'Repay 1000 ETH + 0.09% fee',
-          action: 'Repay Flash Loan'
-        }
+          description: "Repay 1000 ETH + 0.09% fee",
+          action: "Repay Flash Loan",
+        },
       ],
       example: {
-        scenario: 'Profit from $50 price difference per ETH across exchanges',
-        profit: '$50,000 - fees on 1000 ETH trade',
-        risks: ['Slippage', 'Front-running', 'Failed transaction']
-      }
+        scenario: "Profit from $50 price difference per ETH across exchanges",
+        profit: "$50,000 - fees on 1000 ETH trade",
+        risks: ["Slippage", "Front-running", "Failed transaction"],
+      },
     },
     {
-      id: 'liquidation',
+      id: "liquidation",
       icon: <AlertTriangle className="w-6 h-6 text-red-500" />,
-      title: 'Liquidation Helper',
-      description: 'Participate in liquidations without upfront capital',
-      riskLevel: 'medium',
+      title: "Liquidation Helper",
+      description: "Participate in liquidations without upfront capital",
+      riskLevel: "medium",
       steps: [
         {
-          description: 'Borrow 2000 DAI via flash loan',
-          action: 'Get Liquidation Capital'
+          description: "Borrow 2000 DAI via flash loan",
+          action: "Get Liquidation Capital",
         },
         {
-          description: 'Repay underwater position debt',
-          action: 'Execute Liquidation'
+          description: "Repay underwater position debt",
+          action: "Execute Liquidation",
         },
         {
-          description: 'Receive 1.5 ETH collateral (10% discount)',
-          action: 'Claim Collateral'
+          description: "Receive 1.5 ETH collateral (10% discount)",
+          action: "Claim Collateral",
         },
         {
-          description: 'Sell ETH and repay flash loan',
-          action: 'Complete Transaction'
-        }
+          description: "Sell ETH and repay flash loan",
+          action: "Complete Transaction",
+        },
       ],
       example: {
-        scenario: 'Liquidate a 2000 DAI position backed by 1.5 ETH',
-        profit: '10% discount on acquired ETH - fees',
-        risks: ['Price movement', 'Competition', 'Gas costs']
-      }
+        scenario: "Liquidate a 2000 DAI position backed by 1.5 ETH",
+        profit: "10% discount on acquired ETH - fees",
+        risks: ["Price movement", "Competition", "Gas costs"],
+      },
     },
     {
-      id: 'collateral-swap',
+      id: "collateral-swap",
       icon: <ArrowRightLeft className="w-6 h-6 text-blue-500" />,
-      title: 'Collateral Swapping',
-      description: 'Change collateral type without closing position',
-      riskLevel: 'low',
+      title: "Collateral Swapping",
+      description: "Change collateral type without closing position",
+      riskLevel: "low",
       steps: [
         {
-          description: 'Borrow 1000 DAI through flash loan',
-          action: 'Initialize Swap'
+          description: "Borrow 1000 DAI through flash loan",
+          action: "Initialize Swap",
         },
         {
-          description: 'Repay existing ETH-backed loan',
-          action: 'Close Old Position'
+          description: "Repay existing ETH-backed loan",
+          action: "Close Old Position",
         },
         {
-          description: 'Deposit USDC as new collateral',
-          action: 'Open New Position'
+          description: "Deposit USDC as new collateral",
+          action: "Open New Position",
         },
         {
-          description: 'Borrow DAI and repay flash loan',
-          action: 'Complete Swap'
-        }
+          description: "Borrow DAI and repay flash loan",
+          action: "Complete Swap",
+        },
       ],
       example: {
-        scenario: 'Switch from ETH to USDC collateral in one transaction',
-        profit: 'Savings on gas and slippage',
-        risks: ['Price fluctuation', 'Contract risks']
-      }
-    }
+        scenario: "Switch from ETH to USDC collateral in one transaction",
+        profit: "Savings on gas and slippage",
+        risks: ["Price fluctuation", "Contract risks"],
+      },
+    },
   ];
 
   const pools = [
-    { name: 'Uniswap V2', size: '5B USD', fee: '0.3%' },
-    { name: 'Uniswap V3', size: '2.2B USD', fee: '0.3%' },
-    { name: 'Aave', size: '10B USD', fee: '0.09%' },
-    { name: 'dYdX', size: '100M USD', fee: '1 Wei' }
+    { name: "Uniswap V2", size: "5B USD", fee: "0.3%" },
+    { name: "Uniswap V3", size: "2.2B USD", fee: "0.3%" },
+    { name: "Aave", size: "10B USD", fee: "0.09%" },
+    { name: "dYdX", size: "100M USD", fee: "1 Wei" },
   ];
 
   return (
-    <div className="w-full max-w-4xl mx-auto bg-white rounded-lg shadow-md">
+    <div className="w-full bg-white rounded-lg shadow-md">
       <div className="p-6 border-b">
         <div className="flex items-center gap-3">
           <Zap className="w-8 h-8 text-yellow-500" />
           <h2 className="text-2xl font-bold">Flash Loans Explained</h2>
         </div>
         <p className="text-gray-600 mt-2">
-          Unlock the power of uncollateralized loans within a single transaction. Flash loans enable complex DeFi operations without upfront capital.
+          Unlock the power of uncollateralized loans within a single transaction. Flash loans enable complex DeFi
+          operations without upfront capital.
         </p>
       </div>
 
@@ -216,7 +228,7 @@ const FlashLoans: React.FC = () => {
             <div
               key={case_.id}
               className={`p-4 rounded-lg border cursor-pointer transition-all ${
-                selectedCase === case_.id ? 'border-blue-500 bg-blue-50' : 'hover:border-blue-200'
+                selectedCase === case_.id ? "border-blue-500 bg-blue-50" : "hover:border-blue-200"
               }`}
               onClick={() => {
                 setSelectedCase(case_.id);
@@ -228,10 +240,16 @@ const FlashLoans: React.FC = () => {
                 <h3 className="font-semibold">{case_.title}</h3>
               </div>
               <p className="text-sm text-gray-600">{case_.description}</p>
-              <div className={`mt-2 text-xs px-2 py-1 rounded-full inline-block
-                ${case_.riskLevel === 'low' ? 'bg-green-100 text-green-700' :
-                  case_.riskLevel === 'medium' ? 'bg-yellow-100 text-yellow-700' :
-                  'bg-red-100 text-red-700'}`}>
+              <div
+                className={`mt-2 text-xs px-2 py-1 rounded-full inline-block
+                ${
+                  case_.riskLevel === "low"
+                    ? "bg-green-100 text-green-700"
+                    : case_.riskLevel === "medium"
+                      ? "bg-yellow-100 text-yellow-700"
+                      : "bg-red-100 text-red-700"
+                }`}
+              >
                 {case_.riskLevel.charAt(0).toUpperCase() + case_.riskLevel.slice(1)} Risk
               </div>
             </div>
@@ -260,17 +278,12 @@ const FlashLoans: React.FC = () => {
                 )}
               </button>
             </div>
-            <AnimatedTransaction
-              steps={cases.find(c => c.id === selectedCase)?.steps || []}
-              isPlaying={isPlaying}
-            />
-            
+            <AnimatedTransaction steps={cases.find(c => c.id === selectedCase)?.steps || []} isPlaying={isPlaying} />
+
             {/* Example Details */}
             <div className="mt-4 p-4 bg-gray-50 rounded-lg">
               <h5 className="font-semibold mb-2">Example Scenario</h5>
-              <p className="text-gray-600 mb-2">
-                {cases.find(c => c.id === selectedCase)?.example.scenario}
-              </p>
+              <p className="text-gray-600 mb-2">{cases.find(c => c.id === selectedCase)?.example.scenario}</p>
               <div className="flex items-center gap-2 mb-2">
                 <Coins className="w-4 h-4 text-green-500" />
                 <span className="text-sm text-green-700">
@@ -280,9 +293,13 @@ const FlashLoans: React.FC = () => {
               <div className="mt-2">
                 <h6 className="font-medium mb-1">Risk Factors:</h6>
                 <ul className="list-disc pl-5 space-y-1">
-                  {cases.find(c => c.id === selectedCase)?.example.risks.map((risk, idx) => (
-                    <li key={idx} className="text-sm text-gray-600">{risk}</li>
-                  ))}
+                  {cases
+                    .find(c => c.id === selectedCase)
+                    ?.example.risks.map((risk, idx) => (
+                      <li key={idx} className="text-sm text-gray-600">
+                        {risk}
+                      </li>
+                    ))}
                 </ul>
               </div>
             </div>

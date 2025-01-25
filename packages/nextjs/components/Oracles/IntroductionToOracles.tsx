@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { Globe, Database, Link, RefreshCw, Shield, AlertTriangle } from 'lucide-react';
+"use client";
+
+import React, { useEffect, useState } from "react";
+import { AlertTriangle, Database, Globe, Link, RefreshCw, Shield } from "lucide-react";
 
 const IntroductionToOracles = () => {
   const [currentPrice, setCurrentPrice] = useState(2000);
   const [lastUpdate, setLastUpdate] = useState(new Date());
-  
+
   // Simulate price updates
   useEffect(() => {
     const interval = setInterval(() => {
@@ -17,7 +19,7 @@ const IntroductionToOracles = () => {
 
   const OracleSimulator = () => {
     const [isHealthy, setIsHealthy] = useState(true);
-    
+
     const toggleHealth = () => {
       setIsHealthy(!isHealthy);
     };
@@ -27,13 +29,10 @@ const IntroductionToOracles = () => {
         <h4 className="text-lg font-semibold mb-4">Live Oracle Simulator</h4>
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center space-x-2">
-            <RefreshCw className={`w-6 h-6 ${isHealthy ? 'text-green-500' : 'text-red-500'}`} />
-            <span className="font-medium">Oracle Status: {isHealthy ? 'Healthy' : 'Delayed'}</span>
+            <RefreshCw className={`w-6 h-6 ${isHealthy ? "text-green-500" : "text-red-500"}`} />
+            <span className="font-medium">Oracle Status: {isHealthy ? "Healthy" : "Delayed"}</span>
           </div>
-          <button
-            onClick={toggleHealth}
-            className="px-4 py-2 bg-blue-500 text-white rounded-lg"
-          >
+          <button onClick={toggleHealth} className="px-4 py-2 bg-blue-500 text-white rounded-lg">
             Toggle Status
           </button>
         </div>
@@ -45,7 +44,9 @@ const IntroductionToOracles = () => {
             </div>
             <div>
               <p className="text-sm text-gray-600">Last Update</p>
-              <p className="text-sm">{lastUpdate.toLocaleTimeString()}</p>
+              <p className="text-sm" suppressHydrationWarning>
+                {lastUpdate.toLocaleTimeString()}
+              </p>
             </div>
           </div>
         </div>
@@ -61,49 +62,41 @@ const IntroductionToOracles = () => {
       {
         title: "Off-chain Data Sources",
         description: "Multiple price feeds from exchanges",
-        icon: <Globe className="w-8 h-8 text-blue-500" />
+        icon: <Globe className="w-8 h-8 text-blue-500" />,
       },
       {
         title: "Oracle Network",
         description: "Data aggregation and validation",
-        icon: <Database className="w-8 h-8 text-green-500" />
+        icon: <Database className="w-8 h-8 text-green-500" />,
       },
       {
         title: "Smart Contract",
         description: "On-chain price reference",
-        icon: <Link className="w-8 h-8 text-purple-500" />
+        icon: <Link className="w-8 h-8 text-purple-500" />,
       },
       {
         title: "DeFi Protocol",
         description: "Price-dependent operations",
-        icon: <Shield className="w-8 h-8 text-orange-500" />
-      }
+        icon: <Shield className="w-8 h-8 text-orange-500" />,
+      },
     ];
 
     return (
       <div className="mt-8">
         <h4 className="text-lg font-semibold mb-4">Oracle Data Flow</h4>
         <div className="relative">
-          {/* Progress Line */}
-          <div className="absolute top-1/2 left-0 w-full h-1 bg-gray-200 -translate-y-1/2" />
-          <div 
-            className="absolute top-1/2 left-0 h-1 bg-blue-500 -translate-y-1/2 transition-all"
-            style={{ width: `${(activeStep / totalSteps) * 100}%` }}
-          />
-          
+
           {/* Steps */}
           <div className="relative flex justify-between">
             {steps.map((step, index) => (
-              <div 
-                key={index}
-                className="flex flex-col items-center"
-                onClick={() => setActiveStep(index + 1)}
-              >
-                <div className={`
+              <div key={index} className="flex flex-col items-center" onClick={() => setActiveStep(index + 1)}>
+                <div
+                  className={`
                   rounded-full p-2 bg-white border-2 
-                  ${index + 1 <= activeStep ? 'border-blue-500' : 'border-gray-200'}
+                  ${index + 1 <= activeStep ? "border-blue-500" : "border-gray-200"}
                   cursor-pointer transition-colors
-                `}>
+                `}
+                >
                   {step.icon}
                 </div>
                 <div className="mt-2 text-center">
@@ -119,13 +112,13 @@ const IntroductionToOracles = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
+    <div className="p-6">
       <div className="bg-white rounded-lg shadow-lg">
         <div className="p-6 border-b">
           <h3 className="text-2xl font-bold">Introduction to Oracles</h3>
           <p className="mt-4 text-gray-600">
-            Price oracles are critical infrastructure in DeFi lending, providing reliable price feeds 
-            that enable key protocol functions like collateral valuation and liquidation triggers.
+            Price oracles are critical infrastructure in DeFi lending, providing reliable price feeds that enable key
+            protocol functions like collateral valuation and liquidation triggers.
           </p>
         </div>
 
@@ -162,7 +155,6 @@ const IntroductionToOracles = () => {
 
           <OracleSimulator />
           <DataFlowVisualizer />
-
         </div>
       </div>
     </div>

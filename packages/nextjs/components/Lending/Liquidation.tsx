@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { AlertTriangle, Gavel, DollarSign, Info, ArrowRight } from 'lucide-react';
+"use client";
+
+import React, { useEffect, useState } from "react";
+import { AlertTriangle, ArrowRight, DollarSign, Gavel, Info } from "lucide-react";
 
 interface LiquidationMethod {
   id: string;
@@ -28,7 +30,7 @@ const PriceSimulator: React.FC<PriceSimulatorProps> = ({
   collateralAmount,
   debtAmount,
   liquidationThreshold,
-  onLiquidation
+  onLiquidation,
 }) => {
   const [currentPrice, setCurrentPrice] = useState(initialPrice);
   const [isLiquidated, setIsLiquidated] = useState(false);
@@ -53,18 +55,18 @@ const PriceSimulator: React.FC<PriceSimulatorProps> = ({
         </div>
         <div className="text-right">
           <p className="font-mono">${currentPrice.toFixed(2)}</p>
-          <p className={`text-sm ${healthFactor < 1.5 ? 'text-red-500' : 'text-green-500'}`}>
+          <p className={`text-sm ${healthFactor < 1.5 ? "text-red-500" : "text-green-500"}`}>
             Health Factor: {healthFactor.toFixed(2)}
           </p>
         </div>
       </div>
-      
+
       <input
         type="range"
         min={liquidationPrice * 0.5}
         max={initialPrice * 1.5}
         value={currentPrice}
-        onChange={(e) => setCurrentPrice(Number(e.target.value))}
+        onChange={e => setCurrentPrice(Number(e.target.value))}
         className="w-full mb-4"
       />
 
@@ -94,78 +96,78 @@ const Liquidation: React.FC = () => {
 
   const liquidationMethods: LiquidationMethod[] = [
     {
-      id: 'fixed-spread',
+      id: "fixed-spread",
       icon: <DollarSign className="w-6 h-6 text-green-500" />,
-      title: 'Fixed Spread Liquidation',
-      description: 'Instant liquidation with predetermined discount',
+      title: "Fixed Spread Liquidation",
+      description: "Instant liquidation with predetermined discount",
       advantages: [
-        'Immediate execution',
-        'Predictable liquidation price',
-        'Lower gas costs',
-        'Simple to understand and implement'
+        "Immediate execution",
+        "Predictable liquidation price",
+        "Lower gas costs",
+        "Simple to understand and implement",
       ],
       disadvantages: [
-        'May not maximize collateral value',
-        'Fixed discount might be suboptimal',
-        'High competition among liquidators'
+        "May not maximize collateral value",
+        "Fixed discount might be suboptimal",
+        "High competition among liquidators",
       ],
       exampleScenario: {
-        setup: 'Borrower has 2 ETH collateral ($4000) backing 2000 DAI loan',
+        setup: "Borrower has 2 ETH collateral ($4000) backing 2000 DAI loan",
         process: [
-          'ETH price drops to $1500, triggering liquidation',
-          'Liquidator repays 1000 DAI',
-          'Receives 0.75 ETH at 5% discount'
+          "ETH price drops to $1500, triggering liquidation",
+          "Liquidator repays 1000 DAI",
+          "Receives 0.75 ETH at 5% discount",
         ],
-        outcome: 'Liquidator profits from the 5% discount on acquired ETH'
-      }
+        outcome: "Liquidator profits from the 5% discount on acquired ETH",
+      },
     },
     {
-      id: 'auction',
+      id: "auction",
       icon: <Gavel className="w-6 h-6 text-blue-500" />,
-      title: 'Auction Liquidation',
-      description: 'Competitive bidding process for collateral',
+      title: "Auction Liquidation",
+      description: "Competitive bidding process for collateral",
       advantages: [
-        'Potentially better price discovery',
-        'More fair for borrowers',
-        'Reduced impact of MEV',
-        'Lower likelihood of cascade liquidations'
+        "Potentially better price discovery",
+        "More fair for borrowers",
+        "Reduced impact of MEV",
+        "Lower likelihood of cascade liquidations",
       ],
       disadvantages: [
-        'Slower execution',
-        'Higher gas costs',
-        'More complex implementation',
-        'Requires active participation'
+        "Slower execution",
+        "Higher gas costs",
+        "More complex implementation",
+        "Requires active participation",
       ],
       exampleScenario: {
-        setup: 'MakerDAO vault with 100 ETH collateral becomes unsafe',
+        setup: "MakerDAO vault with 100 ETH collateral becomes unsafe",
         process: [
-          'Dutch auction starts with high price',
-          'Price decreases over time',
-          'Liquidators bid for portions of collateral',
-          'Auction ends when debt is covered'
+          "Dutch auction starts with high price",
+          "Price decreases over time",
+          "Liquidators bid for portions of collateral",
+          "Auction ends when debt is covered",
         ],
-        outcome: 'Collateral sold at market-determined price through auction'
-      }
-    }
+        outcome: "Collateral sold at market-determined price through auction",
+      },
+    },
   ];
 
   const stats = {
-    totalLiquidations: '28,138',
-    totalVolume: '$807.46M',
-    averageProfit: '$2,260',
-    successRate: '94.5%',
-    timeframe: 'April 2019 - April 2021'
+    totalLiquidations: "28,138",
+    totalVolume: "$807.46M",
+    averageProfit: "$2,260",
+    successRate: "94.5%",
+    timeframe: "April 2019 - April 2021",
   };
 
   const [simulationConfig] = useState({
     initialPrice: 2000,
     collateralAmount: 5,
     debtAmount: 5000,
-    liquidationThreshold: 1.5
+    liquidationThreshold: 1.5,
   });
 
   return (
-    <div className="w-full max-w-4xl mx-auto bg-white rounded-lg shadow-md">
+    <div className="w-full bg-white rounded-lg shadow-md">
       <div className="p-6 border-b">
         <div className="flex items-center gap-3">
           <AlertTriangle className="w-8 h-8 text-red-500" />
@@ -178,10 +180,7 @@ const Liquidation: React.FC = () => {
 
       <div className="p-6">
         {/* Market Statistics */}
-        <div 
-          className="mb-8 p-4 bg-blue-50 rounded-lg cursor-pointer"
-          onClick={() => setShowStats(!showStats)}
-        >
+        <div className="mb-8 p-4 bg-blue-50 rounded-lg cursor-pointer" onClick={() => setShowStats(!showStats)}>
           <div className="flex justify-between items-center">
             <h3 className="font-semibold">Historical Liquidation Statistics</h3>
             <Info className="w-5 h-5 text-blue-500" />
@@ -207,10 +206,7 @@ const Liquidation: React.FC = () => {
         {/* Price Simulator */}
         <div className="mb-8">
           <h3 className="font-semibold mb-4">Interactive Liquidation Simulator</h3>
-          <PriceSimulator
-            {...simulationConfig}
-            onLiquidation={() => console.log('Position liquidated')}
-          />
+          <PriceSimulator {...simulationConfig} onLiquidation={() => console.log("Position liquidated")} />
         </div>
 
         {/* Liquidation Methods */}
@@ -220,7 +216,7 @@ const Liquidation: React.FC = () => {
             <div
               key={method.id}
               className={`p-4 rounded-lg border cursor-pointer transition-all ${
-                selectedMethod === method.id ? 'border-blue-500 bg-blue-50' : 'hover:border-blue-200'
+                selectedMethod === method.id ? "border-blue-500 bg-blue-50" : "hover:border-blue-200"
               }`}
               onClick={() => setSelectedMethod(method.id)}
             >
@@ -247,7 +243,7 @@ const Liquidation: React.FC = () => {
             <h4 className="font-semibold mb-4">
               {liquidationMethods.find(m => m.id === selectedMethod)?.title} Details
             </h4>
-            
+
             <div className="grid grid-cols-2 gap-4 mb-4">
               <div>
                 <h5 className="font-medium mb-2">Advantages</h5>
@@ -286,7 +282,9 @@ const Liquidation: React.FC = () => {
                 {liquidationMethods
                   .find(m => m.id === selectedMethod)
                   ?.exampleScenario.process.map((step, idx) => (
-                    <li key={idx} className="text-sm text-gray-600">{step}</li>
+                    <li key={idx} className="text-sm text-gray-600">
+                      {step}
+                    </li>
                   ))}
               </ol>
               <p className="text-sm font-medium mt-2">

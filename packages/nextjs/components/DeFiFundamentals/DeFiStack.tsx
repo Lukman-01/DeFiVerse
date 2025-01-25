@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
-import { Layers, Database, Code, Layout, ChevronRight, ArrowRight, Info} from 'lucide-react';
+"use client";
 
-const LayerCard = ({ layer, isActive, onClick }:any) => (
-  <div 
+import React, { useState } from "react";
+import { ArrowRight, ChevronRight, Code, Database, Info, Layers, Layout } from "lucide-react";
+
+const LayerCard = ({ layer, isActive, onClick }: any) => (
+  <div
     onClick={onClick}
     className={`bg-white rounded-lg shadow-lg p-6 cursor-pointer transition-all
-      ${isActive ? 'ring-2 ring-blue-500 shadow-xl' : 'hover:shadow-lg'}`}
+      ${isActive ? "ring-2 ring-blue-500 shadow-xl" : "hover:shadow-lg"}`}
   >
     <div className="flex items-center mb-4">
       {layer.icon}
@@ -17,7 +19,7 @@ const LayerCard = ({ layer, isActive, onClick }:any) => (
         <div className="bg-blue-50 rounded-lg p-4">
           <h4 className="font-semibold mb-2">Key Components:</h4>
           <ul className="space-y-2">
-            {layer.components.map((component:any, idx:any) => (
+            {layer.components.map((component: any, idx: any) => (
               <li key={idx} className="flex items-center text-blue-800">
                 <ChevronRight className="h-4 w-4 mr-2" />
                 {component}
@@ -28,7 +30,7 @@ const LayerCard = ({ layer, isActive, onClick }:any) => (
         <div className="bg-green-50 rounded-lg p-4">
           <h4 className="font-semibold mb-2">Examples:</h4>
           <ul className="space-y-2">
-            {layer.examples.map((example:any, idx:any) => (
+            {layer.examples.map((example: any, idx: any) => (
               <li key={idx} className="flex items-center text-green-800">
                 <ChevronRight className="h-4 w-4 mr-2" />
                 {example}
@@ -42,71 +44,41 @@ const LayerCard = ({ layer, isActive, onClick }:any) => (
 );
 
 const DeFiStack = () => {
-  const [activeLayer, setActiveLayer] = useState('blockchain');
+  const [activeLayer, setActiveLayer] = useState("blockchain");
 
   const layers = {
     blockchain: {
       title: "Blockchain Layer",
       icon: <Database className="h-6 w-6 text-blue-500" />,
       description: "The foundation that provides decentralized, secure, and transparent infrastructure.",
-      components: [
-        "Consensus Mechanism",
-        "Network Security",
-        "Native Cryptocurrency",
-        "Transaction Processing"
-      ],
-      examples: [
-        "Ethereum",
-        "Binance Smart Chain",
-        "Solana",
-        "Polygon"
-      ]
+      components: ["Consensus Mechanism", "Network Security", "Native Cryptocurrency", "Transaction Processing"],
+      examples: ["Ethereum", "Binance Smart Chain", "Solana", "Polygon"],
     },
     protocol: {
       title: "Protocol Layer",
       icon: <Code className="h-6 w-6 text-purple-500" />,
       description: "Smart contracts that define the rules and mechanics of financial operations.",
-      components: [
-        "Smart Contracts",
-        "Token Standards",
-        "Financial Logic",
-        "Protocol Governance"
-      ],
-      examples: [
-        "Uniswap Protocol",
-        "Aave Lending Protocol",
-        "Compound Protocol",
-        "MakerDAO Protocol"
-      ]
+      components: ["Smart Contracts", "Token Standards", "Financial Logic", "Protocol Governance"],
+      examples: ["Uniswap Protocol", "Aave Lending Protocol", "Compound Protocol", "MakerDAO Protocol"],
     },
     application: {
       title: "Application Layer",
       icon: <Layout className="h-6 w-6 text-green-500" />,
       description: "User interfaces and tools that enable interaction with DeFi protocols.",
-      components: [
-        "Web Interface",
-        "Mobile Apps",
-        "Aggregators",
-        "Analytics Dashboards"
-      ],
-      examples: [
-        "MetaMask",
-        "1inch Exchange",
-        "Zapper",
-        "DeFi Pulse"
-      ]
-    }
+      components: ["Web Interface", "Mobile Apps", "Aggregators", "Analytics Dashboards"],
+      examples: ["MetaMask", "1inch Exchange", "Zapper", "DeFi Pulse"],
+    },
   };
 
   const interactions = [
     "User interactions start at the Application Layer",
     "Requests are processed through Protocol Layer smart contracts",
     "Transactions are settled on the Blockchain Layer",
-    "Results propagate back up through the stack"
+    "Results propagate back up through the stack",
   ];
 
   return (
-    <div className="max-w-4xl mx-auto space-y-8 p-4">
+    <div className="space-y-8 p-4">
       <div className="bg-white rounded-lg shadow-lg p-6">
         <div className="flex items-center mb-6">
           <Layers className="h-8 w-8 text-blue-500 mr-3" />
@@ -126,11 +98,7 @@ const DeFiStack = () => {
                   <ArrowRight className="h-6 w-6 text-gray-400 rotate-90" />
                 </div>
               )}
-              <LayerCard 
-                layer={layer}
-                isActive={activeLayer === key}
-                onClick={() => setActiveLayer(key)}
-              />
+              <LayerCard layer={layer} isActive={activeLayer === key} onClick={() => setActiveLayer(key)} />
             </div>
           ))}
         </div>

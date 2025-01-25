@@ -1,16 +1,12 @@
-import React, { useState } from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
-import { ArrowRight, DollarSign, TrendingUp, AlertCircle } from 'lucide-react';
+"use client";
 
-const AttackStep = ({ step, description, amount }: {
-  step: number;
-  description: string;
-  amount: string;
-}) => (
+import React, { useState } from "react";
+import { AlertCircle, ArrowRight, DollarSign, TrendingUp } from "lucide-react";
+import { CartesianGrid, Line, LineChart, Tooltip, XAxis, YAxis } from "recharts";
+
+const AttackStep = ({ step, description, amount }: { step: number; description: string; amount: string }) => (
   <div className="flex items-center mb-4">
-    <div className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold">
-      {step}
-    </div>
+    <div className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold">{step}</div>
     <ArrowRight className="mx-4 text-gray-400" />
     <div className="flex-1 p-4 bg-white rounded-lg shadow-sm">
       <p className="text-gray-700">{description}</p>
@@ -19,11 +15,7 @@ const AttackStep = ({ step, description, amount }: {
   </div>
 );
 
-const ProfitMetric = ({ label, value, icon: Icon }: {
-  label: string;
-  value: string;
-  icon: React.ElementType;
-}) => (
+const ProfitMetric = ({ label, value, icon: Icon }: { label: string; value: string; icon: React.ElementType }) => (
   <div className="bg-white p-4 rounded-lg shadow-sm">
     <div className="flex items-center mb-2">
       <Icon className="w-5 h-5 text-blue-500 mr-2" />
@@ -34,26 +26,26 @@ const ProfitMetric = ({ label, value, icon: Icon }: {
 );
 
 const mockPriceData = [
-  { time: '0s', price: 100 },
-  { time: '10s', price: 171 },
-  { time: '20s', price: 176 },
-  { time: '30s', price: 268 },
-  { time: '40s', price: 106 }
+  { time: "0s", price: 100 },
+  { time: "10s", price: 171 },
+  { time: "20s", price: 176 },
+  { time: "30s", price: 268 },
+  { time: "40s", price: 106 },
 ];
 
 const FlashLoanAttacks = () => {
-  const [selectedAttack, setSelectedAttack] = useState('bZx');
+  const [selectedAttack, setSelectedAttack] = useState("bZx");
 
   const attackSteps = [
     { step: 1, description: "Borrow 7,500 ETH via flash loan", amount: "7,500 ETH" },
     { step: 2, description: "Convert ETH to sUSD via Uniswap", amount: "92,419.70 sUSD" },
     { step: 3, description: "Manipulate price feed through Kyber", amount: "151,021.42 sUSD" },
     { step: 4, description: "Execute profitable trade on Synthetix", amount: "943,837.59 sUSD" },
-    { step: 5, description: "Repay flash loan and profit", amount: "350,000 USD profit" }
+    { step: 5, description: "Repay flash loan and profit", amount: "350,000 USD profit" },
   ];
 
   return (
-    <div className="max-w-6xl mx-auto p-6 space-y-8">
+    <div className="p-6 space-y-8">
       <div className="bg-gradient-to-r from-blue-600 to-blue-800 p-8 rounded-xl text-white">
         <h1 className="text-3xl font-bold mb-4">DeFi Flash Loan Attacks</h1>
         <p className="text-lg opacity-90">
@@ -62,21 +54,9 @@ const FlashLoanAttacks = () => {
       </div>
 
       <div className="grid md:grid-cols-3 gap-4">
-        <ProfitMetric 
-          label="Input Cost"
-          value="130 USD"
-          icon={DollarSign}
-        />
-        <ProfitMetric 
-          label="Attack Profit"
-          value="350,000 USD"
-          icon={TrendingUp}
-        />
-        <ProfitMetric 
-          label="Optimal Profit"
-          value="830,000 USD"
-          icon={AlertCircle}
-        />
+        <ProfitMetric label="Input Cost" value="130 USD" icon={DollarSign} />
+        <ProfitMetric label="Attack Profit" value="350,000 USD" icon={TrendingUp} />
+        <ProfitMetric label="Optimal Profit" value="830,000 USD" icon={AlertCircle} />
       </div>
 
       <div className="bg-gray-50 p-6 rounded-xl">
@@ -93,13 +73,8 @@ const FlashLoanAttacks = () => {
       <div className="bg-gray-50 p-6 rounded-xl">
         <h2 className="text-xl font-bold mb-6">Attack Flow: bZx Oracle Manipulation</h2>
         <div className="space-y-4">
-          {attackSteps.map((step) => (
-            <AttackStep 
-              key={step.step}
-              step={step.step} 
-              description={step.description}
-              amount={step.amount}
-            />
+          {attackSteps.map(step => (
+            <AttackStep key={step.step} step={step.step} description={step.description} amount={step.amount} />
           ))}
         </div>
       </div>

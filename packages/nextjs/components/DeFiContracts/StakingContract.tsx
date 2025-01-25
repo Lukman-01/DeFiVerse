@@ -1,35 +1,24 @@
 "use client";
-import React from 'react';
-import { BookOpen, Code, LightbulbIcon } from 'lucide-react';
+
+import React from "react";
+import { BookOpen, Code, LightbulbIcon } from "lucide-react";
 
 // Simple Card Components
-const Card = ({ children, className = '' }:any) => (
-  <div className={`bg-white rounded-lg shadow-md ${className}`}>
-    {children}
-  </div>
+const Card = ({ children, className = "" }: any) => (
+  <div className={`bg-white rounded-lg shadow-md ${className}`}>{children}</div>
 );
 
-const CardHeader = ({ children, className = '' }:any) => (
-  <div className={`px-6 py-4 ${className}`}>
-    {children}
-  </div>
+const CardHeader = ({ children, className = "" }: any) => <div className={`px-6 py-4 ${className}`}>{children}</div>;
+
+const CardTitle = ({ children, className = "" }: any) => (
+  <h2 className={`text-xl font-semibold ${className}`}>{children}</h2>
 );
 
-const CardTitle = ({ children, className = '' }:any) => (
-  <h2 className={`text-xl font-semibold ${className}`}>
-    {children}
-  </h2>
-);
-
-const CardContent = ({ children, className = '' }:any) => (
-  <div className={`px-6 pb-6 ${className}`}>
-    {children}
-  </div>
-);
+const CardContent = ({ children, className = "" }: any) => <div className={`px-6 pb-6 ${className}`}>{children}</div>;
 
 const StakingContract = () => {
   return (
-    <div className="max-w-5xl mx-auto p-6 space-y-8">
+    <div className="p-6 space-y-8">
       {/* Header */}
       <div className="text-center space-y-2">
         <h1 className="text-3xl font-bold">Understanding Staking Contracts</h1>
@@ -47,17 +36,15 @@ const StakingContract = () => {
         <CardContent className="space-y-4 pt-4">
           <div className="bg-blue-50 p-4 rounded-lg">
             <p className="text-blue-800">
-              Think of staking like putting money in a special savings account. When you stake tokens, 
-              you're essentially saying "I'll lock up my tokens for a while" and in return, you earn 
-              rewards. It's like earning interest, but in the crypto world! The longer you keep your 
-              tokens locked up, the more rewards you can earn.
+              Think of staking like putting money in a special savings account. When you stake tokens, you're
+              essentially saying "I'll lock up my tokens for a while" and in return, you earn rewards. It's like earning
+              interest, but in the crypto world! The longer you keep your tokens locked up, the more rewards you can
+              earn.
             </p>
           </div>
-          
+
           <h3 className="font-semibold text-lg mt-4">How Does Staking Work?</h3>
-          <p className="text-gray-600">
-            The staking process is straightforward:
-          </p>
+          <p className="text-gray-600">The staking process is straightforward:</p>
           <ul className="list-disc pl-6 space-y-2 text-gray-600">
             <li>You deposit (stake) your tokens into the contract</li>
             <li>The contract keeps track of how much you've staked and when</li>
@@ -78,8 +65,8 @@ const StakingContract = () => {
         </CardHeader>
         <CardContent className="pt-4">
           <pre className="bg-gray-50 p-4 rounded-lg overflow-x-auto">
-            <code className="text-sm">
-{`// Our Staking Contract
+            <code className="text-[15px] font-medium text-blue-900">
+              {`// Our Staking Contract
 contract Staking {
     // The token that users can stake
     IERC20 public stakingToken;
@@ -171,9 +158,7 @@ contract Staking {
             {/* Basic Structure */}
             <div className="bg-gray-50 p-4 rounded-lg">
               <h3 className="font-semibold text-lg mb-2">The Basic Setup</h3>
-              <p className="text-gray-600">
-                The contract keeps track of two main things:
-              </p>
+              <p className="text-gray-600">The contract keeps track of two main things:</p>
               <ul className="list-disc pl-6 mt-2 space-y-1 text-gray-600">
                 <li>The token you can stake (like putting money in a bank)</li>
                 <li>The reward token you earn (like earning interest)</li>
@@ -185,9 +170,7 @@ contract Staking {
             {/* Staking Process */}
             <div className="bg-gray-50 p-4 rounded-lg">
               <h3 className="font-semibold text-lg mb-2">How Staking Works</h3>
-              <p className="text-gray-600">
-                When you stake tokens:
-              </p>
+              <p className="text-gray-600">When you stake tokens:</p>
               <ul className="list-disc pl-6 mt-2 space-y-1 text-gray-600">
                 <li>The contract checks if you're staking enough tokens (minimum amount)</li>
                 <li>Your tokens are transferred to the contract for safekeeping</li>
@@ -199,9 +182,7 @@ contract Staking {
             {/* Rewards */}
             <div className="bg-gray-50 p-4 rounded-lg">
               <h3 className="font-semibold text-lg mb-2">Earning and Claiming Rewards</h3>
-              <p className="text-gray-600">
-                The reward system works like this:
-              </p>
+              <p className="text-gray-600">The reward system works like this:</p>
               <ul className="list-disc pl-6 mt-2 space-y-1 text-gray-600">
                 <li>Rewards are calculated based on how many tokens you staked and for how long</li>
                 <li>You can check your rewards at any time</li>
@@ -213,9 +194,7 @@ contract Staking {
             {/* Unstaking */}
             <div className="bg-gray-50 p-4 rounded-lg">
               <h3 className="font-semibold text-lg mb-2">Getting Your Tokens Back</h3>
-              <p className="text-gray-600">
-                When you want to unstake:
-              </p>
+              <p className="text-gray-600">When you want to unstake:</p>
               <ul className="list-disc pl-6 mt-2 space-y-1 text-gray-600">
                 <li>The contract first gives you any final rewards you've earned</li>
                 <li>Then it returns all your staked tokens</li>

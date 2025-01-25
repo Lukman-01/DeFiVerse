@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
-import {Shield, Key, CheckCircle, AlertTriangle, Cpu} from 'lucide-react';
+import React, { useEffect, useState } from "react";
+import { AlertTriangle, CheckCircle, Cpu, Key, Shield } from "lucide-react";
 
 // Types and interfaces
 interface PrivacyTechnique {
@@ -29,108 +29,80 @@ interface DemoStep {
 }
 
 const OraclePrivacy: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<string>('tee');
+  const [activeTab, setActiveTab] = useState<string>("tee");
   const [demoSteps, setDemoSteps] = useState<DemoStep[]>([]);
   const [isSimulating, setIsSimulating] = useState(false);
 
   const privacyTechniques: PrivacyTechnique[] = [
     {
-      id: 'tee',
-      name: 'Trusted Execution Environments (TEEs)',
-      description: 'Hardware-based secure enclaves for private data processing',
-      advantages: [
-        'Hardware-level security guarantees',
-        'High performance',
-        'Remote attestation capability'
-      ],
+      id: "tee",
+      name: "Trusted Execution Environments (TEEs)",
+      description: "Hardware-based secure enclaves for private data processing",
+      advantages: ["Hardware-level security guarantees", "High performance", "Remote attestation capability"],
       limitations: [
-        'Reliance on hardware manufacturer',
-        'Potential side-channel attacks',
-        'Limited processing capacity'
+        "Reliance on hardware manufacturer",
+        "Potential side-channel attacks",
+        "Limited processing capacity",
       ],
       icon: <Cpu className="w-6 h-6" />,
       useCases: [
-        'Private identity verification',
-        'Confidential transaction processing',
-        'Secure multi-party computation'
-      ]
+        "Private identity verification",
+        "Confidential transaction processing",
+        "Secure multi-party computation",
+      ],
     },
     {
-      id: 'deco',
-      name: 'DECO Cryptographic Proofs',
-      description: 'TLS-based oracle protocol for private data attestation',
-      advantages: [
-        'No hardware requirements',
-        'Works with existing TLS infrastructure',
-        'Flexible proof generation'
-      ],
-      limitations: [
-        'Computational overhead',
-        'TLS dependency',
-        'Complex implementation'
-      ],
+      id: "deco",
+      name: "DECO Cryptographic Proofs",
+      description: "TLS-based oracle protocol for private data attestation",
+      advantages: ["No hardware requirements", "Works with existing TLS infrastructure", "Flexible proof generation"],
+      limitations: ["Computational overhead", "TLS dependency", "Complex implementation"],
       icon: <Key className="w-6 h-6" />,
-      useCases: [
-        'Private API data verification',
-        'Selective disclosure proofs',
-        'Cross-chain privacy'
-      ]
+      useCases: ["Private API data verification", "Selective disclosure proofs", "Cross-chain privacy"],
     },
     {
-      id: 'zkp',
-      name: 'Zero-Knowledge Proofs',
-      description: 'Cryptographic methods to prove data validity without revealing it',
-      advantages: [
-        'Mathematical privacy guarantees',
-        'No trusted hardware needed',
-        'Flexible proof composition'
-      ],
-      limitations: [
-        'High computational cost',
-        'Complex setup process',
-        'Proof size challenges'
-      ],
+      id: "zkp",
+      name: "Zero-Knowledge Proofs",
+      description: "Cryptographic methods to prove data validity without revealing it",
+      advantages: ["Mathematical privacy guarantees", "No trusted hardware needed", "Flexible proof composition"],
+      limitations: ["High computational cost", "Complex setup process", "Proof size challenges"],
       icon: <Shield className="w-6 h-6" />,
-      useCases: [
-        'Private identity verification',
-        'Compliance verification',
-        'Private data aggregation'
-      ]
-    }
+      useCases: ["Private identity verification", "Compliance verification", "Private data aggregation"],
+    },
   ];
 
   // Interactive demonstration steps
   const initializeDemoSteps = (): DemoStep[] => [
     {
       id: 1,
-      title: 'Data Encryption',
-      description: 'Sensitive data is encrypted before processing',
-      isActive: false
+      title: "Data Encryption",
+      description: "Sensitive data is encrypted before processing",
+      isActive: false,
     },
     {
       id: 2,
-      title: 'Secure Processing',
-      description: 'Data is processed in a secure enclave',
-      isActive: false
+      title: "Secure Processing",
+      description: "Data is processed in a secure enclave",
+      isActive: false,
     },
     {
       id: 3,
-      title: 'Proof Generation',
-      description: 'Generate proof of valid computation',
-      isActive: false
+      title: "Proof Generation",
+      description: "Generate proof of valid computation",
+      isActive: false,
     },
     {
       id: 4,
-      title: 'Verification',
-      description: 'Verify proof without accessing raw data',
-      isActive: false
-    }
+      title: "Verification",
+      description: "Verify proof without accessing raw data",
+      isActive: false,
+    },
   ];
 
   const startDemo = () => {
     setIsSimulating(true);
     setDemoSteps(initializeDemoSteps());
-    
+
     // Simulate step-by-step process
     const interval = setInterval(() => {
       setDemoSteps(prev => {
@@ -142,7 +114,7 @@ const OraclePrivacy: React.FC = () => {
         }
         return prev.map((step, idx) => ({
           ...step,
-          isActive: idx <= currentStep ? true : false
+          isActive: idx <= currentStep ? true : false,
         }));
       });
     }, 1500);
@@ -151,13 +123,11 @@ const OraclePrivacy: React.FC = () => {
   const PrivacyTechniqueCard: React.FC<{ technique: PrivacyTechnique }> = ({ technique }) => (
     <div className="bg-white rounded-lg shadow-sm p-6">
       <div className="flex items-center gap-3 mb-4">
-        <div className="p-2 bg-blue-50 rounded-lg">
-          {technique.icon}
-        </div>
+        <div className="p-2 bg-blue-50 rounded-lg">{technique.icon}</div>
         <h4 className="text-lg font-semibold">{technique.name}</h4>
       </div>
       <p className="text-gray-600 mb-4">{technique.description}</p>
-      
+
       <div className="space-y-4">
         <div>
           <h5 className="font-medium mb-2">Advantages</h5>
@@ -170,7 +140,7 @@ const OraclePrivacy: React.FC = () => {
             ))}
           </ul>
         </div>
-        
+
         <div>
           <h5 className="font-medium mb-2">Limitations</h5>
           <ul className="space-y-1">
@@ -195,7 +165,7 @@ const OraclePrivacy: React.FC = () => {
           disabled={isSimulating}
           className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:opacity-50"
         >
-          {isSimulating ? 'Simulating...' : 'Start Demo'}
+          {isSimulating ? "Simulating..." : "Start Demo"}
         </button>
       </div>
 
@@ -204,7 +174,7 @@ const OraclePrivacy: React.FC = () => {
           <div
             key={step.id}
             className={`flex items-center gap-3 p-4 rounded-lg transition-all ${
-              step.isActive ? 'bg-green-50 border border-green-200' : 'bg-white'
+              step.isActive ? "bg-green-50 border border-green-200" : "bg-white"
             }`}
           >
             {step.isActive ? (
@@ -223,13 +193,13 @@ const OraclePrivacy: React.FC = () => {
   );
 
   return (
-    <div className="max-w-6xl mx-auto p-6">
+    <div className="p-6">
       <div className="bg-white rounded-lg shadow-lg">
         <div className="p-6 border-b">
           <h2 className="text-2xl font-bold">Oracle Privacy</h2>
           <p className="mt-4 text-gray-600">
-            Privacy is a critical concern in oracle systems, particularly for sensitive applications.
-            Learn about various techniques used to maintain data privacy while ensuring oracle reliability.
+            Privacy is a critical concern in oracle systems, particularly for sensitive applications. Learn about
+            various techniques used to maintain data privacy while ensuring oracle reliability.
           </p>
         </div>
 
@@ -244,9 +214,7 @@ const OraclePrivacy: React.FC = () => {
 
           <div className="bg-blue-50 p-6 rounded-lg">
             <h4 className="text-lg font-semibold mb-4">Real-World Implementation Example</h4>
-            <p className="mb-4">
-              Consider a flight insurance system using TEE-based privacy:
-            </p>
+            <p className="mb-4">Consider a flight insurance system using TEE-based privacy:</p>
             <ol className="space-y-2 pl-4">
               <li>1. Flight data is encrypted and sent to TEE</li>
               <li>2. TEE verifies flight status privately</li>
@@ -254,8 +222,8 @@ const OraclePrivacy: React.FC = () => {
               <li>4. Smart contract executes based on verified result</li>
             </ol>
             <p className="mt-4 text-sm text-gray-600">
-              This ensures that sensitive flight details remain private while maintaining
-              system transparency and reliability.
+              This ensures that sensitive flight details remain private while maintaining system transparency and
+              reliability.
             </p>
           </div>
         </div>

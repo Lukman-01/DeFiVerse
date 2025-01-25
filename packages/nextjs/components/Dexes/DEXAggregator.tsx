@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
-import { ArrowRight, RefreshCw, AlertCircle } from 'lucide-react';
+"use client";
+
+import React, { useState } from "react";
+import { AlertCircle, ArrowRight, RefreshCw } from "lucide-react";
 
 interface Route {
   path: string[];
@@ -15,49 +17,49 @@ interface Token {
 }
 
 const DEXAggregator = () => {
-  const [inputAmount, setInputAmount] = useState<string>('');
-  const [selectedInputToken, setSelectedInputToken] = useState<string>('ETH');
-  const [selectedOutputToken, setSelectedOutputToken] = useState<string>('DAI');
-  
+  const [inputAmount, setInputAmount] = useState<string>("");
+  const [selectedInputToken, setSelectedInputToken] = useState<string>("ETH");
+  const [selectedOutputToken, setSelectedOutputToken] = useState<string>("DAI");
+
   // Sample tokens - in production this would come from an API
   const tokens: Token[] = [
-    { symbol: 'ETH', name: 'Ethereum', balance: 1.5 },
-    { symbol: 'DAI', name: 'Dai Stablecoin', balance: 1000 },
-    { symbol: 'USDC', name: 'USD Coin', balance: 1000 },
+    { symbol: "ETH", name: "Ethereum", balance: 1.5 },
+    { symbol: "DAI", name: "Dai Stablecoin", balance: 1000 },
+    { symbol: "USDC", name: "USD Coin", balance: 1000 },
   ];
 
   // Sample routes - in production this would be calculated based on current market data
   const routes: Route[] = [
     {
-      path: ['Uniswap V3', 'SushiSwap'],
+      path: ["Uniswap V3", "SushiSwap"],
       expectedOutput: 1950.75,
       slippage: 0.1,
-      gasCost: 0.005
+      gasCost: 0.005,
     },
     {
-      path: ['Curve', 'Balancer'],
-      expectedOutput: 1945.50,
+      path: ["Curve", "Balancer"],
+      expectedOutput: 1945.5,
       slippage: 0.15,
-      gasCost: 0.004
-    }
+      gasCost: 0.004,
+    },
   ];
 
-  const TokenSelector = ({ 
-    selected, 
-    onChange, 
-    tokens 
-  }: { 
-    selected: string; 
-    onChange: (value: string) => void; 
-    tokens: Token[] 
+  const TokenSelector = ({
+    selected,
+    onChange,
+    tokens,
+  }: {
+    selected: string;
+    onChange: (value: string) => void;
+    tokens: Token[];
   }) => (
     <div className="w-full">
       <select
         value={selected}
-        onChange={(e) => onChange(e.target.value)}
+        onChange={e => onChange(e.target.value)}
         className="w-full p-3 rounded-lg bg-gray-100 border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
       >
-        {tokens.map((token) => (
+        {tokens.map(token => (
           <option key={token.symbol} value={token.symbol}>
             {token.symbol} - {token.name}
           </option>
@@ -76,19 +78,17 @@ const DEXAggregator = () => {
       <div className="flex items-center space-x-2 mb-3">
         {route.path.map((dex, index) => (
           <React.Fragment key={dex}>
-            <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">
-              {dex}
-            </span>
-            {index < route.path.length - 1 && (
-              <ArrowRight className="w-4 h-4 text-gray-400" />
-            )}
+            <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">{dex}</span>
+            {index < route.path.length - 1 && <ArrowRight className="w-4 h-4 text-gray-400" />}
           </React.Fragment>
         ))}
       </div>
       <div className="grid grid-cols-3 gap-4 text-sm">
         <div>
           <div className="text-gray-600">Expected Output</div>
-          <div className="font-semibold">{route.expectedOutput} {selectedOutputToken}</div>
+          <div className="font-semibold">
+            {route.expectedOutput} {selectedOutputToken}
+          </div>
         </div>
         <div>
           <div className="text-gray-600">Slippage</div>
@@ -103,7 +103,7 @@ const DEXAggregator = () => {
   );
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-gray-50 rounded-xl">
+    <div className="p-6 bg-gray-50 rounded-xl">
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-2">DEX Aggregator</h1>
         <div className="flex items-center space-x-2 text-sm text-gray-600">
@@ -120,15 +120,11 @@ const DEXAggregator = () => {
               <input
                 type="number"
                 value={inputAmount}
-                onChange={(e) => setInputAmount(e.target.value)}
+                onChange={e => setInputAmount(e.target.value)}
                 placeholder="0.0"
                 className="flex-1 p-3 rounded-lg bg-gray-100 border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
               />
-              <TokenSelector
-                selected={selectedInputToken}
-                onChange={setSelectedInputToken}
-                tokens={tokens}
-              />
+              <TokenSelector selected={selectedInputToken} onChange={setSelectedInputToken} tokens={tokens} />
             </div>
           </div>
 
@@ -144,15 +140,11 @@ const DEXAggregator = () => {
               <input
                 type="number"
                 readOnly
-                value={inputAmount ? Number(inputAmount) * 1950.75 : ''}
+                value={inputAmount ? Number(inputAmount) * 1950.75 : ""}
                 placeholder="0.0"
                 className="flex-1 p-3 rounded-lg bg-gray-100 border border-gray-300"
               />
-              <TokenSelector
-                selected={selectedOutputToken}
-                onChange={setSelectedOutputToken}
-                tokens={tokens}
-              />
+              <TokenSelector selected={selectedOutputToken} onChange={setSelectedOutputToken} tokens={tokens} />
             </div>
           </div>
         </div>

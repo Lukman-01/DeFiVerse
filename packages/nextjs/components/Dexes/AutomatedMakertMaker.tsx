@@ -1,13 +1,11 @@
+"use client";
+
 import React, { useState } from "react";
-import {LineChart,Line,XAxis,YAxis,Tooltip,ResponsiveContainer} from "recharts";
-import { Droplet, TrendingUp, AlertTriangle, Wallet, RefreshCcw } from "lucide-react";
+import { AlertTriangle, Droplet, RefreshCcw, TrendingUp, Wallet } from "lucide-react";
+import { Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 
 // Helper function to calculate constant product curve points
-const generatePoolData = (
-  initialX: number,
-  initialY: number,
-  points: number
-) => {
+const generatePoolData = (initialX: number, initialY: number, points: number) => {
   const k = initialX * initialY;
   const data = [];
   for (let x = initialX * 0.5; x <= initialX * 1.5; x += initialX / points) {
@@ -26,12 +24,7 @@ interface LiquidityPoolProps {
 }
 
 // Component for displaying liquidity pool
-const LiquidityPool: React.FC<LiquidityPoolProps> = ({
-  tokenA,
-  tokenB,
-  amountA,
-  amountB,
-}) => (
+const LiquidityPool: React.FC<LiquidityPoolProps> = ({ tokenA, tokenB, amountA, amountB }) => (
   <div className="bg-gradient-to-br from-blue-50 to-purple-50 p-6 rounded-xl shadow-sm">
     <div className="flex justify-between items-center mb-4">
       <h3 className="text-lg font-semibold text-gray-800">Liquidity Pool</h3>
@@ -80,7 +73,7 @@ const SlippageSimulator: React.FC<SlippageSimulatorProps> = ({ poolSize }) => {
             min="0"
             max={poolSize}
             value={tradeAmount}
-            onChange={(e) => setTradeAmount(Number(e.target.value))}
+            onChange={e => setTradeAmount(Number(e.target.value))}
             className="w-full mt-2"
           />
           <div className="flex justify-between text-sm text-gray-500">
@@ -109,14 +102,12 @@ const AutomatedMarketMaker = () => {
   ];
 
   return (
-    <div className="max-w-6xl mx-auto p-6 space-y-8">
+    <div className="p-6 space-y-8">
       <div className="text-center">
-        <h1 className="text-4xl font-bold text-gray-800 mb-4">
-          Automated Market Maker (AMM)
-        </h1>
+        <h1 className="text-4xl font-bold text-gray-800 mb-4">Automated Market Maker (AMM)</h1>
         <p className="text-gray-600 max-w-2xl mx-auto">
-          Smart contracts that enable automated trading through liquidity pools,
-          replacing traditional order books with mathematical price formulas.
+          Smart contracts that enable automated trading through liquidity pools, replacing traditional order books with
+          mathematical price formulas.
         </p>
       </div>
 
@@ -126,9 +117,10 @@ const AutomatedMarketMaker = () => {
             key={id}
             onClick={() => setActiveTab(id)}
             className={`flex items-center space-x-2 px-4 py-2 border-b-2 
-              ${activeTab === id
-                ? "border-blue-500 text-blue-600"
-                : "border-transparent text-gray-500 hover:text-gray-700"
+              ${
+                activeTab === id
+                  ? "border-blue-500 text-blue-600"
+                  : "border-transparent text-gray-500 hover:text-gray-700"
               }`}
           >
             <Icon className="w-4 h-4" />
@@ -138,12 +130,7 @@ const AutomatedMarketMaker = () => {
       </div>
 
       <div className="grid md:grid-cols-2 gap-8">
-        <LiquidityPool
-          tokenA="Token A"
-          tokenB="Token B"
-          amountA={1000}
-          amountB={1000}
-        />
+        <LiquidityPool tokenA="Token A" tokenB="Token B" amountA={1000} amountB={1000} />
         <SlippageSimulator poolSize={1000} />
       </div>
 
@@ -152,21 +139,10 @@ const AutomatedMarketMaker = () => {
         <div className="h-64">
           <ResponsiveContainer>
             <LineChart data={poolData}>
-              <XAxis
-                dataKey="x"
-                label={{ value: "Token A Amount", position: "bottom" }}
-              />
-              <YAxis
-                dataKey="y"
-                label={{ value: "Token B Amount", angle: -90, position: "left" }}
-              />
-              <Tooltip formatter={(value) => value.toFixed(2)} />
-              <Line
-                type="monotone"
-                dataKey="y"
-                stroke="#3B82F6"
-                dot={false}
-              />
+              <XAxis dataKey="x" label={{ value: "Token A Amount", position: "bottom" }} />
+              <YAxis dataKey="y" label={{ value: "Token B Amount", angle: -90, position: "left" }} />
+              <Tooltip formatter={value => value.toFixed(2)} />
+              <Line type="monotone" dataKey="y" stroke="#3B82F6" dot={false} />
             </LineChart>
           </ResponsiveContainer>
         </div>
@@ -179,8 +155,8 @@ const AutomatedMarketMaker = () => {
             Constant Product
           </h3>
           <p className="text-gray-600">
-            AMMs maintain a constant product (k) between token reserves:
-            x * y = k. This ensures liquidity is always available at some price.
+            AMMs maintain a constant product (k) between token reserves: x * y = k. This ensures liquidity is always
+            available at some price.
           </p>
         </div>
 
@@ -190,8 +166,8 @@ const AutomatedMarketMaker = () => {
             Price Impact
           </h3>
           <p className="text-gray-600">
-            Larger trades have higher price impact due to the constant product
-            formula. This is known as slippage and affects trading efficiency.
+            Larger trades have higher price impact due to the constant product formula. This is known as slippage and
+            affects trading efficiency.
           </p>
         </div>
 
@@ -201,8 +177,8 @@ const AutomatedMarketMaker = () => {
             Impermanent Loss
           </h3>
           <p className="text-gray-600">
-            LP tokens may be worth less than holding assets separately due to
-            price changes, resulting in impermanent loss upon withdrawal.
+            LP tokens may be worth less than holding assets separately due to price changes, resulting in impermanent
+            loss upon withdrawal.
           </p>
         </div>
       </div>
@@ -213,15 +189,13 @@ const AutomatedMarketMaker = () => {
           <div className="border-l-4 border-blue-500 pl-4">
             <h3 className="font-semibold">Uniswap</h3>
             <p className="text-gray-600">
-              Pioneered the x*y=k formula for DEXes. Simple and efficient design
-              for general token pairs.
+              Pioneered the x*y=k formula for DEXes. Simple and efficient design for general token pairs.
             </p>
           </div>
           <div className="border-l-4 border-purple-500 pl-4">
             <h3 className="font-semibold">Curve Finance</h3>
             <p className="text-gray-600">
-              Specialized for stable assets with low slippage and high efficiency
-              trading between similar-priced assets.
+              Specialized for stable assets with low slippage and high efficiency trading between similar-priced assets.
             </p>
           </div>
         </div>
@@ -231,4 +205,3 @@ const AutomatedMarketMaker = () => {
 };
 
 export default AutomatedMarketMaker;
-

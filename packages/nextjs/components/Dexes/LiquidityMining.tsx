@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
-import { Calculator, Coins, TrendingUp, AlertTriangle, Info } from 'lucide-react';
+"use client";
+
+import React, { useState } from "react";
+import { AlertTriangle, Calculator, Coins, Info, TrendingUp } from "lucide-react";
+import { CartesianGrid, Legend, Line, LineChart, Tooltip, XAxis, YAxis } from "recharts";
 
 interface Pool {
   id: string;
@@ -24,59 +26,59 @@ interface UserPosition {
 }
 
 const LiquidityMining = () => {
-  const [selectedPool, setSelectedPool] = useState<string>('');
-  const [stakeAmount, setStakeAmount] = useState<string>('');
+  const [selectedPool, setSelectedPool] = useState<string>("");
+  const [stakeAmount, setStakeAmount] = useState<string>("");
 
   // Sample historical APR data for chart
   const aprHistory = [
-    { date: '1 Week Ago', apr: 45 },
-    { date: '6 Days Ago', apr: 42 },
-    { date: '5 Days Ago', apr: 48 },
-    { date: '4 Days Ago', apr: 52 },
-    { date: '3 Days Ago', apr: 49 },
-    { date: '2 Days Ago', apr: 51 },
-    { date: 'Yesterday', apr: 47 },
-    { date: 'Today', apr: 45 },
+    { date: "1 Week Ago", apr: 45 },
+    { date: "6 Days Ago", apr: 42 },
+    { date: "5 Days Ago", apr: 48 },
+    { date: "4 Days Ago", apr: 52 },
+    { date: "3 Days Ago", apr: 49 },
+    { date: "2 Days Ago", apr: 51 },
+    { date: "Yesterday", apr: 47 },
+    { date: "Today", apr: 45 },
   ];
 
   // Sample pools data
   const pools: Pool[] = [
     {
-      id: '1',
-      name: 'ETH-USDC',
-      token1: 'ETH',
-      token2: 'USDC',
+      id: "1",
+      name: "ETH-USDC",
+      token1: "ETH",
+      token2: "USDC",
       apr: 45.2,
       tvl: 10500000,
       dailyVolume: 2500000,
       rewards: {
         tradingFees: 0.03,
-        tokenRewards: 25
-      }
+        tokenRewards: 25,
+      },
     },
     {
-      id: '2',
-      name: 'BTC-ETH',
-      token1: 'BTC',
-      token2: 'ETH',
+      id: "2",
+      name: "BTC-ETH",
+      token1: "BTC",
+      token2: "ETH",
       apr: 38.5,
       tvl: 15800000,
       dailyVolume: 3200000,
       rewards: {
         tradingFees: 0.03,
-        tokenRewards: 20
-      }
-    }
+        tokenRewards: 20,
+      },
+    },
   ];
 
   // Sample user positions
   const userPositions: UserPosition[] = [
     {
-      poolId: '1',
+      poolId: "1",
       stakedAmount: 5000,
       pendingRewards: 125.5,
-      value: 5250
-    }
+      value: 5250,
+    },
   ];
 
   const PoolCard = ({ pool }: { pool: Pool }) => (
@@ -114,9 +116,7 @@ const LiquidityMining = () => {
 
   const RewardsCalculator = () => {
     const pool = pools.find(p => p.id === selectedPool);
-    const estimatedDailyReward = pool && stakeAmount 
-      ? (Number(stakeAmount) * (pool.apr / 100) / 365)
-      : 0;
+    const estimatedDailyReward = pool && stakeAmount ? (Number(stakeAmount) * (pool.apr / 100)) / 365 : 0;
 
     return (
       <div className="bg-white rounded-lg p-6 shadow-md mb-6">
@@ -124,21 +124,19 @@ const LiquidityMining = () => {
           <Calculator className="w-5 h-5 mr-2" />
           Rewards Calculator
         </h3>
-        
+
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Stake Amount (USD)
-            </label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Stake Amount (USD)</label>
             <input
               type="number"
               value={stakeAmount}
-              onChange={(e) => setStakeAmount(e.target.value)}
+              onChange={e => setStakeAmount(e.target.value)}
               className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
               placeholder="Enter amount..."
             />
           </div>
-          
+
           {stakeAmount && (
             <div className="bg-blue-50 p-4 rounded-lg">
               <div className="text-sm text-gray-600 mb-2">Estimated Daily Rewards</div>
@@ -156,7 +154,7 @@ const LiquidityMining = () => {
         <Coins className="w-5 h-5 mr-2" />
         Your Positions
       </h3>
-      
+
       {userPositions.map(position => {
         const pool = pools.find(p => p.id === position.poolId);
         return (
@@ -168,9 +166,7 @@ const LiquidityMining = () => {
               </div>
               <div>
                 <div className="text-sm text-gray-600">Pending Rewards</div>
-                <div className="text-lg font-semibold text-green-600">
-                  ${position.pendingRewards.toLocaleString()}
-                </div>
+                <div className="text-lg font-semibold text-green-600">${position.pendingRewards.toLocaleString()}</div>
               </div>
             </div>
           </div>
@@ -180,12 +176,10 @@ const LiquidityMining = () => {
   );
 
   return (
-    <div className="max-w-6xl mx-auto p-6 bg-gray-50">
+    <div className="p-6 bg-gray-50">
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-2">Liquidity Mining</h1>
-        <p className="text-gray-600">
-          Earn rewards by providing liquidity to our decentralized exchange pools.
-        </p>
+        <p className="text-gray-600">Earn rewards by providing liquidity to our decentralized exchange pools.</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -202,7 +196,7 @@ const LiquidityMining = () => {
         <div>
           <UserDashboard />
           <RewardsCalculator />
-          
+
           <div className="bg-white rounded-lg p-6 shadow-md">
             <h2 className="text-lg font-bold mb-4 flex items-center">
               <Info className="w-5 h-5 mr-2" />

@@ -1,6 +1,8 @@
+"use client";
+
 // ProfitableOpportunities.tsx
-import React, { useState } from 'react';
-import { TrendingUp, GitBranch, BarChart2, RefreshCw, ArrowRight, DollarSign } from 'lucide-react';
+import React, { useState } from "react";
+import { ArrowRight, BarChart2, DollarSign, GitBranch, RefreshCw, TrendingUp } from "lucide-react";
 
 interface Strategy {
   id: number;
@@ -43,8 +45,8 @@ export const ProfitableOpportunities: React.FC = (): JSX.Element => {
       details: {
         how: "Systematically evaluates all possible trading paths to find negative cycles",
         when: "Best used in markets with multiple connected exchanges",
-        risks: "High gas costs may eat into profits, timing risks"
-      }
+        risks: "High gas costs may eat into profits, timing risks",
+      },
     },
     {
       id: 2,
@@ -54,8 +56,8 @@ export const ProfitableOpportunities: React.FC = (): JSX.Element => {
       details: {
         how: "Models complex trading strategies using symbolic mathematics",
         when: "Useful for complex multi-step transactions across protocols",
-        risks: "Model assumptions may not match real-world conditions"
-      }
+        risks: "Model assumptions may not match real-world conditions",
+      },
     },
     {
       id: 3,
@@ -65,9 +67,9 @@ export const ProfitableOpportunities: React.FC = (): JSX.Element => {
       details: {
         how: "Borrows and repays assets within single transaction",
         when: "Price discrepancies exist between different protocols",
-        risks: "High competition, complex execution requirements"
-      }
-    }
+        risks: "High competition, complex execution requirements",
+      },
+    },
   ];
 
   const impacts: Impact[] = [
@@ -76,23 +78,15 @@ export const ProfitableOpportunities: React.FC = (): JSX.Element => {
       title: "Market Efficiency",
       description: "Enhances efficiency in decentralized markets",
       icon: <TrendingUp className="w-5 h-5" />,
-      metrics: [
-        "Reduced price discrepancies",
-        "Increased liquidity flow",
-        "Better price discovery"
-      ]
+      metrics: ["Reduced price discrepancies", "Increased liquidity flow", "Better price discovery"],
     },
     {
       id: 2,
       title: "Price Equilibrium",
       description: "Balances asset prices across platforms",
       icon: <DollarSign className="w-5 h-5" />,
-      metrics: [
-        "Consistent pricing",
-        "Lower spreads",
-        "Improved market stability"
-      ]
-    }
+      metrics: ["Consistent pricing", "Lower spreads", "Improved market stability"],
+    },
   ];
 
   const exampleCases: ExampleCase[] = [
@@ -101,23 +95,18 @@ export const ProfitableOpportunities: React.FC = (): JSX.Element => {
       title: "Cross-DEX Arbitrage",
       description: "USDC/ETH price difference between Uniswap and SushiSwap",
       profit: "0.5% per trade",
-      steps: [
-        "Buy ETH on Uniswap",
-        "Sell ETH on SushiSwap",
-        "Profit from price difference"
-      ]
-    }
+      steps: ["Buy ETH on Uniswap", "Sell ETH on SushiSwap", "Profit from price difference"],
+    },
   ];
 
   return (
-    <div className="p-6 bg-white rounded-lg shadow-lg max-w-4xl mx-auto">
+    <div className="p-6 bg-white rounded-lg shadow-lg">
       <h1 className="text-2xl font-bold mb-6">Profitable Opportunities</h1>
-      
+
       <div className="mb-8 text-gray-600">
         <p>
-          Identifying profitable opportunities in DeFi involves leveraging arbitrage,
-          algorithmic strategies, and other techniques to maximize returns while
-          maintaining market efficiency.
+          Identifying profitable opportunities in DeFi involves leveraging arbitrage, algorithmic strategies, and other
+          techniques to maximize returns while maintaining market efficiency.
         </p>
       </div>
 
@@ -125,13 +114,11 @@ export const ProfitableOpportunities: React.FC = (): JSX.Element => {
       <div className="mb-8">
         <h2 className="text-xl font-semibold mb-4">Trading Strategies</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {strategies.map((strategy) => (
-            <div 
+          {strategies.map(strategy => (
+            <div
               key={strategy.id}
               className={`p-4 rounded-lg cursor-pointer transition-all ${
-                selectedStrategy === strategy.id 
-                  ? 'bg-blue-100 shadow-md' 
-                  : 'bg-gray-50 hover:shadow-md'
+                selectedStrategy === strategy.id ? "bg-blue-100 shadow-md" : "bg-gray-50 hover:shadow-md"
               }`}
               onClick={() => {
                 setSelectedStrategy(strategy.id);
@@ -150,27 +137,19 @@ export const ProfitableOpportunities: React.FC = (): JSX.Element => {
         {/* Strategy Details */}
         {showDetails && (
           <div className="mt-4 p-4 bg-blue-50 rounded-lg">
-            <h3 className="font-semibold mb-2">
-              {strategies[selectedStrategy - 1].name} Details
-            </h3>
+            <h3 className="font-semibold mb-2">{strategies[selectedStrategy - 1].name} Details</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
               <div>
                 <p className="font-medium">How it works:</p>
-                <p className="text-gray-600">
-                  {strategies[selectedStrategy - 1].details.how}
-                </p>
+                <p className="text-gray-600">{strategies[selectedStrategy - 1].details.how}</p>
               </div>
               <div>
                 <p className="font-medium">When to use:</p>
-                <p className="text-gray-600">
-                  {strategies[selectedStrategy - 1].details.when}
-                </p>
+                <p className="text-gray-600">{strategies[selectedStrategy - 1].details.when}</p>
               </div>
               <div>
                 <p className="font-medium">Risks:</p>
-                <p className="text-gray-600">
-                  {strategies[selectedStrategy - 1].details.risks}
-                </p>
+                <p className="text-gray-600">{strategies[selectedStrategy - 1].details.risks}</p>
               </div>
             </div>
           </div>
@@ -181,11 +160,8 @@ export const ProfitableOpportunities: React.FC = (): JSX.Element => {
       <div className="mb-8">
         <h2 className="text-xl font-semibold mb-4">Market Impact</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {impacts.map((impact) => (
-            <div 
-              key={impact.id}
-              className="p-4 bg-green-50 rounded-lg"
-            >
+          {impacts.map(impact => (
+            <div key={impact.id} className="p-4 bg-green-50 rounded-lg">
               <div className="flex items-center mb-2">
                 <div className="text-green-500 mr-2">{impact.icon}</div>
                 <h3 className="font-semibold">{impact.title}</h3>
@@ -207,16 +183,11 @@ export const ProfitableOpportunities: React.FC = (): JSX.Element => {
       {/* Example Cases */}
       <div>
         <h2 className="text-xl font-semibold mb-4">Example Case</h2>
-        {exampleCases.map((example) => (
-          <div 
-            key={example.id}
-            className="p-4 bg-gray-50 rounded-lg"
-          >
+        {exampleCases.map(example => (
+          <div key={example.id} className="p-4 bg-gray-50 rounded-lg">
             <h3 className="font-semibold text-lg mb-2">{example.title}</h3>
             <p className="text-sm text-gray-600 mb-2">{example.description}</p>
-            <p className="text-sm font-medium text-green-600 mb-2">
-              Potential Profit: {example.profit}
-            </p>
+            <p className="text-sm font-medium text-green-600 mb-2">Potential Profit: {example.profit}</p>
             <div className="space-y-2">
               {example.steps.map((step, index) => (
                 <div key={index} className="flex items-center text-sm text-gray-600">

@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
-import { ArrowRight, DollarSign, RefreshCcw, TrendingUp } from 'lucide-react';
-import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
+"use client";
 
-const ArbitrageOpportunity = ({ market1Price, market2Price, asset }:any) => (
+import React, { useState } from "react";
+import { ArrowRight, DollarSign, RefreshCcw, TrendingUp } from "lucide-react";
+import { Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+
+const ArbitrageOpportunity = ({ market1Price, market2Price, asset }: any) => (
   <div className="bg-gradient-to-r from-blue-50 to-purple-50 p-6 rounded-lg shadow-sm">
     <div className="flex items-center justify-between">
       <div className="text-center p-4">
@@ -12,9 +14,7 @@ const ArbitrageOpportunity = ({ market1Price, market2Price, asset }:any) => (
       <div className="flex flex-col items-center">
         <ArrowRight className="text-gray-400 mb-2" />
         <p className="text-sm text-gray-500">Profit Opportunity:</p>
-        <p className="font-bold text-green-500">
-          ${(market2Price - market1Price).toFixed(2)}
-        </p>
+        <p className="font-bold text-green-500">${(market2Price - market1Price).toFixed(2)}</p>
       </div>
       <div className="text-center p-4">
         <h3 className="font-semibold text-gray-700">Market 2</h3>
@@ -26,12 +26,12 @@ const ArbitrageOpportunity = ({ market1Price, market2Price, asset }:any) => (
 );
 
 const arbitrageData = [
-  { time: '0s', market1: 100, market2: 102 },
-  { time: '10s', market1: 101, market2: 103 },
-  { time: '20s', market1: 102, market2: 101 },
-  { time: '30s', market1: 103, market2: 100 },
-  { time: '40s', market1: 102, market2: 101 },
-  { time: '50s', market1: 101, market2: 102 },
+  { time: "0s", market1: 100, market2: 102 },
+  { time: "10s", market1: 101, market2: 103 },
+  { time: "20s", market1: 102, market2: 101 },
+  { time: "30s", market1: 103, market2: 100 },
+  { time: "40s", market1: 102, market2: 101 },
+  { time: "50s", market1: 101, market2: 102 },
 ];
 
 const ArbitrageComponent = () => {
@@ -42,18 +42,16 @@ const ArbitrageComponent = () => {
     "2. Buy at lower price market",
     "3. Sell at higher price market",
     "4. Repay flash loan + fee",
-    "5. Keep the profit"
+    "5. Keep the profit",
   ];
 
   return (
-    <div className="max-w-4xl mx-auto p-6 space-y-8">
+    <div className="p-6 space-y-8">
       <div className="text-center mb-8">
-        <h1 className="text-4xl font-bold text-gray-800 mb-4">
-          Understanding DeFi Arbitrage
-        </h1>
+        <h1 className="text-4xl font-bold text-gray-800 mb-4">Understanding DeFi Arbitrage</h1>
         <p className="text-gray-600 max-w-2xl mx-auto">
-          Arbitrage in DeFi involves exploiting price differences across multiple markets
-          to generate profits while helping maintain market efficiency.
+          Arbitrage in DeFi involves exploiting price differences across multiple markets to generate profits while
+          helping maintain market efficiency.
         </p>
       </div>
 
@@ -62,11 +60,7 @@ const ArbitrageComponent = () => {
           <TrendingUp className="mr-2 text-blue-500" />
           Live Arbitrage Opportunity
         </h2>
-        <ArbitrageOpportunity
-          market1Price={100.00}
-          market2Price={102.50}
-          asset="ETH/USDT"
-        />
+        <ArbitrageOpportunity market1Price={100.0} market2Price={102.5} asset="ETH/USDT" />
       </section>
 
       <section className="mb-8">
@@ -75,20 +69,10 @@ const ArbitrageComponent = () => {
           <ResponsiveContainer>
             <LineChart data={arbitrageData}>
               <XAxis dataKey="time" />
-              <YAxis domain={['dataMin - 1', 'dataMax + 1']} />
+              <YAxis domain={["dataMin - 1", "dataMax + 1"]} />
               <Tooltip />
-              <Line 
-                type="monotone" 
-                dataKey="market1" 
-                stroke="#3B82F6" 
-                name="Market 1"
-              />
-              <Line 
-                type="monotone" 
-                dataKey="market2" 
-                stroke="#8B5CF6" 
-                name="Market 2"
-              />
+              <Line type="monotone" dataKey="market1" stroke="#3B82F6" name="Market 1" />
+              <Line type="monotone" dataKey="market2" stroke="#8B5CF6" name="Market 2" />
             </LineChart>
           </ResponsiveContainer>
         </div>
@@ -117,7 +101,7 @@ const ArbitrageComponent = () => {
         </div>
 
         <div className="bg-white p-6 rounded-lg shadow-sm">
-          <h2 
+          <h2
             className="text-xl font-semibold mb-4 flex items-center cursor-pointer"
             onClick={() => setShowFlashLoan(!showFlashLoan)}
           >
@@ -144,15 +128,15 @@ const ArbitrageComponent = () => {
           <div className="border-l-4 border-blue-500 pl-4">
             <h3 className="font-semibold text-lg">Bellman-Ford Algorithm</h3>
             <p className="text-gray-600">
-              Detects negative cycles in price graphs to identify arbitrage opportunities
-              across multiple markets. Complexity: O(|N²| × |E|)
+              Detects negative cycles in price graphs to identify arbitrage opportunities across multiple markets.
+              Complexity: O(|N²| × |E|)
             </p>
           </div>
           <div className="border-l-4 border-purple-500 pl-4">
             <h3 className="font-semibold text-lg">DeFiPoser-SMT</h3>
             <p className="text-gray-600">
-              Uses theorem solvers and path pruning to identify optimal arbitrage
-              opportunities while reducing the search space.
+              Uses theorem solvers and path pruning to identify optimal arbitrage opportunities while reducing the
+              search space.
             </p>
           </div>
         </div>

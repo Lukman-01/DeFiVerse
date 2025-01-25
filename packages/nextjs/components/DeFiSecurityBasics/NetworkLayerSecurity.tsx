@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
-import { Eye,FastForward, Rewind, Shield, Network, Clock,AlertTriangle,ChevronDown} from 'lucide-react';
+"use client";
+
+import React, { useState } from "react";
+import { AlertTriangle, ChevronDown, Clock, Eye, FastForward, Network, Rewind, Shield } from "lucide-react";
 
 interface AttackVector {
   id: string;
@@ -26,9 +28,9 @@ const NetworkLayerSecurity: React.FC = () => {
         "Information gathering about transaction flows",
         "Network topology mapping",
         "Transaction source identification",
-        "Strategic position for other attacks"
+        "Strategic position for other attacks",
       ],
-      icon: <Eye className="w-6 h-6" />
+      icon: <Eye className="w-6 h-6" />,
     },
     {
       id: "front-running",
@@ -38,9 +40,9 @@ const NetworkLayerSecurity: React.FC = () => {
         "MEV extraction",
         "Transaction ordering manipulation",
         "Price manipulation in DEX",
-        "Unfair advantage in trading"
+        "Unfair advantage in trading",
       ],
-      icon: <FastForward className="w-6 h-6" />
+      icon: <FastForward className="w-6 h-6" />,
     },
     {
       id: "back-running",
@@ -50,9 +52,9 @@ const NetworkLayerSecurity: React.FC = () => {
         "Arbitrage exploitation",
         "Sandwich attacks",
         "Liquidation manipulation",
-        "Market impact exploitation"
+        "Market impact exploitation",
       ],
-      icon: <Rewind className="w-6 h-6" />
+      icon: <Rewind className="w-6 h-6" />,
     },
     {
       id: "eclipse",
@@ -62,20 +64,20 @@ const NetworkLayerSecurity: React.FC = () => {
         "Double spending attacks",
         "Network partitioning",
         "Selective transaction filtering",
-        "Block withholding"
+        "Block withholding",
       ],
       icon: <Shield className="w-6 h-6" />,
       timeoutInfo: [
         {
           type: "Block timeout",
-          duration: "20 minutes"
+          duration: "20 minutes",
         },
         {
           type: "Transaction timeout",
-          duration: "2 minutes"
-        }
-      ]
-    }
+          duration: "2 minutes",
+        },
+      ],
+    },
   ];
 
   const NetworkDiagram: React.FC = () => (
@@ -84,17 +86,17 @@ const NetworkLayerSecurity: React.FC = () => {
         <Network className="w-12 h-12 text-blue-500" />
       </div>
       <div className="absolute inset-0 flex items-center justify-around">
-        {attackVectors.map((attack) => (
+        {attackVectors.map(attack => (
           <div
             key={attack.id}
             className={`
               w-10 h-10 rounded-full flex items-center justify-center
               transition-all duration-300
-              ${selectedAttack === attack.id ? 'bg-red-500' : 'bg-gray-200'}
+              ${selectedAttack === attack.id ? "bg-red-500" : "bg-gray-200"}
             `}
           >
             {React.cloneElement(attack.icon as React.ReactElement, {
-              className: `w-5 h-5 ${selectedAttack === attack.id ? 'text-white' : 'text-gray-600'}`
+              className: `w-5 h-5 ${selectedAttack === attack.id ? "text-white" : "text-gray-600"}`,
             })}
           </div>
         ))}
@@ -103,25 +105,24 @@ const NetworkLayerSecurity: React.FC = () => {
   );
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-gray-50">
+    <div className="p-6 bg-gray-50">
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-4">Network Layer Security</h1>
         <p className="text-gray-600">
-          The network layer forms the foundation of blockchain communication,
-          handling data propagation and peer-to-peer interactions. However, it
-          presents various attack vectors that can compromise network integrity.
+          The network layer forms the foundation of blockchain communication, handling data propagation and peer-to-peer
+          interactions. However, it presents various attack vectors that can compromise network integrity.
         </p>
       </div>
 
       <NetworkDiagram />
 
       <div className="space-y-4">
-        {attackVectors.map((attack) => (
+        {attackVectors.map(attack => (
           <div
             key={attack.id}
             className={`
               border rounded-lg transition-all duration-200
-              ${selectedAttack === attack.id ? 'bg-white shadow-lg' : 'bg-white hover:shadow'}
+              ${selectedAttack === attack.id ? "bg-white shadow-lg" : "bg-white hover:shadow"}
             `}
           >
             <div
@@ -130,14 +131,12 @@ const NetworkLayerSecurity: React.FC = () => {
             >
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-3">
-                  <div className="p-2 bg-blue-100 rounded-lg">
-                    {attack.icon}
-                  </div>
+                  <div className="p-2 bg-blue-100 rounded-lg">{attack.icon}</div>
                   <h2 className="text-xl font-semibold">{attack.title}</h2>
                 </div>
-                <ChevronDown 
+                <ChevronDown
                   className={`w-5 h-5 transition-transform duration-200 
-                    ${selectedAttack === attack.id ? 'rotate-180' : ''}`}
+                    ${selectedAttack === attack.id ? "rotate-180" : ""}`}
                 />
               </div>
 
@@ -147,22 +146,19 @@ const NetworkLayerSecurity: React.FC = () => {
                   <div className="space-y-2">
                     <h3 className="font-medium">Security Implications:</h3>
                     <ul className="grid grid-cols-2 gap-2">
-                      {attack.implications.map((implication) => (
-                        <li
-                          key={implication}
-                          className="flex items-center space-x-2 text-sm"
-                        >
+                      {attack.implications.map(implication => (
+                        <li key={implication} className="flex items-center space-x-2 text-sm">
                           <AlertTriangle className="w-4 h-4 text-yellow-500" />
                           <span>{implication}</span>
                         </li>
                       ))}
                     </ul>
-                    
+
                     {attack.timeoutInfo && (
                       <div className="mt-4">
-                        <div 
+                        <div
                           className="flex items-center space-x-2 cursor-pointer text-blue-600"
-                          onClick={(e) => {
+                          onClick={e => {
                             e.stopPropagation();
                             setShowTimeouts(!showTimeouts);
                           }}
@@ -170,10 +166,10 @@ const NetworkLayerSecurity: React.FC = () => {
                           <Clock className="w-4 h-4" />
                           <span>Network Timeouts</span>
                         </div>
-                        
+
                         {showTimeouts && (
                           <div className="mt-2 pl-6 space-y-2">
-                            {attack.timeoutInfo.map((timeout) => (
+                            {attack.timeoutInfo.map(timeout => (
                               <div key={timeout.type} className="text-sm">
                                 <span className="font-medium">{timeout.type}:</span>
                                 <span className="ml-2">{timeout.duration}</span>
@@ -195,8 +191,8 @@ const NetworkLayerSecurity: React.FC = () => {
         <div className="flex items-center space-x-2">
           <AlertTriangle className="w-5 h-5 text-red-500" />
           <p className="text-sm text-red-800">
-            Network layer attacks can have cascading effects on higher layers of the
-            DeFi stack. Implementing proper monitoring and protection mechanisms is crucial.
+            Network layer attacks can have cascading effects on higher layers of the DeFi stack. Implementing proper
+            monitoring and protection mechanisms is crucial.
           </p>
         </div>
       </div>

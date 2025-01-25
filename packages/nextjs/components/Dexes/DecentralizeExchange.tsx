@@ -1,6 +1,17 @@
+"use client";
 
-import React, { useState } from 'react';
-import { ArrowRight, Server, Database, CheckCircle, XCircle, Clock, AlertTriangle, Shield, DollarSign } from 'lucide-react';
+import React, { useState } from "react";
+import {
+  AlertTriangle,
+  ArrowRight,
+  CheckCircle,
+  Clock,
+  Database,
+  DollarSign,
+  Server,
+  Shield,
+  XCircle,
+} from "lucide-react";
 
 interface Feature {
   feature: string;
@@ -27,43 +38,36 @@ interface FeatureComparisonProps {
 
 const modelFeatures: ModelFeatures = {
   onchain: [
-    { feature: 'Matching Speed', value: 'Slow matching', icon: Clock },
-    { feature: 'Censorship Resistance', value: 'High resistance', icon: CheckCircle },
-    { feature: 'Front Running', value: 'Miner/trader front running possible', icon: AlertTriangle },
-    { feature: 'Order Fees', value: 'Blockchain fees for all orders', icon: DollarSign },
-    { feature: 'Robustness', value: 'Highly robust', icon: Shield },
+    { feature: "Matching Speed", value: "Slow matching", icon: Clock },
+    { feature: "Censorship Resistance", value: "High resistance", icon: CheckCircle },
+    { feature: "Front Running", value: "Miner/trader front running possible", icon: AlertTriangle },
+    { feature: "Order Fees", value: "Blockchain fees for all orders", icon: DollarSign },
+    { feature: "Robustness", value: "Highly robust", icon: Shield },
   ],
   server: [
-    { feature: 'Matching Speed', value: 'Fast matching', icon: Clock },
-    { feature: 'Censorship Resistance', value: 'No resistance', icon: XCircle },
-    { feature: 'Front Running', value: 'Exchange front running possible', icon: AlertTriangle },
-    { feature: 'Order Fees', value: 'No fees for canceled orders', icon: DollarSign },
-    { feature: 'Control', value: 'Centralized control', icon: Server },
-  ]
+    { feature: "Matching Speed", value: "Fast matching", icon: Clock },
+    { feature: "Censorship Resistance", value: "No resistance", icon: XCircle },
+    { feature: "Front Running", value: "Exchange front running possible", icon: AlertTriangle },
+    { feature: "Order Fees", value: "No fees for canceled orders", icon: DollarSign },
+    { feature: "Control", value: "Centralized control", icon: Server },
+  ],
 };
 
 const ModelCard: React.FC<ModelCardProps> = ({ title, isActive, onClick }) => (
   <button
     onClick={onClick}
     className={`p-6 rounded-lg transition-all duration-200 w-full 
-      ${isActive 
-        ? 'bg-blue-50 border-2 border-blue-500 shadow-md' 
-        : 'bg-white border border-gray-200 hover:shadow-md'
+      ${
+        isActive ? "bg-blue-50 border-2 border-blue-500 shadow-md" : "bg-white border border-gray-200 hover:shadow-md"
       }`}
   >
     <div className="flex items-center justify-between mb-4">
-      <h3 className={`text-lg font-semibold ${isActive ? 'text-blue-600' : 'text-gray-800'}`}>
-        {title}
-      </h3>
-      {isActive && (
-        <div className="bg-blue-500 text-white text-xs px-2 py-1 rounded">
-          Active
-        </div>
-      )}
+      <h3 className={`text-lg font-semibold ${isActive ? "text-blue-600" : "text-gray-800"}`}>{title}</h3>
+      {isActive && <div className="bg-blue-500 text-white text-xs px-2 py-1 rounded">Active</div>}
     </div>
     <div className="flex items-center text-sm text-gray-600">
-      {title === 'On-Chain Order Book' ? <Database className="w-4 h-4 mr-2" /> : <Server className="w-4 h-4 mr-2" />}
-      {title === 'On-Chain Order Book' ? 'Fully decentralized' : 'Hybrid approach'}
+      {title === "On-Chain Order Book" ? <Database className="w-4 h-4 mr-2" /> : <Server className="w-4 h-4 mr-2" />}
+      {title === "On-Chain Order Book" ? "Fully decentralized" : "Hybrid approach"}
     </div>
   </button>
 );
@@ -83,7 +87,7 @@ const FeatureComparison: React.FC<FeatureComparisonProps> = ({ feature, value, I
 const EtherDeltaExample: React.FC = () => (
   <div className="bg-gray-50 p-6 rounded-lg border border-gray-200 mt-8">
     <h3 className="text-lg font-semibold mb-4">EtherDelta: Lessons Learned</h3>
-    
+
     <div className="grid gap-4">
       <div className="bg-green-50 p-4 rounded-lg">
         <h4 className="font-medium text-green-700 mb-2">Advantages</h4>
@@ -102,7 +106,7 @@ const EtherDeltaExample: React.FC = () => (
           </li>
         </ul>
       </div>
-      
+
       <div className="bg-red-50 p-4 rounded-lg">
         <h4 className="font-medium text-red-700 mb-2">Disadvantages</h4>
         <ul className="space-y-2">
@@ -125,28 +129,28 @@ const EtherDeltaExample: React.FC = () => (
 );
 
 const OrderBookModels: React.FC = () => {
-  const [selectedModel, setSelectedModel] = useState<'onchain' | 'server'>('onchain');
+  const [selectedModel, setSelectedModel] = useState<"onchain" | "server">("onchain");
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8 space-y-8">
+    <div className="px-4 py-8 space-y-8">
       <div className="text-center mb-12">
         <h2 className="text-3xl font-bold mb-4">Order Book Models</h2>
         <p className="text-gray-600 max-w-2xl mx-auto">
-          Explore the two main approaches to implementing order books in decentralized exchanges:
-          on-chain and server-based models.
+          Explore the two main approaches to implementing order books in decentralized exchanges: on-chain and
+          server-based models.
         </p>
       </div>
 
       <div className="grid md:grid-cols-2 gap-6 mb-8">
         <ModelCard
           title="On-Chain Order Book"
-          isActive={selectedModel === 'onchain'}
-          onClick={() => setSelectedModel('onchain')}
+          isActive={selectedModel === "onchain"}
+          onClick={() => setSelectedModel("onchain")}
         />
         <ModelCard
           title="Server-Based Order Book"
-          isActive={selectedModel === 'server'}
-          onClick={() => setSelectedModel('server')}
+          isActive={selectedModel === "server"}
+          onClick={() => setSelectedModel("server")}
         />
       </div>
 
@@ -154,12 +158,7 @@ const OrderBookModels: React.FC = () => {
         <h3 className="text-xl font-semibold mb-4">Key Characteristics</h3>
         <div className="grid md:grid-cols-2 gap-4">
           {modelFeatures[selectedModel].map((item, index) => (
-            <FeatureComparison
-              key={index}
-              feature={item.feature}
-              value={item.value}
-              Icon={item.icon}
-            />
+            <FeatureComparison key={index} feature={item.feature} value={item.value} Icon={item.icon} />
           ))}
         </div>
       </div>
@@ -177,7 +176,7 @@ const OrderBookModels: React.FC = () => {
           <div className="text-center p-4 bg-white rounded-lg shadow-sm">
             <h4 className="font-medium">Order Matching</h4>
             <p className="text-sm text-gray-600">
-              {selectedModel === 'onchain' ? 'On-chain matching' : 'Server-side matching'}
+              {selectedModel === "onchain" ? "On-chain matching" : "Server-side matching"}
             </p>
           </div>
           <ArrowRight className="hidden md:block text-gray-400" />

@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
-import { Building2, ShieldCheck, Clock, Eye, ChevronRight, AlertCircle,Scale} from 'lucide-react';
+"use client";
 
-const FeatureCard = ({ icon, title, description, details, isActive, onClick }:any) => (
-  <div 
+import React, { useState } from "react";
+import { AlertCircle, Building2, ChevronRight, Clock, Eye, Scale, ShieldCheck } from "lucide-react";
+
+const FeatureCard = ({ icon, title, description, details, isActive, onClick }: any) => (
+  <div
     onClick={onClick}
     className={`bg-white rounded-lg shadow-lg p-6 cursor-pointer transition-all
-      ${isActive ? 'ring-2 ring-blue-500 shadow-xl' : 'hover:shadow-lg'}`}
+      ${isActive ? "ring-2 ring-blue-500 shadow-xl" : "hover:shadow-lg"}`}
   >
     <div className="flex items-center mb-4">
       {icon}
@@ -14,7 +16,7 @@ const FeatureCard = ({ icon, title, description, details, isActive, onClick }:an
     <p className="text-gray-600 mb-4">{description}</p>
     {isActive && (
       <div className="bg-blue-50 rounded-lg p-4 space-y-3">
-        {details.map((detail:any, idx:any) => (
+        {details.map((detail: any, idx: any) => (
           <div key={idx} className="flex items-start">
             <ChevronRight className="h-4 w-4 mr-2 mt-1 text-blue-500 flex-shrink-0" />
             <span className="text-blue-800">{detail}</span>
@@ -26,7 +28,7 @@ const FeatureCard = ({ icon, title, description, details, isActive, onClick }:an
 );
 
 const TraditionalFinance = () => {
-  const [activeFeature, setActiveFeature] = useState('custody');
+  const [activeFeature, setActiveFeature] = useState("custody");
 
   const features = {
     custody: {
@@ -37,8 +39,8 @@ const TraditionalFinance = () => {
         "Banks maintain physical and digital storage of assets",
         "Government insurance protection (e.g., FDIC)",
         "Regular audits and compliance checks",
-        "Institutional responsibility for asset security"
-      ]
+        "Institutional responsibility for asset security",
+      ],
     },
     mediation: {
       icon: <Scale className="h-6 w-6 text-purple-500" />,
@@ -48,8 +50,8 @@ const TraditionalFinance = () => {
         "Payment processing and verification",
         "Dispute resolution mechanisms",
         "Fraud prevention systems",
-        "International transfer networks (SWIFT)"
-      ]
+        "International transfer networks (SWIFT)",
+      ],
     },
     regulation: {
       icon: <ShieldCheck className="h-6 w-6 text-green-500" />,
@@ -59,8 +61,8 @@ const TraditionalFinance = () => {
         "KYC (Know Your Customer) verification",
         "AML (Anti-Money Laundering) checks",
         "CFT (Counter Financing of Terrorism)",
-        "Regular regulatory reporting"
-      ]
+        "Regular regulatory reporting",
+      ],
     },
     privacy: {
       icon: <Eye className="h-6 w-6 text-red-500" />,
@@ -70,39 +72,39 @@ const TraditionalFinance = () => {
         "Complete transaction history tracking",
         "Identity verification requirements",
         "Data sharing with authorities",
-        "Credit history monitoring"
-      ]
-    }
+        "Credit history monitoring",
+      ],
+    },
   };
 
   const statistics = [
     { value: "$468T", label: "Global Banking Assets" },
     { value: "150+", label: "Countries with Central Banks" },
     { value: "$7T", label: "Daily Transaction Volume" },
-    { value: "26,000", label: "Banks Worldwide" }
+    { value: "26,000", label: "Banks Worldwide" },
   ];
 
   const limitations = [
     {
       title: "High Fees",
-      description: "Transaction and service fees can be substantial, especially for international transfers."
+      description: "Transaction and service fees can be substantial, especially for international transfers.",
     },
     {
       title: "Processing Time",
-      description: "Transactions can take days to settle, particularly across borders."
+      description: "Transactions can take days to settle, particularly across borders.",
     },
     {
       title: "Limited Access",
-      description: "Many people worldwide remain unbanked or underbanked."
+      description: "Many people worldwide remain unbanked or underbanked.",
     },
     {
       title: "Centralized Control",
-      description: "Users have limited control over their assets and transaction approval."
-    }
+      description: "Users have limited control over their assets and transaction approval.",
+    },
   ];
 
   return (
-    <div className="max-w-4xl mx-auto space-y-8 p-4">
+    <div className="space-y-8 p-4">
       <div className="bg-white rounded-lg shadow-lg overflow-hidden">
         <div className="p-6 border-b bg-gradient-to-r from-gray-800 to-gray-600 text-white">
           <div className="flex items-center mb-4">
@@ -110,9 +112,8 @@ const TraditionalFinance = () => {
             <h1 className="text-2xl font-bold">Traditional Finance (CeFi)</h1>
           </div>
           <p className="text-lg">
-            The established financial system that powers global commerce through regulated 
-            institutions and standardized processes. Understanding CeFi is crucial for 
-            appreciating both its strengths and limitations.
+            The established financial system that powers global commerce through regulated institutions and standardized
+            processes. Understanding CeFi is crucial for appreciating both its strengths and limitations.
           </p>
         </div>
 

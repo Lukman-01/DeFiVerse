@@ -1,26 +1,28 @@
-import React, { useState } from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
-import { ArrowUpRight, ArrowDownRight, DollarSign } from 'lucide-react';
+"use client";
+
+import React, { useState } from "react";
+import { ArrowDownRight, ArrowUpRight, DollarSign } from "lucide-react";
+import { CartesianGrid, Legend, Line, LineChart, Tooltip, XAxis, YAxis } from "recharts";
 
 const mockMEVData = [
-  { month: 'Jan', value: 2.1, liquidations: 0.8, arbitrage: 0.9, sandwichAttacks: 0.4 },
-  { month: 'Feb', value: 3.2, liquidations: 1.2, arbitrage: 1.4, sandwichAttacks: 0.6 },
-  { month: 'Mar', value: 2.8, liquidations: 1.0, arbitrage: 1.1, sandwichAttacks: 0.7 },
-  { month: 'Apr', value: 4.1, liquidations: 1.5, arbitrage: 1.8, sandwichAttacks: 0.8 },
+  { month: "Jan", value: 2.1, liquidations: 0.8, arbitrage: 0.9, sandwichAttacks: 0.4 },
+  { month: "Feb", value: 3.2, liquidations: 1.2, arbitrage: 1.4, sandwichAttacks: 0.6 },
+  { month: "Mar", value: 2.8, liquidations: 1.0, arbitrage: 1.1, sandwichAttacks: 0.7 },
+  { month: "Apr", value: 4.1, liquidations: 1.5, arbitrage: 1.8, sandwichAttacks: 0.8 },
 ];
 
 interface MEVTypeCardProps {
   title: string;
   description: string;
   value: number;
-  trend: 'up' | 'down';
+  trend: "up" | "down";
 }
 
 const MEVTypeCard: React.FC<MEVTypeCardProps> = ({ title, description, value, trend }) => (
   <div className="bg-white rounded-lg shadow-lg p-6 flex flex-col">
     <div className="flex justify-between items-center mb-4">
       <h3 className="text-lg font-semibold text-gray-800">{title}</h3>
-      {trend === 'up' ? (
+      {trend === "up" ? (
         <ArrowUpRight className="text-green-500" size={24} />
       ) : (
         <ArrowDownRight className="text-red-500" size={24} />
@@ -35,10 +37,10 @@ const MEVTypeCard: React.FC<MEVTypeCardProps> = ({ title, description, value, tr
 );
 
 const BlockchainExtractableValue: React.FC = () => {
-  const [selectedType, setSelectedType] = useState<string>('all');
+  const [selectedType, setSelectedType] = useState<string>("all");
 
   return (
-    <div className="max-w-6xl mx-auto p-8 bg-gray-50">
+    <div className="p-8 bg-gray-50">
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-gray-900 mb-4">Blockchain Extractable Value (BEV)</h1>
         <p className="text-gray-600">
@@ -72,7 +74,7 @@ const BlockchainExtractableValue: React.FC = () => {
           <h2 className="text-xl font-semibold text-gray-800">BEV Trends</h2>
           <select
             value={selectedType}
-            onChange={(e) => setSelectedType(e.target.value)}
+            onChange={e => setSelectedType(e.target.value)}
             className="border rounded-md px-3 py-2 text-gray-700"
           >
             <option value="all">All Types</option>
@@ -89,13 +91,13 @@ const BlockchainExtractableValue: React.FC = () => {
             <YAxis />
             <Tooltip />
             <Legend />
-            {selectedType === 'all' || selectedType === 'arbitrage' ? (
+            {selectedType === "all" || selectedType === "arbitrage" ? (
               <Line type="monotone" dataKey="arbitrage" stroke="#3B82F6" name="Arbitrage" />
             ) : null}
-            {selectedType === 'all' || selectedType === 'liquidations' ? (
+            {selectedType === "all" || selectedType === "liquidations" ? (
               <Line type="monotone" dataKey="liquidations" stroke="#10B981" name="Liquidations" />
             ) : null}
-            {selectedType === 'all' || selectedType === 'sandwichAttacks' ? (
+            {selectedType === "all" || selectedType === "sandwichAttacks" ? (
               <Line type="monotone" dataKey="sandwichAttacks" stroke="#EF4444" name="Sandwich Attacks" />
             ) : null}
           </LineChart>

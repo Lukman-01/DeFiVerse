@@ -1,24 +1,24 @@
-import React, { useState } from 'react';
-import { Shield, Code, AlertTriangle, ChevronDown, ChevronUp } from 'lucide-react';
+"use client";
+
+import React, { useState } from "react";
+import { AlertTriangle, ChevronDown, ChevronUp, Code, Shield } from "lucide-react";
 
 const SecurityExample = ({ title, code, explanation }: { title: string; code: string; explanation: string }) => {
   const [isExpanded, setIsExpanded] = useState(false);
-  
+
   return (
     <div className="border border-gray-200 rounded-lg mb-4">
-      <button 
+      <button
         onClick={() => setIsExpanded(!isExpanded)}
         className="w-full p-4 flex items-center justify-between hover:bg-gray-50"
       >
         <span className="font-medium">{title}</span>
         {isExpanded ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
       </button>
-      
+
       {isExpanded && (
         <div className="p-4 border-t border-gray-200 bg-gray-50">
-          <pre className="bg-black text-green-400 p-4 rounded-lg overflow-x-auto">
-            {code}
-          </pre>
+          <pre className="bg-black text-green-400 p-4 rounded-lg overflow-x-auto">{code}</pre>
           <p className="mt-4 text-gray-600">{explanation}</p>
         </div>
       )}
@@ -26,7 +26,11 @@ const SecurityExample = ({ title, code, explanation }: { title: string; code: st
   );
 };
 
-const VulnerabilityCard = ({ icon: Icon, title, description }: { 
+const VulnerabilityCard = ({
+  icon: Icon,
+  title,
+  description,
+}: {
   icon: React.ElementType;
   title: string;
   description: string;
@@ -52,7 +56,8 @@ const SmartContractLayerSecurity = () => {
     balance = 0;
   }
 }`,
-      explanation: "In this vulnerable code, an attacker contract can recursively call withdraw() before the balance is set to 0, draining more funds than they should be able to."
+      explanation:
+        "In this vulnerable code, an attacker contract can recursively call withdraw() before the balance is set to 0, draining more funds than they should be able to.",
     },
     {
       title: "Unprivileged Write Example",
@@ -65,20 +70,21 @@ function withdraw(uint amount) {
     owner.send(amount);
   }
 }`,
-      explanation: "This code allows any user to change the wallet's owner due to missing access control on initWallet()."
-    }
+      explanation:
+        "This code allows any user to change the wallet's owner due to missing access control on initWallet().",
+    },
   ];
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-gray-100 min-h-screen">
+    <div className="p-6 bg-gray-100 min-h-screen">
       <div className="mb-8">
         <div className="flex items-center mb-4">
           <Shield className="w-8 h-8 text-blue-600 mr-3" />
           <h1 className="text-3xl font-bold text-gray-900">Smart Contract Layer Security</h1>
         </div>
         <p className="text-lg text-gray-600">
-          Smart contracts are programs that handle digital assets on the blockchain. 
-          Their immutable nature means security vulnerabilities can have severe consequences.
+          Smart contracts are programs that handle digital assets on the blockchain. Their immutable nature means
+          security vulnerabilities can have severe consequences.
         </p>
       </div>
 
@@ -116,12 +122,7 @@ function withdraw(uint amount) {
       <div className="bg-white rounded-lg p-6 shadow-md">
         <h2 className="text-xl font-semibold mb-4">Vulnerability Examples</h2>
         {vulnerabilityExamples.map((example, index) => (
-          <SecurityExample
-            key={index}
-            title={example.title}
-            code={example.code}
-            explanation={example.explanation}
-          />
+          <SecurityExample key={index} title={example.title} code={example.code} explanation={example.explanation} />
         ))}
       </div>
     </div>

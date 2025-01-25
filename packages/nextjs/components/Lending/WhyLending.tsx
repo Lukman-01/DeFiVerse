@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
-import { Coins, ArrowRight, PiggyBank, Globe, Lock} from 'lucide-react';
+"use client";
+
+import React, { useState } from "react";
+import { ArrowRight, Coins, Globe, Lock, PiggyBank } from "lucide-react";
 
 interface Benefit {
   id: string;
@@ -22,29 +24,32 @@ const WhyLending: React.FC = () => {
 
   const benefits: Benefit[] = [
     {
-      id: 'liquidity',
+      id: "liquidity",
       icon: <Coins className="w-6 h-6 text-blue-500" />,
-      title: 'Liquidity Provision',
-      description: 'Lenders provide liquidity to protocols, enabling borrowers to access funds while earning interest on their deposits.'
+      title: "Liquidity Provision",
+      description:
+        "Lenders provide liquidity to protocols, enabling borrowers to access funds while earning interest on their deposits.",
     },
     {
-      id: 'capital',
+      id: "capital",
       icon: <PiggyBank className="w-6 h-6 text-green-500" />,
-      title: 'Access to Capital',
-      description: 'Use crypto assets as collateral to secure loans without selling, maintaining long-term investment positions.'
+      title: "Access to Capital",
+      description:
+        "Use crypto assets as collateral to secure loans without selling, maintaining long-term investment positions.",
     },
     {
-      id: 'inclusion',
+      id: "inclusion",
       icon: <Globe className="w-6 h-6 text-purple-500" />,
-      title: 'Financial Inclusion',
-      description: 'Anyone with an internet connection can participate, bypassing traditional banking restrictions.'
+      title: "Financial Inclusion",
+      description: "Anyone with an internet connection can participate, bypassing traditional banking restrictions.",
     },
     {
-      id: 'security',
+      id: "security",
       icon: <Lock className="w-6 h-6 text-orange-500" />,
-      title: 'Trustless Security',
-      description: 'Smart contracts automatically handle loan terms and collateral, eliminating the need for traditional intermediaries.'
-    }
+      title: "Trustless Security",
+      description:
+        "Smart contracts automatically handle loan terms and collateral, eliminating the need for traditional intermediaries.",
+    },
   ];
 
   const LendingExample: React.FC<LendingExampleProps> = ({ className }) => {
@@ -53,21 +58,21 @@ const WhyLending: React.FC = () => {
 
     const steps: Step[] = [
       {
-        title: 'Initial State',
-        description: 'Alice has 5 ETH but needs 10,000 USDC'
+        title: "Initial State",
+        description: "Alice has 5 ETH but needs 10,000 USDC",
       },
       {
-        title: 'Collateral Deposit',
-        description: 'Alice deposits her 5 ETH as collateral'
+        title: "Collateral Deposit",
+        description: "Alice deposits her 5 ETH as collateral",
       },
       {
-        title: 'Borrowing',
-        description: 'Alice borrows 10,000 USDC against her ETH'
+        title: "Borrowing",
+        description: "Alice borrows 10,000 USDC against her ETH",
       },
       {
-        title: 'Repayment',
-        description: 'Alice repays 10,000 USDC + interest to retrieve her ETH'
-      }
+        title: "Repayment",
+        description: "Alice repays 10,000 USDC + interest to retrieve her ETH",
+      },
     ];
 
     return (
@@ -78,14 +83,12 @@ const WhyLending: React.FC = () => {
             <div key={index} className="flex items-center">
               <div
                 className={`rounded-full w-8 h-8 flex items-center justify-center ${
-                  index + 1 <= step ? 'bg-blue-500 text-white' : 'bg-gray-200'
+                  index + 1 <= step ? "bg-blue-500 text-white" : "bg-gray-200"
                 }`}
               >
                 {index + 1}
               </div>
-              {index < steps.length - 1 && (
-                <ArrowRight className="mx-2 text-gray-400" />
-              )}
+              {index < steps.length - 1 && <ArrowRight className="mx-2 text-gray-400" />}
             </div>
           ))}
         </div>
@@ -114,22 +117,22 @@ const WhyLending: React.FC = () => {
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto bg-white rounded-lg shadow-md">
+    <div className="w-full bg-white rounded-lg shadow-md">
       <div className="p-6 border-b">
         <h2 className="text-2xl font-bold">Why Lending in DeFi?</h2>
       </div>
       <div className="p-6">
         <p className="text-gray-600 mb-6">
-          Lending is a cornerstone of both traditional and decentralized finance, enabling capital efficiency
-          and economic growth through a trustless, automated system.
+          Lending is a cornerstone of both traditional and decentralized finance, enabling capital efficiency and
+          economic growth through a trustless, automated system.
         </p>
-        
+
         <div className="grid grid-cols-2 gap-4 mb-8">
           {benefits.map(benefit => (
             <div
               key={benefit.id}
               className={`p-4 rounded-lg border cursor-pointer transition-all ${
-                selectedBenefit === benefit.id ? 'border-blue-500 bg-blue-50' : 'hover:border-blue-200'
+                selectedBenefit === benefit.id ? "border-blue-500 bg-blue-50" : "hover:border-blue-200"
               }`}
               onClick={() => setSelectedBenefit(benefit.id)}
             >

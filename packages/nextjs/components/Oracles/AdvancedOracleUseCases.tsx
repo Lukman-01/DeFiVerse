@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState } from 'react';
-import { LineChart, DollarSign, Shield, Gamepad2, Umbrella, AlertTriangle, TrendingUp, Clock} from 'lucide-react';
+import React, { useState } from "react";
+import { AlertTriangle, Clock, DollarSign, Gamepad2, LineChart, Shield, TrendingUp, Umbrella } from "lucide-react";
 
 // Types and interfaces
 interface UseCase {
@@ -33,98 +33,98 @@ interface MetricCard {
 }
 
 const AdvancedOracleUseCases: React.FC = () => {
-  const [selectedCase, setSelectedCase] = useState<string>('price');
+  const [selectedCase, setSelectedCase] = useState<string>("price");
 
   // Define use cases data
   const useCases: UseCase[] = [
     {
-      id: 'price',
-      title: 'Price Feeds',
-      description: 'Providing real-time asset prices for DeFi applications',
+      id: "price",
+      title: "Price Feeds",
+      description: "Providing real-time asset prices for DeFi applications",
       icon: <DollarSign className="w-6 h-6" />,
       examples: [
         {
-          name: 'Uniswap V3',
-          description: 'Time-weighted average prices (TWAP) for spot trading',
-          implementation: 'Uses historical price accumulator pattern'
+          name: "Uniswap V3",
+          description: "Time-weighted average prices (TWAP) for spot trading",
+          implementation: "Uses historical price accumulator pattern",
         },
         {
-          name: 'Aave',
-          description: 'Asset prices for lending and liquidations',
-          implementation: 'Multiple price feeds with fallback mechanisms'
-        }
+          name: "Aave",
+          description: "Asset prices for lending and liquidations",
+          implementation: "Multiple price feeds with fallback mechanisms",
+        },
       ],
       risks: [
         {
-          type: 'Flash Loan Attacks',
-          description: 'Price manipulation through flash loans',
-          mitigation: 'Time-weighted average prices (TWAP)'
-        }
-      ]
+          type: "Flash Loan Attacks",
+          description: "Price manipulation through flash loans",
+          mitigation: "Time-weighted average prices (TWAP)",
+        },
+      ],
     },
     {
-      id: 'insurance',
-      title: 'Insurance',
-      description: 'Parametric insurance powered by real-world data',
+      id: "insurance",
+      title: "Insurance",
+      description: "Parametric insurance powered by real-world data",
       icon: <Umbrella className="w-6 h-6" />,
       examples: [
         {
-          name: 'Flight Insurance',
-          description: 'Automatic payouts for flight delays',
-          implementation: 'Multiple airport data feeds'
+          name: "Flight Insurance",
+          description: "Automatic payouts for flight delays",
+          implementation: "Multiple airport data feeds",
         },
         {
-          name: 'Crop Insurance',
-          description: 'Weather-based agricultural insurance',
-          implementation: 'Decentralized weather data network'
-        }
+          name: "Crop Insurance",
+          description: "Weather-based agricultural insurance",
+          implementation: "Decentralized weather data network",
+        },
       ],
       risks: [
         {
-          type: 'Data Accuracy',
-          description: 'Incorrect or delayed real-world data',
-          mitigation: 'Multiple independent data sources'
-        }
-      ]
+          type: "Data Accuracy",
+          description: "Incorrect or delayed real-world data",
+          mitigation: "Multiple independent data sources",
+        },
+      ],
     },
     {
-      id: 'gaming',
-      title: 'Gaming & NFTs',
-      description: 'Random number generation and game state verification',
+      id: "gaming",
+      title: "Gaming & NFTs",
+      description: "Random number generation and game state verification",
       icon: <Gamepad2 className="w-6 h-6" />,
       examples: [
         {
-          name: 'Chainlink VRF',
-          description: 'Verifiable random numbers for gaming',
-          implementation: 'Proof of randomness with on-chain verification'
+          name: "Chainlink VRF",
+          description: "Verifiable random numbers for gaming",
+          implementation: "Proof of randomness with on-chain verification",
         },
         {
-          name: 'Dynamic NFTs',
-          description: 'NFTs that evolve based on real-world data',
-          implementation: 'External data feeds update metadata'
-        }
+          name: "Dynamic NFTs",
+          description: "NFTs that evolve based on real-world data",
+          implementation: "External data feeds update metadata",
+        },
       ],
       risks: [
         {
-          type: 'Manipulation',
-          description: 'Gaming the random number generation',
-          mitigation: 'Verifiable random function (VRF)'
-        }
-      ]
-    }
+          type: "Manipulation",
+          description: "Gaming the random number generation",
+          mitigation: "Verifiable random function (VRF)",
+        },
+      ],
+    },
   ];
 
   const UseCaseCard: React.FC<{ useCase: UseCase }> = ({ useCase }) => (
-    <div className="bg-white rounded-lg shadow-sm p-6 cursor-pointer hover:shadow-md transition-shadow"
-         onClick={() => setSelectedCase(useCase.id)}>
+    <div
+      className="bg-white rounded-lg shadow-sm p-6 cursor-pointer hover:shadow-md transition-shadow"
+      onClick={() => setSelectedCase(useCase.id)}
+    >
       <div className="flex items-center gap-3 mb-4">
-        <div className="p-2 bg-blue-50 rounded-lg">
-          {useCase.icon}
-        </div>
+        <div className="p-2 bg-blue-50 rounded-lg">{useCase.icon}</div>
         <h4 className="text-lg font-semibold">{useCase.title}</h4>
       </div>
       <p className="text-gray-600 mb-4">{useCase.description}</p>
-      <div className={`border-t pt-4 ${selectedCase === useCase.id ? 'block' : 'hidden'}`}>
+      <div className={`border-t pt-4 ${selectedCase === useCase.id ? "block" : "hidden"}`}>
         <h5 className="font-medium mb-2">Implementation Examples:</h5>
         <ul className="space-y-2">
           {useCase.examples.map(example => (
@@ -161,23 +161,23 @@ const AdvancedOracleUseCases: React.FC = () => {
   const MetricsDisplay: React.FC = () => {
     const metrics: MetricCard[] = [
       {
-        title: 'Total Value Secured',
-        value: '$5.2B',
+        title: "Total Value Secured",
+        value: "$5.2B",
         change: 12.5,
-        icon: <LineChart className="w-5 h-5" />
+        icon: <LineChart className="w-5 h-5" />,
       },
       {
-        title: 'Active Oracle Networks',
+        title: "Active Oracle Networks",
         value: 180,
         change: 8.3,
-        icon: <TrendingUp className="w-5 h-5" />
+        icon: <TrendingUp className="w-5 h-5" />,
       },
       {
-        title: 'Average Response Time',
-        value: '2.3s',
+        title: "Average Response Time",
+        value: "2.3s",
         change: -15.4,
-        icon: <Clock className="w-5 h-5" />
-      }
+        icon: <Clock className="w-5 h-5" />,
+      },
     ];
 
     return (
@@ -190,8 +190,9 @@ const AdvancedOracleUseCases: React.FC = () => {
             </div>
             <div className="flex items-end gap-2">
               <span className="text-2xl font-bold">{metric.value}</span>
-              <span className={`text-sm ${metric.change >= 0 ? 'text-green-500' : 'text-red-500'}`}>
-                {metric.change >= 0 ? '+' : ''}{metric.change}%
+              <span className={`text-sm ${metric.change >= 0 ? "text-green-500" : "text-red-500"}`}>
+                {metric.change >= 0 ? "+" : ""}
+                {metric.change}%
               </span>
             </div>
           </div>
@@ -201,13 +202,13 @@ const AdvancedOracleUseCases: React.FC = () => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto p-6">
+    <div className="p-6">
       <div className="bg-white rounded-lg shadow-lg">
         <div className="p-6 border-b">
           <h2 className="text-2xl font-bold">Advanced Oracle Use Cases</h2>
           <p className="mt-4 text-gray-600">
-            Oracles are central to enabling sophisticated DeFi applications by providing external data
-            that powers functionalities like decentralized trading, insurance, and gaming.
+            Oracles are central to enabling sophisticated DeFi applications by providing external data that powers
+            functionalities like decentralized trading, insurance, and gaming.
           </p>
         </div>
 
@@ -222,9 +223,7 @@ const AdvancedOracleUseCases: React.FC = () => {
 
           {selectedCase && (
             <div className="mt-8">
-              <RiskAssessment 
-                risks={useCases.find(uc => uc.id === selectedCase)?.risks || []} 
-              />
+              <RiskAssessment risks={useCases.find(uc => uc.id === selectedCase)?.risks || []} />
             </div>
           )}
 

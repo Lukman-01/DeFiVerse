@@ -1,16 +1,24 @@
-import React, { useState } from 'react';
-import { Shield, Lock, Settings, Layers, ChevronDown, ChevronUp } from 'lucide-react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
+"use client";
+
+import React, { useState } from "react";
+import { ChevronDown, ChevronUp, Layers, Lock, Settings, Shield } from "lucide-react";
+import { CartesianGrid, Line, LineChart, Tooltip, XAxis, YAxis } from "recharts";
 
 const mevData = [
-  { month: 'Jan', value: 100, withSolution: 20 },
-  { month: 'Feb', value: 120, withSolution: 15 },
-  { month: 'Mar', value: 140, withSolution: 10 },
-  { month: 'Apr', value: 160, withSolution: 8 },
-  { month: 'May', value: 180, withSolution: 5 }
+  { month: "Jan", value: 100, withSolution: 20 },
+  { month: "Feb", value: 120, withSolution: 15 },
+  { month: "Mar", value: 140, withSolution: 10 },
+  { month: "Apr", value: 160, withSolution: 8 },
+  { month: "May", value: 180, withSolution: 5 },
 ];
 
-const Solution = ({ title, description, icon: Icon, expanded, onClick }: {
+const Solution = ({
+  title,
+  description,
+  icon: Icon,
+  expanded,
+  onClick,
+}: {
   title: string;
   description: string;
   icon: React.ElementType;
@@ -18,35 +26,24 @@ const Solution = ({ title, description, icon: Icon, expanded, onClick }: {
   onClick: () => void;
 }) => (
   <div className="bg-white rounded-lg shadow-sm">
-    <button 
-      className="w-full p-4 flex items-center justify-between"
-      onClick={onClick}
-    >
+    <button className="w-full p-4 flex items-center justify-between" onClick={onClick}>
       <div className="flex items-center gap-3">
         <Icon className="text-blue-500" />
         <span className="font-semibold">{title}</span>
       </div>
       {expanded ? <ChevronUp /> : <ChevronDown />}
     </button>
-    {expanded && (
-      <div className="px-4 pb-4 text-gray-600 border-t">
-        {description}
-      </div>
-    )}
+    {expanded && <div className="px-4 pb-4 text-gray-600 border-t">{description}</div>}
   </div>
 );
 
-const ImpactMetric = ({ label, value, trend }: {
-  label: string;
-  value: string;
-  trend: 'positive' | 'negative';
-}) => (
+const ImpactMetric = ({ label, value, trend }: { label: string; value: string; trend: "positive" | "negative" }) => (
   <div className="bg-white p-4 rounded-lg shadow-sm">
     <p className="text-sm text-gray-500">{label}</p>
     <div className="flex items-baseline gap-2">
       <span className="text-2xl font-bold">{value}</span>
-      <span className={trend === 'positive' ? 'text-green-500' : 'text-red-500'}>
-        {trend === 'positive' ? '↓' : '↑'}
+      <span className={trend === "positive" ? "text-green-500" : "text-red-500"}>
+        {trend === "positive" ? "↓" : "↑"}
       </span>
     </div>
   </div>
@@ -58,23 +55,26 @@ const ReducingBEV = () => {
   const solutions = [
     {
       title: "Fair-Ordering Protocol",
-      description: "Aequitas Protocol Family ensures transaction ordering fairness, reducing MEV extraction opportunities by implementing time-based sequencing.",
-      icon: Layers
+      description:
+        "Aequitas Protocol Family ensures transaction ordering fairness, reducing MEV extraction opportunities by implementing time-based sequencing.",
+      icon: Layers,
     },
     {
       title: "MEV-Mindful dApp Design",
-      description: "Design protocols that minimize MEV opportunities through immediate liquidations and unified liquidity pools, reducing cross-protocol arbitrage.",
-      icon: Settings
+      description:
+        "Design protocols that minimize MEV opportunities through immediate liquidations and unified liquidity pools, reducing cross-protocol arbitrage.",
+      icon: Settings,
     },
     {
       title: "Private Transaction Relay",
-      description: "Secure transaction submission pathway that prevents front-running by hiding pending transactions until block inclusion.",
-      icon: Lock
-    }
+      description:
+        "Secure transaction submission pathway that prevents front-running by hiding pending transactions until block inclusion.",
+      icon: Lock,
+    },
   ];
 
   return (
-    <div className="max-w-6xl mx-auto p-6 space-y-8">
+    <div className="p-6 space-y-8">
       <div className="bg-gradient-to-r from-green-600 to-green-800 p-8 rounded-xl text-white">
         <div className="flex items-center gap-3 mb-4">
           <Shield className="h-8 w-8" />
@@ -86,21 +86,9 @@ const ReducingBEV = () => {
       </div>
 
       <div className="grid md:grid-cols-3 gap-4">
-        <ImpactMetric 
-          label="MEV Impact Reduction"
-          value="874x"
-          trend="positive"
-        />
-        <ImpactMetric 
-          label="Network Security"
-          value="10%"
-          trend="positive"
-        />
-        <ImpactMetric 
-          label="Block Reward Impact"
-          value="4x"
-          trend="negative"
-        />
+        <ImpactMetric label="MEV Impact Reduction" value="874x" trend="positive" />
+        <ImpactMetric label="Network Security" value="10%" trend="positive" />
+        <ImpactMetric label="Block Reward Impact" value="4x" trend="negative" />
       </div>
 
       <div className="grid md:grid-cols-2 gap-8">
@@ -111,18 +99,8 @@ const ReducingBEV = () => {
             <XAxis dataKey="month" />
             <YAxis />
             <Tooltip />
-            <Line 
-              type="monotone" 
-              dataKey="value" 
-              stroke="#ef4444" 
-              name="Without Solution"
-            />
-            <Line 
-              type="monotone" 
-              dataKey="withSolution" 
-              stroke="#22c55e" 
-              name="With Solution"
-            />
+            <Line type="monotone" dataKey="value" stroke="#ef4444" name="Without Solution" />
+            <Line type="monotone" dataKey="withSolution" stroke="#22c55e" name="With Solution" />
           </LineChart>
         </div>
 

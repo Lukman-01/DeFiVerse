@@ -1,33 +1,37 @@
-import React, { useState } from 'react';
-import { Coins, ArrowRight, LockIcon, BarChart2, DollarSign, Repeat } from 'lucide-react';
+"use client";
+
+import React, { useState } from "react";
+import { ArrowRight, BarChart2, Coins, DollarSign, LockIcon, Repeat } from "lucide-react";
 
 const SyntheticAssetsAndSynthetix: React.FC = () => {
   const [activeStep, setActiveStep] = useState(1);
-  const [selectedAsset, setSelectedAsset] = useState<'sUSD' | 'sBTC' | 'sETH'>('sUSD');
+  const [selectedAsset, setSelectedAsset] = useState<"sUSD" | "sBTC" | "sETH">("sUSD");
 
-  const StepCard = ({ 
-    step, 
-    title, 
-    description, 
-    icon: Icon 
-  }: { 
-    step: number; 
-    title: string; 
-    description: string; 
-    icon: React.ElementType 
+  const StepCard = ({
+    step,
+    title,
+    description,
+    icon: Icon,
+  }: {
+    step: number;
+    title: string;
+    description: string;
+    icon: React.ElementType;
   }) => (
-    <div 
+    <div
       className={`p-6 rounded-lg cursor-pointer transition-all ${
-        activeStep === step 
-          ? 'bg-blue-50 border-2 border-blue-500 shadow-lg' 
-          : 'bg-gray-50 border-2 border-transparent hover:bg-gray-100'
+        activeStep === step
+          ? "bg-blue-50 border-2 border-blue-500 shadow-lg"
+          : "bg-gray-50 border-2 border-transparent hover:bg-gray-100"
       }`}
       onClick={() => setActiveStep(step)}
     >
       <div className="flex items-center mb-4">
-        <div className={`w-8 h-8 rounded-full flex items-center justify-center mr-3 ${
-          activeStep === step ? 'bg-blue-500 text-white' : 'bg-gray-300'
-        }`}>
+        <div
+          className={`w-8 h-8 rounded-full flex items-center justify-center mr-3 ${
+            activeStep === step ? "bg-blue-500 text-white" : "bg-gray-300"
+          }`}
+        >
           {step}
         </div>
         <Icon className="w-6 h-6" />
@@ -37,39 +41,33 @@ const SyntheticAssetsAndSynthetix: React.FC = () => {
     </div>
   );
 
-  const AssetCard = ({ 
-    type, 
-    name, 
-    price, 
-    change 
-  }: { 
-    type: 'sUSD' | 'sBTC' | 'sETH'; 
-    name: string; 
-    price: string; 
-    change: string 
+  const AssetCard = ({
+    type,
+    name,
+    price,
+    change,
+  }: {
+    type: "sUSD" | "sBTC" | "sETH";
+    name: string;
+    price: string;
+    change: string;
   }) => (
-    <div 
+    <div
       className={`p-4 rounded-lg cursor-pointer transition-all ${
-        selectedAsset === type 
-          ? 'bg-blue-50 border-2 border-blue-500' 
-          : 'bg-white border-2 border-gray-200'
+        selectedAsset === type ? "bg-blue-50 border-2 border-blue-500" : "bg-white border-2 border-gray-200"
       }`}
       onClick={() => setSelectedAsset(type)}
     >
       <div className="flex justify-between items-center">
         <h5 className="font-bold">{name}</h5>
-        <span className={`text-sm ${
-          Number(change) >= 0 ? 'text-green-500' : 'text-red-500'
-        }`}>
-          {change}%
-        </span>
+        <span className={`text-sm ${Number(change) >= 0 ? "text-green-500" : "text-red-500"}`}>{change}%</span>
       </div>
       <p className="text-lg font-semibold mt-2">{price}</p>
     </div>
   );
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white rounded-xl shadow-sm">
+    <div className="p-6 bg-white rounded-xl shadow-sm">
       <div className="mb-8">
         <h2 className="text-3xl font-bold mb-4">Synthetic Assets & Synthetix</h2>
         <p className="text-gray-600 text-lg">

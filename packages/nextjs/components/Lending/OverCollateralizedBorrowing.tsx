@@ -1,41 +1,44 @@
-import React, { useState } from 'react';
-import { PiggyBank, ArrowRight, Lock, DollarSign, AlertTriangle } from 'lucide-react';
+"use client";
+
+import React, { useState } from "react";
+import { AlertTriangle, ArrowRight, DollarSign, Lock, PiggyBank } from "lucide-react";
 
 const OverCollateralizedBorrowing = () => {
   const [collateralAmount, setCollateralAmount] = useState(5);
-  const [borrowAmount, setBorrowAmount] = useState(7500);
+  const [borrowAmount, setBorrowAmount] = useState<number>(7500);
   const ethPrice = 2000; // Simulated ETH price
 
   const calculateHealthFactor = () => {
     const collateralValue = collateralAmount * ethPrice;
+    if (!borrowAmount || !collateralAmount) return "0.00";
     return (collateralValue / borrowAmount).toFixed(2);
   };
 
   const ExampleScenario = () => {
     const [step, setStep] = useState(1);
     const totalSteps = 4;
-    
+
     const steps = [
       {
         title: "Initial Deposit",
         description: "Borrower deposits ETH as collateral",
-        icon: <PiggyBank className="w-8 h-8 text-blue-500" />
+        icon: <PiggyBank className="w-8 h-8 text-blue-500" />,
       },
       {
         title: "Loan Issuance",
         description: "Borrower receives DAI loan",
-        icon: <DollarSign className="w-8 h-8 text-green-500" />
+        icon: <DollarSign className="w-8 h-8 text-green-500" />,
       },
       {
         title: "Monitor Position",
         description: "System monitors collateral value",
-        icon: <AlertTriangle className="w-8 h-8 text-orange-500" />
+        icon: <AlertTriangle className="w-8 h-8 text-orange-500" />,
       },
       {
         title: "Repayment",
         description: "Repay DAI to retrieve ETH",
-        icon: <Lock className="w-8 h-8 text-purple-500" />
-      }
+        icon: <Lock className="w-8 h-8 text-purple-500" />,
+      },
     ];
 
     return (
@@ -44,16 +47,8 @@ const OverCollateralizedBorrowing = () => {
         <div className="flex items-center justify-between mb-6">
           {steps.map((s, index) => (
             <div key={index} className="flex items-center">
-              <div
-                className={`rounded-full p-2 ${
-                  index + 1 <= step ? 'bg-blue-100' : 'bg-gray-100'
-                }`}
-              >
-                {s.icon}
-              </div>
-              {index < steps.length - 1 && (
-                <ArrowRight className="mx-2 text-gray-400" />
-              )}
+              <div className={`rounded-full p-2 ${index + 1 <= step ? "bg-blue-100" : "bg-gray-100"}`}>{s.icon}</div>
+              {index < steps.length - 1 && <ArrowRight className="mx-2 text-gray-400" />}
             </div>
           ))}
         </div>
@@ -82,13 +77,13 @@ const OverCollateralizedBorrowing = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
+    <div className="p-6">
       <div className="bg-white rounded-lg shadow-lg">
         <div className="p-6 border-b">
           <h3 className="text-2xl font-bold">Over-Collateralized Borrowing</h3>
           <p className="mt-4 text-gray-600">
-            In DeFi lending protocols, borrowers must deposit collateral that exceeds their loan value. 
-            This mechanism ensures protocol safety and lender protection in volatile market conditions.
+            In DeFi lending protocols, borrowers must deposit collateral that exceeds their loan value. This mechanism
+            ensures protocol safety and lender protection in volatile market conditions.
           </p>
         </div>
 
@@ -101,8 +96,12 @@ const OverCollateralizedBorrowing = () => {
                 <label className="block text-sm font-medium mb-2">Collateral (ETH)</label>
                 <input
                   type="number"
-                  value={collateralAmount}
-                  onChange={(e) => setCollateralAmount(Number(e.target.value))}
+                  value={collateralAmount || undefined}
+                  onChange={e => {
+                    e.preventDefault();
+                    if (isNaN(Number(e.target.value))) return;
+                    setCollateralAmount(Number(e.target.value));
+                  }}
                   className="w-full p-2 border rounded"
                   min="0"
                 />
@@ -111,17 +110,19 @@ const OverCollateralizedBorrowing = () => {
                 <label className="block text-sm font-medium mb-2">Borrow Amount (DAI)</label>
                 <input
                   type="number"
-                  value={borrowAmount}
-                  onChange={(e) => setBorrowAmount(Number(e.target.value))}
+                  value={borrowAmount || undefined}
+                  onChange={e => {
+                    e.preventDefault();
+                    if (isNaN(Number(e.target.value))) return;
+                    setBorrowAmount(Number(e.target.value));
+                  }}
                   className="w-full p-2 border rounded"
                   min="0"
                 />
               </div>
               <div className="p-4 bg-white rounded-lg">
                 <p className="font-semibold">Health Factor: {calculateHealthFactor()}</p>
-                <p className="text-sm text-gray-600 mt-2">
-                  Health factor should stay above 1 to avoid liquidation
-                </p>
+                <p className="text-sm text-gray-600 mt-2">Health factor should stay above 1 to avoid liquidation</p>
               </div>
             </div>
           </div>

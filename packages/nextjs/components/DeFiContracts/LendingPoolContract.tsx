@@ -1,35 +1,24 @@
 "use client";
-import React from 'react';
-import { Coins, Code, LightbulbIcon, ShieldAlert } from 'lucide-react';
+
+import React from "react";
+import { Code, Coins, LightbulbIcon, ShieldAlert } from "lucide-react";
 
 // Custom Card Components
-const Card = ({ children, className = '' }:any) => (
-  <div className={`bg-white rounded-lg shadow-md border ${className}`}>
-    {children}
-  </div>
+const Card = ({ children, className = "" }: any) => (
+  <div className={`bg-white rounded-lg shadow-md border ${className}`}>{children}</div>
 );
 
-const CardHeader = ({ children, className = '' }:any) => (
-  <div className={`px-6 py-4 ${className}`}>
-    {children}
-  </div>
+const CardHeader = ({ children, className = "" }: any) => <div className={`px-6 py-4 ${className}`}>{children}</div>;
+
+const CardTitle = ({ children, className = "" }: any) => (
+  <h2 className={`text-xl font-semibold ${className}`}>{children}</h2>
 );
 
-const CardTitle = ({ children, className = '' }:any) => (
-  <h2 className={`text-xl font-semibold ${className}`}>
-    {children}
-  </h2>
-);
-
-const CardContent = ({ children, className = '' }:any) => (
-  <div className={`px-6 pb-6 ${className}`}>
-    {children}
-  </div>
-);
+const CardContent = ({ children, className = "" }: any) => <div className={`px-6 pb-6 ${className}`}>{children}</div>;
 
 const LendingPoolContract = () => {
   return (
-    <div className="max-w-5xl mx-auto p-6 space-y-8">
+    <div className="p-6 space-y-8">
       {/* Header */}
       <div className="text-center space-y-2">
         <h1 className="text-3xl font-bold">Understanding DeFi Lending Pools</h1>
@@ -47,13 +36,13 @@ const LendingPoolContract = () => {
         <CardContent className="space-y-4 pt-4">
           <div className="bg-blue-50 p-4 rounded-lg">
             <p className="text-blue-800">
-              Think of a lending pool like a community piggy bank where everyone can participate! 
-              Some people put money in to earn interest (like a savings account), while others can 
-              borrow from it by putting up collateral (like getting a loan from a bank, but using 
-              other crypto as security). The more people borrow, the more interest lenders earn!
+              Think of a lending pool like a community piggy bank where everyone can participate! Some people put money
+              in to earn interest (like a savings account), while others can borrow from it by putting up collateral
+              (like getting a loan from a bank, but using other crypto as security). The more people borrow, the more
+              interest lenders earn!
             </p>
           </div>
-          
+
           <h3 className="font-semibold text-lg mt-4">How Does It Work?</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
             <div className="bg-gray-50 p-4 rounded-lg">
@@ -82,8 +71,8 @@ const LendingPoolContract = () => {
         </CardHeader>
         <CardContent className="pt-4">
           <pre className="bg-gray-50 p-4 rounded-lg overflow-x-auto">
-            <code className="text-sm">
-{`// SPDX-License-Identifier: MIT
+            <code className="text-[15px] font-medium text-blue-900">
+              {`// SPDX-License-Identifier: MIT
 contract LendingPool {
     // Think of Market like a piggy bank's status report
     struct Market {
@@ -158,9 +147,7 @@ contract LendingPool {
             {/* Market Structure */}
             <div className="bg-gray-50 p-4 rounded-lg">
               <h3 className="font-semibold text-lg mb-2">The Market Structure</h3>
-              <p className="text-gray-600">
-                Think of each Market like a dashboard for a specific cryptocurrency pool:
-              </p>
+              <p className="text-gray-600">Think of each Market like a dashboard for a specific cryptocurrency pool:</p>
               <ul className="list-disc pl-6 mt-2 space-y-1 text-gray-600">
                 <li>It tracks how much money is in the pool (totalDeposits)</li>
                 <li>It knows how much has been borrowed (totalBorrows)</li>
@@ -172,9 +159,7 @@ contract LendingPool {
             {/* User Account */}
             <div className="bg-gray-50 p-4 rounded-lg">
               <h3 className="font-semibold text-lg mb-2">Your Personal Account</h3>
-              <p className="text-gray-600">
-                Each user has their own account that tracks:
-              </p>
+              <p className="text-gray-600">Each user has their own account that tracks:</p>
               <ul className="list-disc pl-6 mt-2 space-y-1 text-gray-600">
                 <li>How much you've deposited (like savings)</li>
                 <li>How much you've borrowed (like loans)</li>
@@ -186,9 +171,7 @@ contract LendingPool {
             {/* Interest Rates */}
             <div className="bg-gray-50 p-4 rounded-lg">
               <h3 className="font-semibold text-lg mb-2">Smart Interest Rates</h3>
-              <p className="text-gray-600">
-                The pool automatically adjusts interest rates:
-              </p>
+              <p className="text-gray-600">The pool automatically adjusts interest rates:</p>
               <ul className="list-disc pl-6 mt-2 space-y-1 text-gray-600">
                 <li>When more people borrow, rates go up</li>
                 <li>When fewer people borrow, rates go down</li>

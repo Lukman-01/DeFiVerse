@@ -1,35 +1,23 @@
 "use client";
 
-import React from 'react';
-import { BookOpen, Code, LightbulbIcon } from 'lucide-react';
+import React from "react";
+import { BookOpen, Code, LightbulbIcon } from "lucide-react";
 
-const Card = ({ children, className = '' }:any) => (
-  <div className={`bg-white rounded-lg shadow-md ${className}`}>
-    {children}
-  </div>
+const Card = ({ children, className = "" }: any) => (
+  <div className={`bg-white rounded-lg shadow-md ${className}`}>{children}</div>
 );
 
-const CardHeader = ({ children, className = '' }:any) => (
-  <div className={`px-6 py-4 ${className}`}>
-    {children}
-  </div>
+const CardHeader = ({ children, className = "" }: any) => <div className={`px-6 py-4 ${className}`}>{children}</div>;
+
+const CardTitle = ({ children, className = "" }: any) => (
+  <h2 className={`text-xl font-semibold ${className}`}>{children}</h2>
 );
 
-const CardTitle = ({ children, className = '' }:any) => (
-  <h2 className={`text-xl font-semibold ${className}`}>
-    {children}
-  </h2>
-);
-
-const CardContent = ({ children, className = '' }:any) => (
-  <div className={`px-6 pb-6 ${className}`}>
-    {children}
-  </div>
-);
+const CardContent = ({ children, className = "" }: any) => <div className={`px-6 pb-6 ${className}`}>{children}</div>;
 
 const VaultContract = () => {
   return (
-    <div className="max-w-5xl mx-auto p-6 space-y-8">
+    <div className="p-6 space-y-8">
       {/* Rest of the component remains exactly the same... */}
       {/* Header */}
       <div className="text-center space-y-2">
@@ -48,16 +36,14 @@ const VaultContract = () => {
         <CardContent className="space-y-4 pt-4">
           <div className="bg-blue-50 p-4 rounded-lg">
             <p className="text-blue-800">
-              Imagine a super-smart digital piggy bank. Just like a regular piggy bank holds your coins, 
-              a DeFi vault holds your digital money (tokens). But it's much more powerful! It can automatically 
-              grow your money by investing it in different opportunities, all while keeping it safe and secure.
+              Imagine a super-smart digital piggy bank. Just like a regular piggy bank holds your coins, a DeFi vault
+              holds your digital money (tokens). But it's much more powerful! It can automatically grow your money by
+              investing it in different opportunities, all while keeping it safe and secure.
             </p>
           </div>
-          
+
           <h3 className="font-semibold text-lg mt-4">How Does It Work?</h3>
-          <p className="text-gray-600">
-            When you put tokens into a vault:
-          </p>
+          <p className="text-gray-600">When you put tokens into a vault:</p>
           <ul className="list-disc pl-6 space-y-2 text-gray-600">
             <li>The vault remembers exactly how much you deposited</li>
             <li>Only you can access your tokens (like having your personal locker)</li>
@@ -77,8 +63,8 @@ const VaultContract = () => {
         </CardHeader>
         <CardContent className="pt-4">
           <pre className="bg-gray-50 p-4 rounded-lg overflow-x-auto">
-            <code className="text-sm">
-{`// This is our digital vault
+            <code className="text-[15px] font-medium text-blue-900">
+              {`// This is our digital vault
 contract SimpleVault {
     // Keep track of everyone's tokens
     mapping(address => uint256) userBalances;
@@ -157,9 +143,7 @@ contract SimpleVault {
             {/* Deposit Function */}
             <div className="bg-gray-50 p-4 rounded-lg">
               <h3 className="font-semibold text-lg mb-2">The Deposit Function</h3>
-              <p className="text-gray-600">
-                Think of this like putting money in a piggy bank:
-              </p>
+              <p className="text-gray-600">Think of this like putting money in a piggy bank:</p>
               <ul className="list-disc pl-6 mt-2 space-y-1 text-gray-600">
                 <li>First, it checks if you're actually putting something in</li>
                 <li>Then it moves your tokens from your wallet to the vault</li>
@@ -170,9 +154,7 @@ contract SimpleVault {
             {/* Withdraw Function */}
             <div className="bg-gray-50 p-4 rounded-lg">
               <h3 className="font-semibold text-lg mb-2">The Withdraw Function</h3>
-              <p className="text-gray-600">
-                This is like taking money out of your piggy bank:
-              </p>
+              <p className="text-gray-600">This is like taking money out of your piggy bank:</p>
               <ul className="list-disc pl-6 mt-2 space-y-1 text-gray-600">
                 <li>First, it checks if you have enough tokens to withdraw</li>
                 <li>Then it updates your balance in the vault</li>
