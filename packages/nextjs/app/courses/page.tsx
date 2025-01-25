@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import Footer from "../../components/LandingPage/Footer";
+import { courses } from "./data/data";
 
 const CourseCard = ({ handleClick, id, title, description, image, category }: any) => (
   <div
@@ -33,73 +34,6 @@ const CourseCard = ({ handleClick, id, title, description, image, category }: an
 export default function Dashboard() {
   const router = useRouter();
   const [selectedCategory, setSelectedCategory] = useState("All");
-
-  const courses = [
-    {
-      id: 1,
-      title: "DeFi Fundamentals",
-      description:
-        "Learn the foundations of decentralized finance, including key principles, concepts, and the structure of DeFi protocols like lending, borrowing, and automated market makers.",
-      category: "Beginner",
-      image: "/fundamental.jpg",
-    },
-    {
-      id: 2,
-      title: "DeFi Contracts",
-      description:
-        "Dive into the workings of DeFi contracts, covering topics like smart contract development, yield farming mechanics, and liquidity provisioning strategies.",
-      category: "Intermediate",
-      image: "/contract.jpg",
-    },
-    {
-      id: 3,
-      title: "Lending and Borrowing",
-      description:
-        "Gain insights into decentralized lending and borrowing platforms, exploring how interest rates are determined and best practices for leveraging these tools.",
-      category: "Intermediate",
-      image: "/lend.jpg",
-    },
-    {
-      id: 4,
-      title: "Stablecoins",
-      description:
-        "Understand the role of stablecoins in DeFi, their mechanisms for maintaining price stability, and their importance in creating a robust financial ecosystem.",
-      category: "Intermediate",
-      image: "/stable.jpg",
-    },
-    {
-      id: 5,
-      title: "Oracles",
-      description:
-        "Learn how blockchain oracles provide off-chain data to smart contracts, and discover their applications in DeFi, prediction markets, and more.",
-      category: "Intermediate",
-      image: "/Oracle.jpg",
-    },
-    {
-      id: 6,
-      title: "Synthetics and Derivatives",
-      description:
-        "Explore synthetic assets and decentralized derivatives, understanding their role in DeFi markets and strategies for leveraging them to mitigate risks.",
-      category: "Intermediate",
-      image: "/synthetix.jpg",
-    },
-    {
-      id: 7,
-      title: "DeFi Security",
-      description:
-        "Understand the critical importance of security in DeFi, exploring smart contract vulnerabilities, best practices for audits, and how to secure your assets.",
-      category: "Advanced",
-      image: "/security.jpg",
-    },
-    {
-      id: 8,
-      title: "DEXs",
-      description:
-        "Master the operation of decentralized exchanges (DEXs), covering automated market makers (AMMs), order books, and strategies for efficient trading.",
-      category: "Advanced",
-      image: "/dex.jpg",
-    },
-  ];
 
   const handleClick = (id: number, title: string) => {
     router.push(`/courses/${title}`);

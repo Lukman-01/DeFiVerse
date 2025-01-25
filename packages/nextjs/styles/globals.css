@@ -30,3 +30,12 @@ p {
 .btn.btn-ghost {
   @apply shadow-none;
 }
+
+input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-outer-spin-button {
+  appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: none;
+}
