@@ -27,7 +27,10 @@ export default function Navbar() {
             Quiz
           </Link>
         </nav>
-        <RainbowKitCustomConnectButton />
+
+        <div className="flex items-center gap-2">
+          <RainbowKitCustomConnectButton />
+        </div>
       </div>
     </header>
   );
