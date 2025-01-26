@@ -78,20 +78,25 @@ const Quiz = ({
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 to-indigo-100 flex items-center justify-center p-4">
       <div className="bg-white w-full max-w-[650px] rounded-2xl shadow-2xl overflow-hidden transform transition-all duration-500 hover:scale-[1.01]">
-        <div className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white p-4 flex justify-between items-center">
-          <div>
+        <div className="bg-gradient-to-r gap-3 from-purple-600 to-indigo-600 text-white p-4 flex justify-between items-center">
+          <div className="flex-1">
             <h2 className="text-xl font-bold">{questionData.title} Quiz</h2>
             <p className="text-sm">
               Question {currentQuestion + 1} of {questionData.questions.length}
             </p>
           </div>
+
+          <div className="px-3 py-2 font-medium bg-indigo-500 text-white text-sm rounded-full">Score: {score}</div>
+
           <div className="flex items-center">
             <Clock className="mr-2" />
             <span className={`text-lg font-bold ${timeLeft <= 10 ? "text-red-300" : "text-white"}`}>{timeLeft}s</span>
           </div>
         </div>
         <div className="p-6">
-          <h3 className="text-lg font-semibold mb-4 text-indigo-800">{currentQuizQuestion.question}</h3>
+          <h3 className="text-lg font-semibold mb-4 text-indigo-800">
+            {currentQuestion + 1}. {currentQuizQuestion.question}
+          </h3>
           <div className="space-y-3">
             {currentQuizQuestion.options.map((option, index) => (
               <button
@@ -106,7 +111,7 @@ const Quiz = ({
                       : "bg-indigo-50 hover:bg-indigo-100"
                   }`}
               >
-                <span className="font-medium text-blue-600">
+                <span className="font-medium text-indigo-800">
                   {index === 0 ? "A" : index === 1 ? "B" : index === 2 ? "C" : "D"}.
                 </span>
                 <span className="flex-1">{option}</span>
