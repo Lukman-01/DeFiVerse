@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
-import Pagination from "../Pagination";
+import Pagination from "../../components/Pagination";
 import { BookOpen, Search } from "lucide-react";
-import { keywords } from "~~/app/keywords/data";
+import { keywords } from "./data";
 
 const itemPerPage = 10;
 const startIndex = (currentPage: number) => {

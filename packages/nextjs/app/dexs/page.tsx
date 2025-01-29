@@ -1,4 +1,4 @@
-import DexPage from "~~/components/Navigations/Dexs";
+import DexPage from "./Dexs";
 
 export default function DexsPage() {
   return <DexPage />;

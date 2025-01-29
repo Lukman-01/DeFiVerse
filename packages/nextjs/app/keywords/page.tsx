@@ -1,5 +1,5 @@
-import DefiKeywordsPage from "~~/components/Navigations/Keywords";
+import DefiKeywordsPage from "./Keywords";
 
-export default function KeywordPage(){
-    return <DefiKeywordsPage />
+export default function KeywordPage() {
+  return <DefiKeywordsPage />;
 }
