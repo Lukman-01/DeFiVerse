@@ -1,11 +1,28 @@
 "use client";
 
 import React, { useState } from "react";
-import { AlertTriangle, Droplet, RefreshCcw, TrendingUp, Wallet } from "lucide-react";
-import { Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import {
+  AlertTriangle,
+  Droplet,
+  RefreshCcw,
+  TrendingUp,
+  Wallet,
+} from "lucide-react";
+import {
+  Line,
+  LineChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
 
 // Helper function to calculate constant product curve points
-const generatePoolData = (initialX: number, initialY: number, points: number) => {
+const generatePoolData = (
+  initialX: number,
+  initialY: number,
+  points: number,
+) => {
   const k = initialX * initialY;
   const data = [];
   for (let x = initialX * 0.5; x <= initialX * 1.5; x += initialX / points) {
@@ -24,7 +41,12 @@ interface LiquidityPoolProps {
 }
 
 // Component for displaying liquidity pool
-const LiquidityPool: React.FC<LiquidityPoolProps> = ({ tokenA, tokenB, amountA, amountB }) => (
+const LiquidityPool: React.FC<LiquidityPoolProps> = ({
+  tokenA,
+  tokenB,
+  amountA,
+  amountB,
+}) => (
   <div className="bg-gradient-to-br from-blue-50 to-purple-50 p-6 rounded-xl shadow-sm">
     <div className="flex justify-between items-center mb-4">
       <h3 className="text-lg font-semibold text-gray-800">Liquidity Pool</h3>
@@ -34,12 +56,16 @@ const LiquidityPool: React.FC<LiquidityPoolProps> = ({ tokenA, tokenB, amountA, 
       <div className="text-center">
         <Droplet className="w-8 h-8 text-blue-500 mx-auto mb-2" />
         <p className="font-semibold">{tokenA}</p>
-        <p className="text-2xl font-bold text-blue-600">{amountA.toLocaleString()}</p>
+        <p className="text-2xl font-bold text-blue-600">
+          {amountA.toLocaleString()}
+        </p>
       </div>
       <div className="text-center">
         <Droplet className="w-8 h-8 text-purple-500 mx-auto mb-2" />
         <p className="font-semibold">{tokenB}</p>
-        <p className="text-2xl font-bold text-purple-600">{amountB.toLocaleString()}</p>
+        <p className="text-2xl font-bold text-purple-600">
+          {amountB.toLocaleString()}
+        </p>
       </div>
     </div>
   </div>
@@ -67,13 +93,15 @@ const SlippageSimulator: React.FC<SlippageSimulatorProps> = ({ poolSize }) => {
       <h3 className="text-lg font-semibold mb-4">Slippage Simulator</h3>
       <div className="space-y-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700">Trade Amount</label>
+          <label className="block text-sm font-medium text-gray-700">
+            Trade Amount
+          </label>
           <input
             type="range"
             min="0"
             max={poolSize}
             value={tradeAmount}
-            onChange={e => setTradeAmount(Number(e.target.value))}
+            onChange={(e) => setTradeAmount(Number(e.target.value))}
             className="w-full mt-2"
           />
           <div className="flex justify-between text-sm text-gray-500">
@@ -84,7 +112,9 @@ const SlippageSimulator: React.FC<SlippageSimulatorProps> = ({ poolSize }) => {
         </div>
         <div className="bg-gray-50 p-4 rounded-md">
           <p className="text-sm text-gray-700">Expected Slippage:</p>
-          <p className="text-2xl font-bold text-blue-600">{calculateSlippage()}%</p>
+          <p className="text-2xl font-bold text-blue-600">
+            {calculateSlippage()}%
+          </p>
         </div>
       </div>
     </div>
@@ -104,10 +134,12 @@ const AutomatedMarketMaker = () => {
   return (
     <div className="p-6 space-y-8">
       <div className="text-center">
-        <h1 className="text-4xl font-bold text-gray-800 mb-4">Automated Market Maker (AMM)</h1>
+        <h1 className="text-4xl font-bold text-gray-800 mb-4">
+          Automated Market Maker (AMM)
+        </h1>
         <p className="text-gray-600 max-w-2xl mx-auto">
-          Smart contracts that enable automated trading through liquidity pools, replacing traditional order books with
-          mathematical price formulas.
+          Smart contracts that enable automated trading through liquidity pools,
+          replacing traditional order books with mathematical price formulas.
         </p>
       </div>
 
@@ -130,7 +162,12 @@ const AutomatedMarketMaker = () => {
       </div>
 
       <div className="grid md:grid-cols-2 gap-8">
-        <LiquidityPool tokenA="Token A" tokenB="Token B" amountA={1000} amountB={1000} />
+        <LiquidityPool
+          tokenA="Token A"
+          tokenB="Token B"
+          amountA={1000}
+          amountB={1000}
+        />
         <SlippageSimulator poolSize={1000} />
       </div>
 
@@ -139,9 +176,19 @@ const AutomatedMarketMaker = () => {
         <div className="h-64">
           <ResponsiveContainer>
             <LineChart data={poolData}>
-              <XAxis dataKey="x" label={{ value: "Token A Amount", position: "bottom" }} />
-              <YAxis dataKey="y" label={{ value: "Token B Amount", angle: -90, position: "left" }} />
-              <Tooltip formatter={value => value.toFixed(2)} />
+              <XAxis
+                dataKey="x"
+                label={{ value: "Token A Amount", position: "bottom" }}
+              />
+              <YAxis
+                dataKey="y"
+                label={{
+                  value: "Token B Amount",
+                  angle: -90,
+                  position: "left",
+                }}
+              />
+              <Tooltip formatter={(value) => Number(value).toFixed(2)} />
               <Line type="monotone" dataKey="y" stroke="#3B82F6" dot={false} />
             </LineChart>
           </ResponsiveContainer>
@@ -155,8 +202,8 @@ const AutomatedMarketMaker = () => {
             Constant Product
           </h3>
           <p className="text-gray-600">
-            AMMs maintain a constant product (k) between token reserves: x * y = k. This ensures liquidity is always
-            available at some price.
+            AMMs maintain a constant product (k) between token reserves: x * y =
+            k. This ensures liquidity is always available at some price.
           </p>
         </div>
 
@@ -166,8 +213,8 @@ const AutomatedMarketMaker = () => {
             Price Impact
           </h3>
           <p className="text-gray-600">
-            Larger trades have higher price impact due to the constant product formula. This is known as slippage and
-            affects trading efficiency.
+            Larger trades have higher price impact due to the constant product
+            formula. This is known as slippage and affects trading efficiency.
           </p>
         </div>
 
@@ -177,8 +224,8 @@ const AutomatedMarketMaker = () => {
             Impermanent Loss
           </h3>
           <p className="text-gray-600">
-            LP tokens may be worth less than holding assets separately due to price changes, resulting in impermanent
-            loss upon withdrawal.
+            LP tokens may be worth less than holding assets separately due to
+            price changes, resulting in impermanent loss upon withdrawal.
           </p>
         </div>
       </div>
@@ -189,13 +236,15 @@ const AutomatedMarketMaker = () => {
           <div className="border-l-4 border-blue-500 pl-4">
             <h3 className="font-semibold">Uniswap</h3>
             <p className="text-gray-600">
-              Pioneered the x*y=k formula for DEXes. Simple and efficient design for general token pairs.
+              Pioneered the x*y=k formula for DEXes. Simple and efficient design
+              for general token pairs.
             </p>
           </div>
           <div className="border-l-4 border-purple-500 pl-4">
             <h3 className="font-semibold">Curve Finance</h3>
             <p className="text-gray-600">
-              Specialized for stable assets with low slippage and high efficiency trading between similar-priced assets.
+              Specialized for stable assets with low slippage and high
+              efficiency trading between similar-priced assets.
             </p>
           </div>
         </div>
