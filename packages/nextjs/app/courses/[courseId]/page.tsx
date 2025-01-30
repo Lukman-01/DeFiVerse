@@ -1,5 +1,5 @@
 import React from "react";
-import DataPage from "../data/DataPage";
+import CourseIdPage from "../components/CourseIdPage";
 import { courses } from "../data/data";
 
 const CoursePage = async ({ params }: { params: { courseId: string } }) => {
@@ -22,7 +22,7 @@ const CoursePage = async ({ params }: { params: { courseId: string } }) => {
       <main className="flex-grow w-full">
         <div className="">
           <div className="prose text-black/70 p-5">
-            <DataPage data={pageData} />
+            <CourseIdPage data={pageData} />
           </div>
         </div>
       </main>

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { ChevronRight } from "lucide-react";
 
-export default function DataPage({
+export default function CourseIdPage({
   data,
 }: {
   data: {
