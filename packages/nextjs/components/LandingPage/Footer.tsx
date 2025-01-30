@@ -13,8 +13,11 @@ export default function Footer() {
             <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
             <ul className="space-y-2 text-sm">
               <li><Link href="/" className="hover:text-blue-400">Home</Link></li>
+              <li><a href="#how-it-works" className="hover:text-blue-400">Courses</a></li>
               <li><a href="#features" className="hover:text-blue-400">Keywords</a></li>
               <li><a href="#how-it-works" className="hover:text-blue-400">News</a></li>
+              <li><a href="#how-it-works" className="hover:text-blue-400">Dexes</a></li>
+              <li><a href="#how-it-works" className="hover:text-blue-400">Quiz</a></li>
              </ul>
           </div>
           <div>
@@ -37,7 +40,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="mt-8 pt-8 border-t border-gray-700 text-center text-sm text-gray-400">
-          © {new Date().getFullYear()} DefiVerse. All rights reserved 2024.
+          © {new Date().getFullYear()} DefiVerse. All rights reserved 2025.
         </div>
       </div>
     </footer>

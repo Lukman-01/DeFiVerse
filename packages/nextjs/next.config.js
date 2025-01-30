@@ -14,6 +14,20 @@ const nextConfig = {
     config.externals.push("pino-pretty", "lokijs", "encoding");
     return config;
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "resources.cryptocompare.com",
+        port: "",
+      },
+      {
+        protocol: "https",
+        hostname: "images.cryptocompare.com",
+        port: "",
+      },
+    ],
+  },
 };
 
 module.exports = nextConfig;
