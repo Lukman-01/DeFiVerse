@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { QuizQuestions } from "../../../components/Navigations/ExpandableQuiz";
 import { Award, CheckCircle2, Clock, PieChart, XCircle } from "lucide-react";
 
 const Quiz = ({
