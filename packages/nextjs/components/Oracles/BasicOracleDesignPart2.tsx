@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Activity, AlertTriangle, Calculator, ShieldCheck } from "lucide-react";
 
 // Types and interfaces
@@ -32,7 +32,6 @@ interface Challenge {
 const BasicOracleDesignPart2: React.FC = () => {
   // State with type definitions
   const [dataProviders, setDataProviders] = useState<DataProvider[]>([]);
-  const [aggregatedData, setAggregatedData] = useState<number | null>(null);
   const [activeDemo, setActiveDemo] = useState<"price" | "weather" | "sports">("price");
 
   // Helper function with type definitions
@@ -177,23 +176,6 @@ const BasicOracleDesignPart2: React.FC = () => {
       </div>
     );
   };
-
-  // Effect for data updates
-  useEffect(() => {
-    const updateData = (): void => {
-      const newData = generateProviderData(activeDemo);
-      setDataProviders(newData);
-
-      // Calculate aggregated value (median)
-      const values = newData.map(d => d.value).sort((a, b) => a - b);
-      const mid = Math.floor(values.length / 2);
-      setAggregatedData(values.length % 2 === 0 ? (values[mid - 1] + values[mid]) / 2 : values[mid]);
-    };
-
-    updateData();
-    const interval = setInterval(updateData, 3000);
-    return () => clearInterval(interval);
-  }, [activeDemo]);
 
   return (
     <div className="p-6">

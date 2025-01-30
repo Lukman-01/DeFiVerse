@@ -78,8 +78,6 @@ const AnimatedTransaction: React.FC<AnimatedTransactionProps> = ({ steps, isPlay
 const FlashLoans: React.FC = () => {
   const [selectedCase, setSelectedCase] = useState<string | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [poolSize, setPoolSize] = useState("5B");
-  const [fee, setFee] = useState("0.09");
 
   const cases: FlashLoanCase[] = [
     {

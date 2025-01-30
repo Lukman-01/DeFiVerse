@@ -56,7 +56,6 @@ const IntroductionToOracles = () => {
 
   const DataFlowVisualizer = () => {
     const [activeStep, setActiveStep] = useState(1);
-    const totalSteps = 4;
 
     const steps = [
       {
@@ -85,7 +84,6 @@ const IntroductionToOracles = () => {
       <div className="mt-8">
         <h4 className="text-lg font-semibold mb-4">Oracle Data Flow</h4>
         <div className="relative">
-
           {/* Steps */}
           <div className="relative flex justify-between">
             {steps.map((step, index) => (

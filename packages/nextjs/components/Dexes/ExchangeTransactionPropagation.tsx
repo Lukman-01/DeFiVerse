@@ -1,7 +1,7 @@
 "use client";
 
 // ExchangeTransactionPropagation.tsx
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useState } from "react";
 import { Activity, AlertTriangle, ArrowRight, Database } from "lucide-react";
 
 interface Node {
@@ -17,16 +17,6 @@ interface Challenge {
 
 export const ExchangeTransactionPropagation: React.FC = (): JSX.Element => {
   const [activeNode, setActiveNode] = useState<number>(0);
-  const [isAnimating, setIsAnimating] = useState<boolean>(true);
-
-  useEffect(() => {
-    if (isAnimating) {
-      const interval = setInterval(() => {
-        setActiveNode(prev => (prev + 1) % 5);
-      }, 2000);
-      return () => clearInterval(interval);
-    }
-  }, [isAnimating]);
 
   const nodes: Node[] = [
     { id: 0, label: "Transaction Initiated" },
@@ -61,19 +51,23 @@ export const ExchangeTransactionPropagation: React.FC = (): JSX.Element => {
 
       {/* Propagation visualization */}
       <div className="mb-12">
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center gap-5">
           {nodes.map((node, index) => (
-            <div key={node.id} className="flex flex-col items-center">
-              <div
-                className={`w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 ${
-                  index === activeNode ? "bg-blue-500 text-white" : "bg-gray-100 text-gray-500"
-                }`}
-              >
-                <Database className="w-6 h-6" />
+            <Fragment key={node.id}>
+              <div onClick={() => setActiveNode(index)} className="flex flex-col items-center">
+                <div
+                  className={`w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 ${
+                    index <= activeNode ? "bg-blue-500 text-white" : "bg-gray-100 text-gray-500"
+                  }`}
+                >
+                  <Database className="size-6" />
+                </div>
+                <div className="mt-2 text-sm text-center max-w-[120px]">{node.label}</div>
               </div>
-              <div className="mt-2 text-sm text-center max-w-[120px]">{node.label}</div>
-              {index < nodes.length - 1 && <ArrowRight className="absolute ml-14 text-gray-400" />}
-            </div>
+              {index < nodes.length - 1 && (
+                <ArrowRight className={`${index <= activeNode - 1 ? "text-blue-500" : "text-gray-400"} shrink-0"`} />
+              )}
+            </Fragment>
           ))}
         </div>
       </div>

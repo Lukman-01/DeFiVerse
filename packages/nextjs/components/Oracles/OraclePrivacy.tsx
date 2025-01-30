@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { AlertTriangle, CheckCircle, Cpu, Key, Shield } from "lucide-react";
 
 // Types and interfaces
@@ -14,13 +14,6 @@ interface PrivacyTechnique {
   useCases: string[];
 }
 
-interface PrivacyMetric {
-  name: string;
-  value: number;
-  description: string;
-  icon: React.ReactNode;
-}
-
 interface DemoStep {
   id: number;
   title: string;
@@ -29,7 +22,6 @@ interface DemoStep {
 }
 
 const OraclePrivacy: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<string>("tee");
   const [demoSteps, setDemoSteps] = useState<DemoStep[]>([]);
   const [isSimulating, setIsSimulating] = useState(false);
 

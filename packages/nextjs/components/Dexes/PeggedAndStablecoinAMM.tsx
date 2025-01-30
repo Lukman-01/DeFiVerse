@@ -1,7 +1,5 @@
-"use client";
-
 // PeggedAndStablecoinAMM.tsx
-import React, { useState } from "react";
+import React from "react";
 import { Activity, AlertTriangle, ArrowUpDown, DollarSign } from "lucide-react";
 
 interface Feature {
@@ -26,8 +24,6 @@ interface Challenge {
 }
 
 export const PeggedAndStablecoinAMM: React.FC = (): JSX.Element => {
-  const [selectedProtocol, setSelectedProtocol] = useState<number>(0);
-
   const features: Feature[] = [
     {
       id: 1,
@@ -127,11 +123,7 @@ export const PeggedAndStablecoinAMM: React.FC = (): JSX.Element => {
         <h2 className="text-xl font-semibold mb-4">Example Protocols</h2>
         <div className="space-y-4">
           {protocols.map(protocol => (
-            <div
-              key={protocol.id}
-              className="p-4 bg-gray-50 rounded-lg cursor-pointer transition-all hover:shadow-md"
-              onClick={() => setSelectedProtocol(protocol.id)}
-            >
+            <div key={protocol.id} className="p-4 bg-gray-50 rounded-lg cursor-pointer transition-all hover:shadow-md">
               <h3 className="font-semibold text-lg mb-2">{protocol.name}</h3>
               <p className="text-sm text-gray-600 mb-2">{protocol.description}</p>
               <div className="flex flex-wrap gap-2">
