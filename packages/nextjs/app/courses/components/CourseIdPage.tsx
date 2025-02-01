@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ChevronRight } from "lucide-react";
+import MobileNotAvailable from "./MobileNotAvailable";
 
 export default function CourseIdPage({
   data,
@@ -25,7 +26,8 @@ export default function CourseIdPage({
   const sections = data.data;
 
   return (
-    <div className="flex h-screen bg-black-500">
+    <div className="flex h-dvh">
+      <MobileNotAvailable />
       {/* Sidebar */}
       <div
         className={`${isSidebarOpen ? "w-64" : "w-0 overflow-hidden"} transition-all duration-300 bg-white border-r`}
