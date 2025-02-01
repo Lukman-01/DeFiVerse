@@ -14,44 +14,45 @@ export default function Navbar() {
   const pathname = usePathname();
 
   return (
-    <header className="sticky top-0 z-20 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
-      <div className="container mx-auto px-4">
-        <div className="flex h-16 items-center justify-between">
-          <Link href="/" className="text-2xl font-bold text-blue-600">
-            DefiVerse
-          </Link>
+    <>
+      <header className="sticky top-0 z-20 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
+        <div className="container mx-auto px-4">
+          <div className="flex h-16 items-center justify-between">
+            <Link href="/" className="text-2xl font-bold text-blue-600">
+              DefiVerse
+            </Link>
 
-          <nav className="mx-6 hidden items-center space-x-4 md:flex lg:space-x-6">
-            {navLinks.map((link, index) => (
-              <Link
-                key={index}
-                href={link.href}
-                className={cn(
-                  "text-sm font-medium transition-colors hover:text-blue-600",
-                  pathname === link.href ? "text-blue-600" : "text-gray-700",
-                )}
+            <nav className="mx-6 hidden items-center space-x-4 md:flex lg:space-x-6">
+              {navLinks.map((link, index) => (
+                <Link
+                  key={index}
+                  href={link.href}
+                  className={cn(
+                    "text-sm font-medium transition-colors hover:text-blue-600",
+                    pathname === link.href ? "text-blue-600" : "text-gray-700",
+                  )}
+                >
+                  {link.name}
+                </Link>
+              ))}
+            </nav>
+
+            <div className="flex items-center space-x-4">
+              <div className="hidden sm:block">
+                <RainbowKitCustomConnectButton />
+              </div>
+              <button
+                onClick={() => setIsMenuOpen(true)}
+                className="rounded-md p-2.5 text-gray-700 hover:bg-gray-100 md:hidden"
               >
-                {link.name}
-              </Link>
-            ))}
-          </nav>
-
-          <div className="flex items-center space-x-4">
-            <div className="hidden md:block">
-              <RainbowKitCustomConnectButton />
+                <MenuIcon className="h-5 w-5" />
+              </button>
             </div>
-            <button
-              onClick={() => setIsMenuOpen(true)}
-              className="rounded-md p-2.5 text-gray-700 hover:bg-gray-100 md:hidden"
-            >
-              <MenuIcon className="h-5 w-5" />
-            </button>
           </div>
         </div>
-      </div>
-
+      </header>
       {isMenuOpen && <Menu onClose={() => setIsMenuOpen(false)} />}
-    </header>
+    </>
   );
 }
 

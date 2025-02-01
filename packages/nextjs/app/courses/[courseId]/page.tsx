@@ -18,10 +18,10 @@ const CoursePage = async ({ params }: { params: { courseId: string } }) => {
   }
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col" aria-label="Course Page">
       <main className="flex-grow w-full">
         <div className="">
-          <div className="prose text-black/70 p-5">
+          <div className="prose p-5">
             <CourseIdPage data={pageData} />
           </div>
         </div>

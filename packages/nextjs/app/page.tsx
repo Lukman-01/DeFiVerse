@@ -110,7 +110,7 @@ export default function LandingPage() {
                   ].map((item, index) => (
                     <li
                       key={index}
-                      className="flex items-start space-x-3 md:space-x-4"
+                      className="flex items-center space-x-3 md:space-x-4"
                     >
                       <div className="flex-shrink-0">
                         <div className="flex items-center justify-center w-8 h-8 md:w-10 md:h-10 bg-green-100 rounded-full">
