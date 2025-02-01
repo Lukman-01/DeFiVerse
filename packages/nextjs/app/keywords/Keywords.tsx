@@ -23,7 +23,9 @@ const KeywordCard = ({ keyword }: any) => (
       </div>
       <div>
         <h3 className="font-semibold text-gray-700 mb-2">Example</h3>
-        <p className="text-gray-600 leading-relaxed italic">{keyword.example}</p>
+        <p className="text-gray-600 leading-relaxed italic">
+          {keyword.example}
+        </p>
       </div>
     </div>
   </div>
@@ -34,7 +36,7 @@ const FeaturesDefiKeywordsPage = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
 
   const filteredKeywords = keywords.filter(
-    keyword =>
+    (keyword) =>
       keyword.term.toLowerCase().includes(searchTerm.toLowerCase()) ||
       keyword.description.toLowerCase().includes(searchTerm.toLowerCase()),
   );
@@ -43,10 +45,13 @@ const FeaturesDefiKeywordsPage = () => {
     <div className="bg-gray-50 min-h-screen p-4 md:p-8 font-sans">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-blue-600 mb-4">DeFi Terms Explained</h1>
+          <h1 className="text-4xl font-bold text-blue-600 mb-4">
+            DeFi Terms Explained
+          </h1>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Master the essential terminology of decentralized finance (DeFi). Each term includes a detailed explanation
-            and real-world example to help you understand these important concepts.
+            Master the essential terminology of decentralized finance (DeFi).
+            Each term includes a detailed explanation and real-world example to
+            help you understand these important concepts.
           </p>
         </div>
 
@@ -57,21 +62,23 @@ const FeaturesDefiKeywordsPage = () => {
             placeholder="Search DeFi terms..."
             className="w-full pl-10 pr-4 py-4 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 text-lg bg-white"
             value={searchTerm}
-            onChange={e => setSearchTerm(e.target.value)}
+            onChange={(e) => setSearchTerm(e.target.value)}
           />
         </div>
 
         <div className="grid grid-cols-1 gap-6">
-          {filteredKeywords.slice(startIndex(currentPage), endIndex(currentPage)).map((keyword, index) => (
-            <KeywordCard key={index} keyword={keyword} />
-          ))}
+          {filteredKeywords
+            .slice(startIndex(currentPage), endIndex(currentPage))
+            .map((keyword, index) => (
+              <KeywordCard key={index} keyword={keyword} />
+            ))}
         </div>
 
-        <div className="flex items-center justify-center gap-2 mt-12">
+        <div className="flex items-center flex-wrap justify-center gap-2 mt-12">
           <Pagination
             currentPage={currentPage}
             totalLenght={keywords.length}
-            onPage={page => setCurrentPage(page)}
+            onPage={(page) => setCurrentPage(page)}
             onNext={() => setCurrentPage(currentPage + 1)}
             onPrev={() => setCurrentPage(currentPage - 1)}
             itemPerPage={itemPerPage}

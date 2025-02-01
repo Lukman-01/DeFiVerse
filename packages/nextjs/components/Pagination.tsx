@@ -27,7 +27,7 @@ export default function Pagination({
         <button
           key={index}
           onClick={() => onPage(index + 1)}
-          className={`rounded-md w-[50px] h-[40px] outline-0 text-base font-medium shadow-lg border active:translate-y-0.5 hover:-translate-y-0.5 transition-all duration-200 ${currentPage === index + 1 ? "text-white bg-[#2563eb] border-[#2563eb] hover:bg-[#2563eb]/85" : "text-gray-600 border-gray-600/[10%] bg-white hover:bg-black/[0.02]"}`}
+          className={`rounded-md w-[50px] h-[40px] shrink-0 outline-0 text-base font-medium shadow-lg border active:translate-y-0.5 hover:-translate-y-0.5 transition-all duration-200 ${currentPage === index + 1 ? "text-white bg-[#2563eb] border-[#2563eb] hover:bg-[#2563eb]/85" : "text-gray-600 border-gray-600/[10%] bg-white hover:bg-black/[0.02]"}`}
         >
           {index + 1}
         </button>
@@ -41,7 +41,7 @@ function SpecialButton({ onClick, disabled, icon }: { onClick: () => void; disab
   return (
     <button
       onClick={onClick}
-      className={`rounded-md flex items-center justify-center w-[50px] h-[40px] outline-0 text-base font-medium shadow-lg text-gray-600 border-gray-600/[10%] bg-white hover:bg-black/[0.02] border disabled:pointer-events-none disabled:bg-black/10 active:translate-y-0.5 hover:-translate-y-0.5 transition-all duration-200`}
+      className={`rounded-md shrink-0 flex items-center justify-center w-[50px] h-[40px] outline-0 text-base font-medium shadow-lg text-gray-600 border-gray-600/[10%] bg-white hover:bg-black/[0.02] border disabled:pointer-events-none disabled:bg-black/10 active:translate-y-0.5 hover:-translate-y-0.5 transition-all duration-200`}
       disabled={disabled}
     >
       {icon}
