@@ -43,7 +43,7 @@ const RiskAndSecurity = () => {
       icon: <Bug className="h-6 w-6 text-red-500" />,
       title: "Smart Contract Vulnerabilities",
       description: "Smart contracts are prone to bugs and exploits if not properly audited.",
-      example: "The 2020 DAO exploit resulted in $60M loss due to a reentrancy vulnerability.",
+      example: "The 2016 DAO exploit resulted in $60M loss due to a reentrancy vulnerability.",
     },
     oracle: {
       icon: <Database className="h-6 w-6 text-orange-500" />,
