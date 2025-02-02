@@ -28,30 +28,20 @@ Whether you're new to DeFi or an experienced user looking to deepen your underst
 - **Multiple-choice quizzes** designed to test and reinforce knowledge.  
 - Each course includes a quiz to track progress and comprehension.  
 
-## **Tech Stack**  
-
-| Stack       | Technology |
-|-------------|-------------|
-| **Frontend** | Next.js, TypeScript, Tailwind CSS, Lucid react |
-| **Backend** | Scaffold-ETH 2 (Ethereum Development Framework) |
-| **Blockchain** | Solidity, Hardhat |
-| **APIs** | Real-time DeFi news integration |
-
 ## **Getting Started**  
 
 ### ✅ **Prerequisites**  
 Ensure you have the following installed:  
 - **Node.js** (>= 16.x)  
 - **Yarn** or **npm**  
-- **Metamask** or any compatible Web3 wallet  
-- **Hardhat** for smart contract development  
+- **Metamask** or any compatible Web3 wallet    
 
 ### 🚀 **Installation & Setup**  
 
 1️⃣ **Clone the repository:**  
 ```bash
-git clone https://github.com/yourusername/defiverse.git
-cd defiverse
+git clone git@github.com:Lukman-01/DeFiVerse.git
+cd DeFiverse
 ```
 
 2️⃣ **Install dependencies:**  
