@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
-import { ChevronRight } from "lucide-react";
-import MobileNotAvailable from "./MobileNotAvailable";
+import { useEffect, useState } from "react";
+import { ChevronRight, Menu } from "lucide-react";
+import CourseIdSidebar from "./CourseIdSidebar";
+import CourseIdMobileSideBar from "./CourseIdMobileSidebar";
 
 export default function CourseIdPage({
   data,
@@ -25,39 +26,32 @@ export default function CourseIdPage({
 
   const sections = data.data;
 
+  useEffect(() => {
+    function handleResize() {
+      setSidebarOpen(window.innerWidth >= 1024);
+    }
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
-    <div className="flex h-dvh">
-      <MobileNotAvailable />
+    <div className="flex relative overflow-hidden h-dvh">
       {/* Sidebar */}
-      <div
-        className={`${isSidebarOpen ? "w-64" : "w-0 overflow-hidden"} transition-all duration-300 bg-white border-r`}
-      >
-        <div className="p-4 border-b">
-          <h1 className="text-xl font-bold">{data.title}</h1>
-        </div>
-        <nav className="p-4">
-          <ul className="space-y-2">
-            {sections.map((section, index) => (
-              <li key={index}>
-                <button
-                  className={`flex items-center w-full p-3 rounded-lg transition-colors duration-200 ${
-                    selectedSection === index
-                      ? "bg-blue-50 text-blue-600"
-                      : "text-gray-600 hover:bg-gray-50"
-                  }`}
-                  onClick={() => setSelectedSection(index)}
-                >
-                  <span className="mr-3">{section.icon}</span>
-                  <span className="text-left me-2">{section.title}</span>
-                  {selectedSection === index && (
-                    <ChevronRight className="w-4 h-4 shrink-0 ml-auto" />
-                  )}
-                </button>
-              </li>
-            ))}
-          </ul>
-        </nav>
-      </div>
+      <CourseIdSidebar
+        data={data}
+        sideOpen={isSidebarOpen}
+        currentSectionIndex={selectedSection}
+        changeSection={(index) => setSelectedSection(index)}
+      />
+      <CourseIdMobileSideBar
+        data={data}
+        sideOpen={isSidebarOpen}
+        currentSectionIndex={selectedSection}
+        changeSection={(index) => setSelectedSection(index)}
+        handleClose={() => setSidebarOpen(false)}
+      />
 
       {/* Main Content */}
       <div className="flex-1 flex flex-col overflow-hidden">
@@ -68,7 +62,10 @@ export default function CourseIdPage({
               className="p-2 rounded-lg hover:bg-gray-100 mr-4"
             >
               <ChevronRight
-                className={`w-5 h-5 transition-transform duration-200 ${isSidebarOpen ? "rotate-180" : ""}`}
+                className={`w-5 h-5 max-lg:hidden transition-transform duration-200 ${isSidebarOpen ? "rotate-180" : ""}`}
+              />
+              <Menu
+                className={`size-5 lg:hidden transition-transform duration-200 ${isSidebarOpen ? "rotate-180" : ""}`}
               />
             </button>
             <h2 className="text-xl font-semibold">
@@ -77,12 +74,10 @@ export default function CourseIdPage({
           </div>
         </header>
 
-        <main className="flex-1 overflow-auto p-4">
-          <div>
-            <div className="bg-white shadow-sm rounded-lg p-6">
-              <div className="min-h-[200px]">
-                {sections[selectedSection].component}
-              </div>
+        <main className="flex-1 overflow-auto lg:px-4 py-4">
+          <div className="bg-white lg:shadow-sm rounded-lg lg:p-6">
+            <div className="min-h-[200px]">
+              {sections[selectedSection].component}
             </div>
           </div>
         </main>

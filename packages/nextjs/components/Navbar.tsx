@@ -19,7 +19,7 @@ export default function Navbar() {
         <div className="container mx-auto px-4">
           <div className="flex h-16 items-center justify-between">
             <Link href="/" className="text-2xl font-bold text-blue-600">
-              DefiVerse
+              DeFiVerse
             </Link>
 
             <nav className="mx-6 hidden items-center space-x-4 md:flex lg:space-x-6">
@@ -37,8 +37,8 @@ export default function Navbar() {
               ))}
             </nav>
 
-            <div className="flex items-center space-x-4">
-              <div className="hidden sm:block">
+            <div className="flex items-center gap-4">
+              <div className="hidden sm:flex items-center gap-3">
                 <RainbowKitCustomConnectButton />
               </div>
               <button

@@ -10,7 +10,7 @@ export default function Menu({ onClose }: { onClose: () => void }) {
 
   return (
     <div
-      className="fixed inset-0 z-50 bg-black/20 backdrop-blur-sm"
+      className="fixed inset-0 z-[90] bg-black/20 backdrop-blur-sm"
       aria-label="Menu"
       role="dialog"
       onClick={onClose}
